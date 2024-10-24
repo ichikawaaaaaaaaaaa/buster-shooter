@@ -1,100 +1,115 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Source\sceneFactory.cpp" />
-    <ClCompile Include="Library\app.cpp">
-      <Filter>Library</Filter>
-    </ClCompile>
-    <ClCompile Include="Library\sceneManager.cpp">
+    <ClCompile Include="Source\SceneFactory.cpp" />
+    <ClCompile Include="Library\App.cpp">
       <Filter>Library</Filter>
     </ClCompile>
     <ClCompile Include="Library\main.cpp">
       <Filter>Library</Filter>
     </ClCompile>
-    <ClCompile Include="Source\bootScene.cpp">
+    <ClCompile Include="Source\BootScene.cpp">
       <Filter>BootScene</Filter>
     </ClCompile>
-    <ClCompile Include="Source\titleScene.cpp">
+    <ClCompile Include="Source\TitleScene.cpp">
       <Filter>TitleScene</Filter>
     </ClCompile>
-    <ClCompile Include="Source\playScene.cpp">
+    <ClCompile Include="Source\PlayScene.cpp">
       <Filter>PlayScene</Filter>
     </ClCompile>
-    <ClCompile Include="Source\debugScreen.cpp">
-      <Filter>common</Filter>
+    <ClCompile Include="ImGui\imgui.cpp">
+      <Filter>ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="Library\sceneBase.cpp">
+    <ClCompile Include="ImGui\imgui_draw.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_dx9.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_dx11.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_win32.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_ja_gryph_ranges.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_tables.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_widgets.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\ObjectManager.cpp">
       <Filter>Library</Filter>
     </ClCompile>
-    <ClCompile Include="Library\resourceLoader.cpp">
-      <Filter>common</Filter>
-    </ClCompile>
-    <ClCompile Include="Library\time.cpp">
+    <ClCompile Include="Library\SceneManager.cpp">
       <Filter>Library</Filter>
     </ClCompile>
-    <ClCompile Include="Source\timer.cpp">
-      <Filter>common</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Vector2.cpp">
-      <Filter>PlayScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Stage.cpp">
-      <Filter>PlayScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Player.cpp">
-      <Filter>PlayScene</Filter>
+    <ClCompile Include="Library\Time.cpp">
+      <Filter>Library</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\config.h" />
-    <ClInclude Include="Source\sceneFactory.h" />
-    <ClInclude Include="Library\app.h">
+    <ClInclude Include="Source\Screen.h" />
+    <ClInclude Include="Source\SceneFactory.h" />
+    <ClInclude Include="Library\App.h">
       <Filter>Library</Filter>
     </ClInclude>
-    <ClInclude Include="Library\sceneManager.h">
+    <ClInclude Include="Library\SceneBase.h">
       <Filter>Library</Filter>
     </ClInclude>
-    <ClInclude Include="Library\sceneBase.h">
+    <ClInclude Include="Library\GameObject.h">
       <Filter>Library</Filter>
     </ClInclude>
-    <ClInclude Include="Library\gameObject.h">
-      <Filter>Library</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\bootScene.h">
+    <ClInclude Include="Source\BootScene.h">
       <Filter>BootScene</Filter>
     </ClInclude>
-    <ClInclude Include="Source\titleScene.h">
+    <ClInclude Include="Source\TitleScene.h">
       <Filter>TitleScene</Filter>
     </ClInclude>
-    <ClInclude Include="Source\playScene.h">
+    <ClInclude Include="Source\PlayScene.h">
       <Filter>PlayScene</Filter>
     </ClInclude>
-    <ClInclude Include="Source\debugScreen.h">
-      <Filter>common</Filter>
+    <ClInclude Include="ImGui\imconfig.h">
+      <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Library\myDxLib.h">
+    <ClInclude Include="ImGui\imgui.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_dx9.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_dx11.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_dxlib.hpp">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_win32.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_internal.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_rectpack.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_textedit.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_truetype.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\ObjectManager.h">
       <Filter>Library</Filter>
     </ClInclude>
-    <ClInclude Include="Source\component.h">
-      <Filter>common</Filter>
-    </ClInclude>
-    <ClInclude Include="Library\resourceLoader.h">
-      <Filter>common</Filter>
-    </ClInclude>
-    <ClInclude Include="Library\time.h">
+    <ClInclude Include="Library\SceneManager.h">
       <Filter>Library</Filter>
     </ClInclude>
-    <ClInclude Include="Source\timer.h">
-      <Filter>common</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Vector2.h">
-      <Filter>PlayScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Stage.h">
-      <Filter>PlayScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Player.h">
-      <Filter>PlayScene</Filter>
+    <ClInclude Include="Library\Time.h">
+      <Filter>Library</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -107,11 +122,11 @@
     <Filter Include="TitleScene">
       <UniqueIdentifier>{a52f9c67-9c6c-4376-8f4c-07a10ecbc3db}</UniqueIdentifier>
     </Filter>
-    <Filter Include="common">
-      <UniqueIdentifier>{826397a3-7051-44be-b23c-f5dda703c9f2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="PlayScene">
       <UniqueIdentifier>{8123ada4-16d1-40da-a8f3-3f9e93aafb30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGui">
+      <UniqueIdentifier>{a717257b-67b3-4bfa-834c-1e34032b33b0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

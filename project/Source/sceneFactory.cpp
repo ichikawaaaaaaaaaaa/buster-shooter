@@ -1,9 +1,9 @@
-#include "sceneFactory.h"
+#include "SceneFactory.h"
 #include <windows.h>
 #include <assert.h>
-#include "bootScene.h"
-#include "titleScene.h"
-#include "playScene.h"
+#include "BootScene.h"
+#include "TitleScene.h"
+#include "PlayScene.h"
 
 SceneBase* SceneFactory::CreateFirst()
 {
@@ -12,10 +12,12 @@ SceneBase* SceneFactory::CreateFirst()
 
 SceneBase * SceneFactory::Create(const std::string & name)
 {
-	if (name == "TitleScene") {
+	if (name == "TITLE")
+	{
 		return new TitleScene();
 	}
-	if (name == "PlayScene") {
+	if (name == "PLAY")
+	{
 		return new PlayScene();
 	}
 	MessageBox(NULL, ("éüÇÃÉVÅ[ÉìÇÕÇ†ÇËÇ‹ÇπÇÒ\n" + name).c_str(), "SceneFactory", MB_ICONERROR | MB_OK);
