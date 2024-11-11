@@ -33,10 +33,10 @@ void Stage::Draw()//ècâ°Ç≈âÒÇ∑
 {
 	for (int j = 0; j < HEIGHT; j++)
 	{
-		int y = j * 40 + 100;
+		int y = j * 40 ;
 		for (int i = 0; i < WIDTH; i++)
 		{
-			int x = i * 40 + 100;
+			int x = i * 40 ;
 			if (map[j][i] == 1)
 			{
 				DrawRectGraph(x, y, 0, 40, 40, 40, hImage, TRUE);
@@ -52,10 +52,10 @@ void Stage::Draw()//ècâ°Ç≈âÒÇ∑
 
 int Stage::IsWallRight(VECTOR2 pos)
 {
-	int i =(pos.x -100)/40;
-	int j =(pos.y - 100)/40;
+	int i =(pos.x )/40;
+	int j =(pos.y )/40;
 	if (map[j][i] == 1) {
-		int push = ((int)pos.x - 100) % 40 + 1;
+		int push = ((int)pos.x ) % 40 + 1;
 		return push;
 	}
 		return 0;
@@ -63,10 +63,10 @@ int Stage::IsWallRight(VECTOR2 pos)
 
 int Stage::IsWallDown(VECTOR2 pos)
 {
-	int i = (pos.x - 100) / 40;
-	int j = (pos.y - 100) / 40;
+	int i = (pos.x ) / 40;
+	int j = (pos.y ) / 40;
 	if (map[j][i] == 1) {
-		int push = ((int)pos.y - 100) % 40 + 1;
+		int push = ((int)pos.y ) % 40 + 1;
 		return push;
 	}
 	return 0;
@@ -74,10 +74,10 @@ int Stage::IsWallDown(VECTOR2 pos)
 
 int Stage::IsWallLeft(VECTOR2 pos)
 {
-	int i = (pos.x - 100) / 40;
-	int j = (pos.y - 100) / 40;
+	int i = (pos.x ) / 40;
+	int j = (pos.y ) / 40;
 	if (map[j][i] == 1) {
-		int push = 40-((int)pos.x - 100) % 40 ;
+		int push = 40-((int)pos.x ) % 40 ;
 		return push;
 	}
 	return 0;
