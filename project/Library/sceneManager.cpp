@@ -1,79 +1,83 @@
-#include "SceneManager.h"
-#include "SceneBase.h"
-#include "../Source/SceneFactory.h"
+#include "sceneManager.h"
+#include "sceneBase.h"
+#include "../Source/sceneFactory.h"
 #include <DxLib.h>
+#include "time.h"
 
-namespace
-{
-	std::string* currentName; // 現在のシーンの名称
-	std::string* nextName;    // 次のシーンの名称
-	SceneBase* currentScene; // 今のシーンのインスタンスを保持
-	SceneFactory* factory;   // シーン切り替え用のFactoryのポインター
-	bool exitRequest;
+namespace {
+	std::string m_currentName; // 現在のシーンの名称
+	std::string m_nextName;    // 次のシーンの名称
+	SceneBase* m_currentScene; // 今のシーンのインスタンスを保持
+	SceneBase* m_commonScene;  // 共通シーン
+	SceneFactory* m_factory;   // シーン切り替え用のFactoryのポインター
+	int hShadow;
 };
 
-void SceneManager::Init()
+void SceneManager::Start()
 {
-	currentName = new std::string;
-	nextName = new std::string;
-	*nextName = "";
-	*currentName = "";
+	m_nextName = "";
+	m_currentName = "";
+	m_commonScene = new SceneBase(false);
 
-	factory = new SceneFactory();
+	m_factory = new SceneFactory();
 	// 最初に動くシーンを、SceneFactoryに作ってもらう
-	currentScene = factory->CreateFirst();
-	exitRequest = false;
+	m_currentScene = m_factory->CreateFirst();
+	Time::Init();
 }
 
 void SceneManager::Update()
 {
-	if (*nextName != *currentName)
-	{ // シーン切り替えの指定があったので
-		if (currentScene != nullptr)
-		{ // 今までのシーンを解放
-			ObjectManager::DeleteAllGameObject();
-			delete currentScene;
-			currentScene = nullptr;
+	//Time::Refresh();
+
+	if (m_nextName != m_currentName) { // シーン切り替えの指定があったので
+		if (m_currentScene != nullptr) { // 今までのシーンを解放
+			delete m_currentScene;
+			m_currentScene = nullptr;
 		}
-		currentScene = factory->Create(*nextName); // 次のシーンを作成
-		*currentName = *nextName;
+		m_currentName = m_nextName;
+		m_currentScene = m_factory->Create(m_nextName); // 次のシーンを作成
 	}
-	if (currentScene != nullptr)
-		currentScene->Update();
+	if (m_currentScene != nullptr)
+		m_currentScene->Update();
+	m_commonScene->Update();
 }
 
 void SceneManager::Draw()
 {
-	if (currentScene != nullptr)
-		currentScene->Draw();
+	if (m_currentScene != nullptr) {
+		m_currentScene->Draw();
+	}
+	m_commonScene->Draw();
 }
 
 void SceneManager::Release()
 {
-	if (currentScene != nullptr)
-	{
-		delete currentScene;
-		currentScene = nullptr;
+	if (m_currentScene != nullptr) {
+		delete m_currentScene;
+		m_currentScene = nullptr;
 	}
-	if (factory != nullptr) {
-		delete factory;
-		factory = nullptr;
+	if (m_commonScene != nullptr) {
+		delete m_commonScene;
+		m_commonScene = nullptr;
 	}
-	delete currentName;
-	delete nextName;
+}
+
+SceneBase* SceneManager::CommonScene()
+{
+	return m_commonScene;
+}
+
+SceneBase* SceneManager::CurrentScene()
+{
+	return m_currentScene;
+}
+
+void SceneManager::SetCurrentScene(SceneBase* scene)
+{
+	m_currentScene = scene;
 }
 
 void SceneManager::ChangeScene(const std::string& sceneName)
 {
-	*nextName = sceneName;
-}
-
-void SceneManager::Exit()
-{
-	exitRequest = true;
-}
-
-bool SceneManager::IsExit()
-{
-	return exitRequest;
+	m_nextName = sceneName;
 }

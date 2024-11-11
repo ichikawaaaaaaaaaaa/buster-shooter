@@ -1,9 +1,8 @@
 #pragma once
 
-#include "../Library/SceneBase.h"
+#include "../Library/sceneBase.h"
 
-class BootScene : public SceneBase
-{
+class BootScene : public SceneBase {
 public:
 	BootScene();
 	~BootScene();

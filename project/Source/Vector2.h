@@ -9,30 +9,16 @@ struct VECTOR2 { // ç\ë¢ëÃ
 	}
 };
 
-float VSize(const VECTOR2& v);
+float VSize(VECTOR2 v);
 
-VECTOR2 VSub(const VECTOR2& v1, const VECTOR2& v2);
+VECTOR2 VSub(VECTOR2 v1, VECTOR2 v2);
 
-VECTOR2 VAdd(const VECTOR2& v1, const VECTOR2& v2);
+VECTOR2 VAdd(VECTOR2 v1, VECTOR2 v2);
 
-VECTOR2 operator +(const VECTOR2& v1, const VECTOR2& v2);
+VECTOR2 operator +(VECTOR2 v1, VECTOR2 v2);
 
-VECTOR2 operator -(const VECTOR2& v1, const VECTOR2& v2);
+VECTOR2 VScale(VECTOR2 v, float s);
 
-const VECTOR2& operator +=(VECTOR2& v1, const VECTOR2& v2);
+VECTOR2 VNorm(VECTOR2 v);
 
-const VECTOR2& operator -=(VECTOR2& v1, const VECTOR2& v2);
-
-VECTOR2 VScale(const VECTOR2& v, float s);
-
-VECTOR2 operator *(const VECTOR2& v1, float s);
-
-VECTOR2 operator /(const VECTOR2& v1, float s);
-
-const VECTOR2& operator *=(VECTOR2& v1, float s);
-
-const VECTOR2& operator /=(VECTOR2& v1, float s);
-
-VECTOR2 VNorm(const VECTOR2& v);
-
-bool CircleHit(const VECTOR2& obj1, const VECTOR2& obj2, float r);
+bool CircleHit(VECTOR2 obj1, VECTOR2 obj2, float r);
