@@ -13,4 +13,6 @@ public:
 	int IsWallUP(VECTOR2 pos);
 
 	int hImage;
+
+	int scroll;
 };
