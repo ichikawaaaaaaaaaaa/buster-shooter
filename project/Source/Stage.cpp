@@ -83,8 +83,8 @@ int Stage::IsWallLeft(VECTOR2 pos)
 
 int Stage::IsWallUP(VECTOR2 pos)
 {
-	int i = (pos.x - 100) / 40;
-	int j = (pos.y - 100) / 40;
+	int i = (pos.x) / 40;
+	int j = (pos.y ) / 40;
 	if (map[j][i] == 1) {
 		int push = 40-((int)pos.y ) % 40;
 		return push;
