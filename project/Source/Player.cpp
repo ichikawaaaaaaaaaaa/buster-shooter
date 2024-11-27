@@ -20,23 +20,23 @@ Player::~Player()
 void Player::Update()
 {
 	Stage* s = FindGameObject<Stage>();
-	if (CheckHitKey(KEY_INPUT_W)) {
-		position.y -= 4;
-		//上
-		int push = s->IsWallUP(position + VECTOR2(0, 0));
-		position.y += push;
-		push = s->IsWallUP(position + VECTOR2(39, 0));
-		position.y += push;
-	}
+	//if (CheckHitKey(KEY_INPUT_W)) {
+	//	position.y -= 4;
+	//	//上
+	//	int push = s->IsWallUP(position + VECTOR2(0, 0));
+	//	position.y += push;
+	//	push = s->IsWallUP(position + VECTOR2(39, 0));
+	//	position.y += push;
+	//}
 
-	if (CheckHitKey(KEY_INPUT_S)) {
-		position.y += 4;
-		//下にかべがあるか調べる
-		int push = s->IsWallDown(position + VECTOR2(39, 0));
-		position.y -= push;
-		push = s->IsWallDown(position + VECTOR2(39, 39));
-		position.y -= push;
-	}
+	//if (CheckHitKey(KEY_INPUT_S)) {
+	//	position.y += 4;
+	//	//下にかべがあるか調べる
+	//	int push = s->IsWallDown(position + VECTOR2(39, 0));
+	//	position.y -= push;
+	//	push = s->IsWallDown(position + VECTOR2(39, 39));
+	//	position.y -= push;
+	//}
 
 	if (CheckHitKey(KEY_INPUT_A)) {
 		position.x -= 4;
@@ -91,6 +91,7 @@ void Player::Update()
 		if (push > 0) {
 			velocity = 0.0f;
 			position.y -= push - 1;
+			onGround = true;//接地してる
 		}
 	}
 	else {//ブロックに頭ぶつけたらすぐ落ちる
@@ -114,8 +115,8 @@ void Player::Update()
 	}
 
 
-	if (position.x - s->scroll < 0) {
-		s->scroll = position.x;
+	if (position.x - s->scroll < 200) {
+		s->scroll = position.x - 200;
 	}
 
 }
