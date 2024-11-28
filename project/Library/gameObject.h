@@ -1,83 +1,78 @@
 #pragma once
-/// <summary>
-/// ゲームオブジェクトの基底クラス
-/// </summary>
-/// <author>N.Hanai</author>
-
-#include <DxLib.h>
+#include "myDxLib.h"
 #include <string>
-#include "SceneBase.h"
-#include "ObjectManager.h"
-#include "Time.h"
+#include "sceneBase.h"
 
-class GameObject
-{
+class GameObject {
 public:
-	GameObject() : tag(""), destroy(false), dontDestroy(false), drawOrder(0) { ObjectManager::Push(this); }
-	virtual ~GameObject() { ObjectManager::Pop(this); }
-
-	/// <summary>
-	/// 毎フレームの更新処理のために呼ばれます
-	/// </summary>
+	GameObject() : m_pScene(nullptr), m_pParent(nullptr), m_destroy(false), m_tag("") {}
+	GameObject(SceneBase* scene) : m_pScene(scene), m_pParent(nullptr), m_destroy(false), m_tag("") {}
+	GameObject(GameObject* object) : m_pScene(nullptr), m_pParent(object), m_destroy(false), m_tag("") {}
+	GameObject(SceneBase* scene, GameObject* object) : m_pScene(scene), m_pParent(object), m_destroy(false), m_tag("") {}
+	virtual ~GameObject() {}
+	virtual void Start() {}
 	virtual void Update() {}
-
-	/// <summary>
-	/// 毎フレームの描画処理のために呼ばれます
-	/// </summary>
 	virtual void Draw() {}
 
 	/// <summary>
-	/// 自分のインスタンスを削除する時に呼び出してください
-	/// 次回のUpdateの前に削除されます
+	/// 自分のインスタンスを削除する時に呼び出す
+	/// 次回のUpdateの前に削除される
 	/// </summary>
-	void DestroyMe() { destroy = true; }
-
-	bool DestroyRequested() const { return destroy; }
+	void DestroyMe() { m_destroy = true; }
 
 	/// <summary>
-	/// シーンチェンジするときに、削除されなくする
+	/// インスタンスが削除要求されているかを調べる
+	/// 主に、SceneManagerでチェックしている
 	/// </summary>
-	/// <param name="sw">書かなければtrue、falseにすると削除される</param>
-	void StayOnSceneChange(bool sw = true) { dontDestroy = sw; }
-
-	bool IsDontDestroy() const { return dontDestroy; }
-
-	/// <summary>
-	/// 描画の優先順位を指定します
-	/// 数値が高いほど、先に描画されるので、
-	/// 2Dであれば、奥に表示されます
-	/// 何も指定しなければ０です
-	/// </summary>
-	/// <param name="odr">描画順位</param>
-	void SetDrawOrder(int order) {
-		drawOrder = order;
-		ObjectManager::SortByDrawOrder();
-	}
-
-	inline int GetDrawOrder() const {	return drawOrder; }
+	/// <returns></returns>
+	bool IsDestroy() const { return m_destroy; }
 
 	/// <summary>
 	/// タグをつける
 	/// タグは１つだけ付けることができます
 	/// </summary>
 	/// <param name="_tag">タグ</param>
-	void SetTag(std::string _tag) { tag = _tag; }
+	void SetTag(std::string _tag) { m_tag = _tag; }
 
 	/// <summary>
 	/// 指定されたタグと同じかを返す
 	/// </summary>
 	/// <param name="_tag">タグ</param>
 	/// <returns>同じであればtrue</returns>
-	bool IsTag(std::string _tag) const { return tag == _tag; }
-private:
-	std::string tag;     // タグ
-	bool destroy;
-	bool dontDestroy;
-	int drawOrder;
-};
+	bool IsTag(std::string _tag) const { return m_tag == _tag; }
 
-template <class C>
-C* Instantiate()
-{
-	return new C();
-}
+	/// <summary>
+	/// タグを取得する
+	/// </summary>
+	/// <returns>設定されているタグ</returns>
+	const std::string& GetTag() const { return m_tag; }
+
+	/// <summary>
+	/// 所属するシーンを返す
+	/// </summary>
+	/// <returns>所属するシーンのポインター</returns>
+	SceneBase* GetScene() const { return m_pScene; }
+
+	/// <summary>
+	/// シーンのポインターを保存する
+	/// </summary>
+	/// <returns>所属するシーンのポインター</returns>
+	void SetScene(SceneBase* _scene) { m_pScene = _scene; }
+
+	/// <summary>
+	/// 親のオブジェクトを返す
+	/// </summary>
+	/// <returns>親オブジェクトのポインター</returns>
+	GameObject* GetParent() const { return m_pParent; }
+
+	/// <summary>
+	/// 親のオブジェクトを返す
+	/// </summary>
+	/// <returns>親オブジェクトのポインター</returns>
+	void SetParent(GameObject* _parent) { m_pParent = _parent; }
+private:
+	SceneBase* m_pScene;   // 所属するシーン
+	GameObject* m_pParent; // 親のオブジェクト
+	bool m_destroy;        // 自分を削除するか否か
+	std::string m_tag;     // タグ
+};

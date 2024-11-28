@@ -2,6 +2,7 @@
 #include "Stage.h"
 #include "VECTOR2.h"
 
+<<<<<<< HEAD
 float Gravity = 0.1f;     //重力加速度
 float jumpHeight = 20 * 2;  //ジャンプの高さ
 float V0 = -sqrtf(3.0f * Gravity * jumpHeight);//初速計算
@@ -21,10 +22,24 @@ Player::Player()
 }
 
 //デストラクタ
+=======
+const float Gravity = 0.3f;
+const float JumpHeight = 40 * 2;
+const float V0 = -sqrtf(2.0f * Gravity * JumpHeight);
+
+Player::Player()
+{
+	hImage = LoadGraph("data/image/chara.png");
+	position.x = 0;
+	position.y = 0;
+}
+
+>>>>>>> e687b6cbac460819700e00a87906bba6386f6570
 Player::~Player()
 {
 }
 
+<<<<<<< HEAD
 //更新処理
 void Player::Update()
 {
@@ -123,6 +138,98 @@ void Player::Update()
 		}
 	}
 
+=======
+void Player::Update()
+{
+	Stage* s = FindGameObject<Stage>();
+	//if (CheckHitKey(KEY_INPUT_W)) {
+	//	position.y -= 4;
+	//	//上
+	//	int push = s->IsWallUP(position + VECTOR2(0, 0));
+	//	position.y += push;
+	//	push = s->IsWallUP(position + VECTOR2(39, 0));
+	//	position.y += push;
+	//}
+
+	//if (CheckHitKey(KEY_INPUT_S)) {
+	//	position.y += 4;
+	//	//下にかべがあるか調べる
+	//	int push = s->IsWallDown(position + VECTOR2(39, 0));
+	//	position.y -= push;
+	//	push = s->IsWallDown(position + VECTOR2(39, 39));
+	//	position.y -= push;
+	//}
+
+	if (CheckHitKey(KEY_INPUT_A)) {
+		position.x -= 4;
+		//左
+		int push = s->IsWallLeft(position + VECTOR2(0, 0));
+		position.x -= push;
+		push = s->IsWallLeft(position + VECTOR2(0, 39));
+		position.x += push;
+	}
+
+	if (CheckHitKey(KEY_INPUT_D)) {
+		position.x += 4;
+		//右に壁があるか調べる
+		int push = s->IsWallRight(position + VECTOR2(39, 0));
+			position.x -= push;
+		push = s->IsWallRight(position + VECTOR2(39, 39));
+			position.x -= push;
+	}
+
+	if (CheckHitKey(KEY_INPUT_SPACE)) {
+		if (prevJumpKey == false) {
+			if (onGround) {
+				//ジャンプする
+				velocity = V0;//初速を決める
+			}
+		}
+		prevJumpKey = true;
+	}
+	else{
+		prevJumpKey = false;
+	}
+
+	position.y += velocity;
+	velocity += Gravity;//速度には重力を足す
+	onGround = false;
+
+
+
+
+	if (velocity >= 0) {
+
+		//下に壁があるか調べる
+		int push = s->IsWallDown(position + VECTOR2(0, 40));//足元の１つ下
+		if (push > 0) {//地面に触れたので
+
+			velocity = 0.0f;//地面に触れたら速度を０にする
+			position.y -= push - 1;//地面の上に押し返す
+			onGround = true;//接地してる
+		}
+
+		push = s->IsWallDown(position + VECTOR2(39, 40));
+		if (push > 0) {
+			velocity = 0.0f;
+			position.y -= push - 1;
+			onGround = true;//接地してる
+		}
+	}
+	else {//ブロックに頭ぶつけたらすぐ落ちる
+		int push = s->IsWallUP(position + VECTOR2(0, 0));
+		if (push > 0) {
+			velocity = 0.0f;
+			position.y += push;
+		}
+
+		push = s->IsWallUP(position + VECTOR2(39, 0));
+		if (push > 0) {
+			velocity = 0.0f;
+			position.y += push;
+		}
+	}
+>>>>>>> e687b6cbac460819700e00a87906bba6386f6570
 	//400までプレイヤーが行ったらスクロール
 
 	//- s->scrollしているがscrollに値を入れていないので　ただのposition.x(プレイヤーのx座標）
@@ -140,5 +247,9 @@ void Player::Update()
 void Player::Draw()
 {
 	Stage* s = FindGameObject<Stage>();
+<<<<<<< HEAD
 	DrawRectGraph(position.x - s->scroll, position.y, 0, 0, 40, 40, hImage, TRUE);
+=======
+	DrawRectGraph(position.x - s->scroll, position.y , 0, 0, 40, 40, hImage, TRUE);
+>>>>>>> e687b6cbac460819700e00a87906bba6386f6570
 }

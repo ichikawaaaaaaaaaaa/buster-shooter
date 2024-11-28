@@ -2,6 +2,7 @@
 #include "../Library/gameObject.h"
 #include "Vector2.h"
 
+<<<<<<< HEAD
 //GameObject クラスの継承
 class Player : public GameObject {
 public:
@@ -24,3 +25,17 @@ public:
 
 
 
+=======
+class Player : public GameObject {
+public:
+	Player();
+	~Player();
+	void Update() override;
+	void Draw() override;
+	int hImage;
+	VECTOR2 position;
+	float velocity;
+	bool prevJumpKey;	//前のジャンプキー
+	bool onGround;	//地面にいる
+};
+>>>>>>> e687b6cbac460819700e00a87906bba6386f6570

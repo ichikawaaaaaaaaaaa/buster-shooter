@@ -1,15 +1,14 @@
 #pragma once
+#include <string>
+
+class SceneBase;
+
 /// <summary>
 /// SceneManagerから呼び出されてSceneを作成するクラス
 /// SceneManagerを触らなくていいように、作成部分をここに分離しておく
 /// 作るシーンは、文字列で指定してもらうようにした
 /// </summary>
-#include <string>
-
-class SceneBase;
-
-class SceneFactory
-{
+class SceneFactory {
 public:
 	/// <summary>
 	/// 最初にシーンを作る
