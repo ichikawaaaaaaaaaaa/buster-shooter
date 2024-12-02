@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "GoalText.h"
 #include "Stage.h"
-#include "Stone.h"
+#include "Ball.h"
 #include "config.h"
 #include "Enemy.h"
 #include "VECTOR2.h"
@@ -131,11 +131,11 @@ void Player::Update()
 	// Ball‚ğ“Š‚°‚é
 	if (GetMouseInput() & MOUSE_INPUT_RIGHT) {
 		if (prevRightMouse == false) {
-			Stone* st = Instantiate<Stone>();
+			Ball* Ba = Instantiate<Ball>();
 			// ‘ã“ü‚µ‚Ä‚©‚ç‘«‚·•û–@
-			st->position = position;
-			st->position.x += 130;
-			st->position.y += 5;
+			Ba->position = position;
+			Ba->position.x += 130;
+			Ba->position.y += 5;
 			// ‚±‚±‚Ü‚ÅA‚Ç‚¿‚ç‚©‚ğg‚¤
 		}
 		prevRightMouse = true;

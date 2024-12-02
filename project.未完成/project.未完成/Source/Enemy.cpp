@@ -1,4 +1,4 @@
-#include "Stone.h"
+#include "Ball.h"
 #include "Vector2.h"
 #include "Enemy.h"
 #include "config.h"
@@ -63,23 +63,23 @@ void Enemy::Update()
 				patternY = (patternY + 1) % 4;
 		}
 	}
-	// 石と当たり判定をする
-	std::list<Stone*> stones = FindGameObjects<Stone>(); // 全部の石
-	for (Stone* st : stones) { // stに１つずつ石のポインターが入る
-		// ①石の当たり判定の中心座標を求める
+
+	std::list<Ball*> balls = FindGameObjects<Ball>();
+	for (Ball* Ba : balls) { 
+		
 		VECTOR2 sCenter;
-		sCenter.x = st->position.x + 8;
-		sCenter.y = st->position.y + 8;
-		// ②鳥の当たり判定の中心座標を求める
+		sCenter.x = Ba->position.x + 8;
+		sCenter.y = Ba->position.y + 8;
+		
 		VECTOR2 bCenter;
 		bCenter.x = position.x + 32;
 		bCenter.y = position.y + 32;
-		// ①と②の円の当たり判定をする
+		
 		if (CircleHit(sCenter, bCenter, 32 + 8)) {
 			dead = true;
 			deadCounter = 0;
 			patternY = 4;
-			st->DestroyMe();
+			Ba->DestroyMe();
 		}
 	}
 }

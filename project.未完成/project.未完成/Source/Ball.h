@@ -2,10 +2,10 @@
 #include "../Library/gameObject.h"
 #include "Vector2.h"
 
-class Stone : public GameObject {
+class Ball : public GameObject {
 public:
-	Stone();
-	~Stone();
+	Ball();
+	~Ball();
 	void Update() override;
 	void Draw() override;
 

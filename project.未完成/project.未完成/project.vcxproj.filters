@@ -46,7 +46,7 @@
     </ClCompile>
     <ClCompile Include="Source\Coin.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
-    <ClCompile Include="Source\Stone.cpp" />
+    <ClCompile Include="Source\Ball.cpp" />
     <ClCompile Include="Source\Fader.cpp" />
     <ClCompile Include="Source\GoalText.cpp" />
   </ItemGroup>
@@ -105,7 +105,7 @@
       <Filter>PlayScene</Filter>
     </ClInclude>
     <ClInclude Include="Source\Enemy.h" />
-    <ClInclude Include="Source\Stone.h" />
+    <ClInclude Include="Source\Ball.h" />
     <ClInclude Include="Source\config.h">
       <Filter>TitleScene</Filter>
     </ClInclude>
