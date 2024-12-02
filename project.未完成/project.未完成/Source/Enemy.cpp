@@ -1,4 +1,4 @@
-
+#include "Stone.h"
 #include "Vector2.h"
 #include "Enemy.h"
 #include "config.h"
@@ -25,38 +25,25 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
+	if (dead) {
+		deadCounter++;
+		if (deadCounter >= 20) {
+			DestroyMe();
+		}
+		return;
+	}
 	//突入しているときの、プレイヤーに120まで知数いたら
-	if (attacking) {  //突入しているなら
+	if (attacking) {  
 		Player* player = FindGameObject<Player>();
 		VECTOR2 to = VSub(player->position, position);
-
 		to = VNorm(to);
-		//to.x = player->position.x - position.x;
-		//to.y = player->position.y - position.y;
 
-		//toがベクトル(自分が移動したい向きと距離)
-		//行きたい座標から自分の座標を引く
-
-		
-//		float theta = atan2(to.y, to.x);//プレイヤーの向き
-//		float speed = 1.0f;
-//		position.x += cos(theta)*speed;
-//		position.y += sin(theta)*speed;
-
-		//長さバージョン
-		//toベクトルの長さを求めて、float lenに代入する
-		//oat len = VSize(to);
-		//toベクトルのx,yをそれぞれlenで割る=>toベクトルの長さを1にする
 
 		position = VAdd(position, VScale(to, 2.0f));
-		//oat speed = 2.0f;
-		//position.x += to.x;
-		//position.y += to.y;
-		//sition = VAdd(position, VScale(to, speed));
 
 		VECTOR2 d = VSub(player->position, position);
 		if (VSize(d) < 120) {//長さが120以下になったら
-			attacking = false;//突入をやめて、水平移動する。
+			attacking = false;
 		}
 	}
 	else {
@@ -74,6 +61,25 @@ void Enemy::Update()
 		if (frameCounter += 1) {
 			if (frameCounter % 10 == 0)
 				patternY = (patternY + 1) % 4;
+		}
+	}
+	// 石と当たり判定をする
+	std::list<Stone*> stones = FindGameObjects<Stone>(); // 全部の石
+	for (Stone* st : stones) { // stに１つずつ石のポインターが入る
+		// ①石の当たり判定の中心座標を求める
+		VECTOR2 sCenter;
+		sCenter.x = st->position.x + 8;
+		sCenter.y = st->position.y + 8;
+		// ②鳥の当たり判定の中心座標を求める
+		VECTOR2 bCenter;
+		bCenter.x = position.x + 32;
+		bCenter.y = position.y + 32;
+		// ①と②の円の当たり判定をする
+		if (CircleHit(sCenter, bCenter, 32 + 8)) {
+			dead = true;
+			deadCounter = 0;
+			patternY = 4;
+			st->DestroyMe();
 		}
 	}
 }

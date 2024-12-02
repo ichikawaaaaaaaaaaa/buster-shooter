@@ -20,6 +20,14 @@ public:
 
 	int scroll;  // スクロール位置（仮想）
 
+	int patternX;  
+	int patternY;
+	int frameCounter;
+
+	bool crying;
+
+	bool prevRightMouse;
+
 };
 
 

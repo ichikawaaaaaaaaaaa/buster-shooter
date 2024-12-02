@@ -1,16 +1,19 @@
 #pragma once
 #include "../Library/gameObject.h"
-
-class GoalText : public GameObject
-{
+#include "DxLib.h"  // 描画用
+class GoalText : public GameObject {
 public:
-	GoalText();
-	~GoalText();
-	void Update()override;
-	void Draw() override;
+	GoalText();                // コンストラクタ
+	~GoalText();               // デストラクタ
+	void Update() override;    // 更新処理
+	void Draw() override;      // 描画処理
+	
 
+	int hImage;
 
-	float timer;
-	bool fadeStarted;
+private:
+	float timer;               // タイマー（テキストの表示時間）
+	bool fadeStarted;          // フェード開始フラグ
+	int alpha;                 // 文字の透明度（フェード用）
+
 };
-

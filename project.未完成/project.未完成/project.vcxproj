@@ -142,7 +142,7 @@
     <ClInclude Include="Library\sceneBase.h" />
     <ClInclude Include="Library\sceneManager.h" />
     <ClInclude Include="Library\time.h" />
-    <ClInclude Include="Source\Ball.h" />
+    <ClInclude Include="Source\Stone.h" />
     <ClInclude Include="Source\bootScene.h" />
     <ClInclude Include="Source\Coin.h" />
     <ClInclude Include="Source\component.h" />
@@ -167,7 +167,7 @@
     <ClCompile Include="Library\sceneBase.cpp" />
     <ClCompile Include="Library\sceneManager.cpp" />
     <ClCompile Include="Library\time.cpp" />
-    <ClCompile Include="Source\Ball.cpp" />
+    <ClCompile Include="Source\Stone.cpp" />
     <ClCompile Include="Source\bootScene.cpp" />
     <ClCompile Include="Source\Coin.cpp" />
     <ClCompile Include="Source\debugScreen.cpp" />

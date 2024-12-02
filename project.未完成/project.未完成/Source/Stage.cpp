@@ -97,3 +97,15 @@ int Stage::IsWallUP(VECTOR2 pos)
 	}
 	return 0;
 }
+
+bool Stage::IsWall(const VECTOR2& position){
+	if (position.x >= 300 && position.x <= 320 && position.y >= 100 && position.y <= 200) {
+		return false;
+	}
+}
+
+bool Stage::IsGoal(VECTOR2 position)
+{
+	return position.x > goalX && position.x < goalX + goalWidth &&
+		position.y > goalY && position.y < goalY + goalHeight;
+}

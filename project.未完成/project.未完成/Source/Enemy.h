@@ -20,4 +20,7 @@ public:
 
 	int timer; //ŠÔ‚ğ‘ª‚é‚½‚ß
 	bool attacking; //“Ë“ü‚µ‚Ä‚Ü‚·B
+
+	bool dead;
+	int deadCounter;
 };

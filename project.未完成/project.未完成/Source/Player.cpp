@@ -1,5 +1,9 @@
 #include "Player.h"
+#include "GoalText.h"
 #include "Stage.h"
+#include "Stone.h"
+#include "config.h"
+#include "Enemy.h"
 #include "VECTOR2.h"
 
 float Gravity = 0.1f;     //重力加速度
@@ -10,8 +14,8 @@ float V0 = -sqrtf(3.0f * Gravity * jumpHeight);//初速計算
 Player::Player()
 {
 	hImage = LoadGraph("data/image/chara.png");//キャラ画像の読み込み
-	position.x = 0;  //初期X座標
-	position.y = 0;  //初期Y座標
+	position.x = 10;  //初期X座標
+	position.y = 100;  //初期座標
 	velocity = 0;    //初期速度
 	prevJumpKey = false;   //初期ジャンプキー状態
 	onGround = false;  //地上判定初期化
@@ -23,6 +27,7 @@ Player::Player()
 //デストラクタ
 Player::~Player()
 {
+	DeleteGraph(hImage);
 }
 
 //更新処理
@@ -123,6 +128,31 @@ void Player::Update()
 		}
 	}
 
+	// Ballを投げる
+	if (GetMouseInput() & MOUSE_INPUT_RIGHT) {
+		if (prevRightMouse == false) {
+			Stone* st = Instantiate<Stone>();
+			// 代入してから足す方法
+			st->position = position;
+			st->position.x += 130;
+			st->position.y += 5;
+			// ここまで、どちらかを使う
+		}
+		prevRightMouse = true;
+	}
+	else {
+		prevRightMouse = false;
+	}
+
+	//Enemyの当たり判定
+	std::list<Enemy*> enemys = FindGameObjects<Enemy>();
+	for (Enemy* e : enemys) {
+		if (CircleHit(position, e->position, 56)) {
+			patternY = 4;
+			crying = true;
+		}
+	}
+
 	//400までプレイヤーが行ったらスクロール
 
 	//- s->scrollしているがscrollに値を入れていないので　ただのposition.x(プレイヤーのx座標）
@@ -134,8 +164,17 @@ void Player::Update()
 	if (position.x - s->scroll < 200) {
 		s->scroll = position.x - 200;
 	}
+	if (goaled == false && s->IsGoal(position + VECTOR2(20, 20))) {
+
+		goaled = true;
+
+		Instantiate<GoalText>();
+
+	}
+
 
 }
+
 
 void Player::Draw()
 {
