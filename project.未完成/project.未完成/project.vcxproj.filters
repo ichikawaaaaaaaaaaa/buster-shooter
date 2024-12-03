@@ -35,11 +35,6 @@
     <ClCompile Include="Source\timer.cpp">
       <Filter>common</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="Source\Player.cpp" />
-    <ClCompile Include="Source\Stage.cpp" />
-    <ClCompile Include="Source\Enemy.cpp" />
-=======
     <ClCompile Include="Source\Vector2.cpp">
       <Filter>PlayScene</Filter>
     </ClCompile>
@@ -50,10 +45,12 @@
       <Filter>PlayScene</Filter>
     </ClCompile>
     <ClCompile Include="Source\Coin.cpp" />
->>>>>>> e687b6cbac460819700e00a87906bba6386f6570
+    <ClCompile Include="Source\Enemy.cpp" />
+    <ClCompile Include="Source\Ball.cpp" />
+    <ClCompile Include="Source\Fader.cpp" />
+    <ClCompile Include="Source\GoalText.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\config.h" />
     <ClInclude Include="Source\sceneFactory.h" />
     <ClInclude Include="Library\app.h">
       <Filter>Library</Filter>
@@ -107,10 +104,13 @@
     <ClInclude Include="Source\stage1.h">
       <Filter>PlayScene</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Player.h" />
-    <ClInclude Include="Source\Stage.h" />
-    <ClInclude Include="Source\Stage1.h" />
     <ClInclude Include="Source\Enemy.h" />
+    <ClInclude Include="Source\Ball.h" />
+    <ClInclude Include="Source\config.h">
+      <Filter>TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Fader.h" />
+    <ClInclude Include="Source\GoalText.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">

@@ -1,18 +1,21 @@
 #include "Player.h"
+#include "GoalText.h"
 #include "Stage.h"
+#include "Ball.h"
+#include "config.h"
+#include "Enemy.h"
 #include "VECTOR2.h"
 
-<<<<<<< HEAD
 float Gravity = 0.1f;     //重力加速度
-float jumpHeight = 20 * 2;  //ジャンプの高さ
+float jumpHeight = 20*2;  //ジャンプの高さ
 float V0 = -sqrtf(3.0f * Gravity * jumpHeight);//初速計算
 
 //コンストラクタ
 Player::Player()
 {
 	hImage = LoadGraph("data/image/chara.png");//キャラ画像の読み込み
-	position.x = 0;  //初期X座標
-	position.y = 0;  //初期Y座標
+	position.x = 10;  //初期X座標
+	position.y = 100;  //初期座標
 	velocity = 0;    //初期速度
 	prevJumpKey = false;   //初期ジャンプキー状態
 	onGround = false;  //地上判定初期化
@@ -22,24 +25,11 @@ Player::Player()
 }
 
 //デストラクタ
-=======
-const float Gravity = 0.3f;
-const float JumpHeight = 40 * 2;
-const float V0 = -sqrtf(2.0f * Gravity * JumpHeight);
-
-Player::Player()
-{
-	hImage = LoadGraph("data/image/chara.png");
-	position.x = 0;
-	position.y = 0;
-}
-
->>>>>>> e687b6cbac460819700e00a87906bba6386f6570
 Player::~Player()
 {
+	DeleteGraph(hImage);
 }
 
-<<<<<<< HEAD
 //更新処理
 void Player::Update()
 {
@@ -138,98 +128,31 @@ void Player::Update()
 		}
 	}
 
-=======
-void Player::Update()
-{
-	Stage* s = FindGameObject<Stage>();
-	//if (CheckHitKey(KEY_INPUT_W)) {
-	//	position.y -= 4;
-	//	//上
-	//	int push = s->IsWallUP(position + VECTOR2(0, 0));
-	//	position.y += push;
-	//	push = s->IsWallUP(position + VECTOR2(39, 0));
-	//	position.y += push;
-	//}
-
-	//if (CheckHitKey(KEY_INPUT_S)) {
-	//	position.y += 4;
-	//	//下にかべがあるか調べる
-	//	int push = s->IsWallDown(position + VECTOR2(39, 0));
-	//	position.y -= push;
-	//	push = s->IsWallDown(position + VECTOR2(39, 39));
-	//	position.y -= push;
-	//}
-
-	if (CheckHitKey(KEY_INPUT_A)) {
-		position.x -= 4;
-		//左
-		int push = s->IsWallLeft(position + VECTOR2(0, 0));
-		position.x -= push;
-		push = s->IsWallLeft(position + VECTOR2(0, 39));
-		position.x += push;
-	}
-
-	if (CheckHitKey(KEY_INPUT_D)) {
-		position.x += 4;
-		//右に壁があるか調べる
-		int push = s->IsWallRight(position + VECTOR2(39, 0));
-			position.x -= push;
-		push = s->IsWallRight(position + VECTOR2(39, 39));
-			position.x -= push;
-	}
-
-	if (CheckHitKey(KEY_INPUT_SPACE)) {
-		if (prevJumpKey == false) {
-			if (onGround) {
-				//ジャンプする
-				velocity = V0;//初速を決める
-			}
+	// Ballを投げる
+	if (GetMouseInput() & MOUSE_INPUT_RIGHT) {
+		if (prevRightMouse == false) {
+			Ball* Ba = Instantiate<Ball>();
+			// 代入してから足す方法
+			Ba->position = position;
+			Ba->position.x += 130;
+			Ba->position.y += 5;
+			// ここまで、どちらかを使う
 		}
-		prevJumpKey = true;
+		prevRightMouse = true;
 	}
-	else{
-		prevJumpKey = false;
+	else {
+		prevRightMouse = false;
 	}
 
-	position.y += velocity;
-	velocity += Gravity;//速度には重力を足す
-	onGround = false;
-
-
-
-
-	if (velocity >= 0) {
-
-		//下に壁があるか調べる
-		int push = s->IsWallDown(position + VECTOR2(0, 40));//足元の１つ下
-		if (push > 0) {//地面に触れたので
-
-			velocity = 0.0f;//地面に触れたら速度を０にする
-			position.y -= push - 1;//地面の上に押し返す
-			onGround = true;//接地してる
-		}
-
-		push = s->IsWallDown(position + VECTOR2(39, 40));
-		if (push > 0) {
-			velocity = 0.0f;
-			position.y -= push - 1;
-			onGround = true;//接地してる
+	//Enemyの当たり判定
+	std::list<Enemy*> enemys = FindGameObjects<Enemy>();
+	for (Enemy* e : enemys) {
+		if (CircleHit(position, e->position, 56)) {
+			patternY = 4;
+			crying = true;
 		}
 	}
-	else {//ブロックに頭ぶつけたらすぐ落ちる
-		int push = s->IsWallUP(position + VECTOR2(0, 0));
-		if (push > 0) {
-			velocity = 0.0f;
-			position.y += push;
-		}
 
-		push = s->IsWallUP(position + VECTOR2(39, 0));
-		if (push > 0) {
-			velocity = 0.0f;
-			position.y += push;
-		}
-	}
->>>>>>> e687b6cbac460819700e00a87906bba6386f6570
 	//400までプレイヤーが行ったらスクロール
 
 	//- s->scrollしているがscrollに値を入れていないので　ただのposition.x(プレイヤーのx座標）
@@ -241,15 +164,20 @@ void Player::Update()
 	if (position.x - s->scroll < 200) {
 		s->scroll = position.x - 200;
 	}
+	if (goaled == false && s->IsGoal(position + VECTOR2(20, 20))) {
+
+		goaled = true;
+
+		Instantiate<GoalText>();
+
+	}
+
 
 }
+
 
 void Player::Draw()
 {
 	Stage* s = FindGameObject<Stage>();
-<<<<<<< HEAD
-	DrawRectGraph(position.x - s->scroll, position.y, 0, 0, 40, 40, hImage, TRUE);
-=======
 	DrawRectGraph(position.x - s->scroll, position.y , 0, 0, 40, 40, hImage, TRUE);
->>>>>>> e687b6cbac460819700e00a87906bba6386f6570
 }
