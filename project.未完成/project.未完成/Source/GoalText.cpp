@@ -2,13 +2,14 @@
 #include "../Library/time.h"
 #include "Fader.h"
 #include "Player.h"
+#include "Stage.h"
 
 
 GoalText::GoalText()
 {
 	hImage = LoadGraph("data/image/mob.png");
 	IsGoal = false;
-	timer++;
+
 }
 
 GoalText::~GoalText()
@@ -51,6 +52,7 @@ void GoalText::Update()
 
 void GoalText::Draw()
 {
+	Stage* s = FindGameObject<Stage>();//ŠG‚Ì•\Ž¦‚ð‚·‚é
 	if(IsGoal)
 	{
 		int size = GetFontSize();
