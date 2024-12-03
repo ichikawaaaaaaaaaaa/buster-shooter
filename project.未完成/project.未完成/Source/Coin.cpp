@@ -5,7 +5,7 @@
 Coin::Coin()
 {
 	//コンストラクターで絵をロードする
-	hImage = LoadGraph("data/image/parts.png");
+	hImage = LoadGraph("data/image/mob.png");
 	got = false;
 }
 
@@ -40,7 +40,5 @@ void Coin::Update()
 
 void Coin::Draw()
 {
-	Stage* s = FindGameObject<Stage>();
-	//絵の表示をする
-	DrawRectGraph(position.x - s->scroll, position.y, 120, 0, 40, 40, hImage, TRUE);
+	Stage* s = FindGameObject<Stage>();//絵の表示をする
 }
