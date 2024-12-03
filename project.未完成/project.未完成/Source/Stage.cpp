@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "Coin.h"
 #include "Enemy.h"
-
+#include "GoalText.h"
 const int CHIP_SIZE = 40;
 
 #include "stage1.h"
@@ -26,6 +26,11 @@ Stage::Stage()
 				Enemy* e = Instantiate<Enemy>();
 				e->position.x = i * 40;
 				e->position.y = j * 40;
+			}
+			if (map[j][i] == 4) {
+				GoalText* g = Instantiate<GoalText>();
+				g->position.x = i * 40;
+				g->position.y = j * 40;
 			}
 		}
 	}

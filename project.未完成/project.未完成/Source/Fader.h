@@ -9,7 +9,7 @@ class Fader : public GameObject
 	void Update();
 	void Draw();
 	void FadeOut(unsigned int color, float time);
-	bool IsFinish();
+	bool IsFinish() const;
 
 	float alpha;
 	unsigned int fadeColor;
