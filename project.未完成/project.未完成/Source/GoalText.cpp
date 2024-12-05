@@ -22,24 +22,28 @@ void GoalText::Update()
 	Player* p = FindGameObject<Player>();//相手のインスタンスを取得
 	VECTOR2 playerPos = p->position;//相手の座標を取得
 
-	if (CircleHit(playerPos, position, 40)) {//円の当たり判定
+	if (CircleHit(playerPos, position, 1)) {//円の当たり判定
 		//DestroyMe();
 
 		IsGoal = true;
 	}
 	if (IsGoal)
 	{
-		if (fadeStarted) {
+		if (fadeStarted)
+		{
 			Fader* f = FindGameObject <Fader>();
-			if (f->IsFinish()) {
+			if (f->IsFinish())
+			{
 				SceneManager::ChangeScene("TitleScene");
 			}
 			return;
 		}
 
 		timer += Time::DeltaTime();
-		if (timer >= 2.5f) {
-			if (CheckHitKey(KEY_INPUT_SPACE)) {
+		if (timer >= 2.5f)
+		{
+			if (CheckHitKey(KEY_INPUT_SPACE))
+			{
 				Fader* f = FindGameObject <Fader>();
 				f->FadeOut(GetColor(0, 0, 0), 0.5f);
 				fadeStarted = true;
