@@ -111,6 +111,9 @@
     </ClInclude>
     <ClInclude Include="Source\Fader.h" />
     <ClInclude Include="Source\GoalText.h" />
+    <ClInclude Include="stage2.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">

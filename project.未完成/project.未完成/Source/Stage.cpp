@@ -3,6 +3,7 @@
 #include "Coin.h"
 #include "Enemy.h"
 #include "GoalText.h"
+
 const int CHIP_SIZE = 40;
 
 #include "stage1.h"
