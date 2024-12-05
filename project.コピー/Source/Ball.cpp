@@ -13,6 +13,9 @@ Ball::~Ball() {
 void Ball::Update() {
     // 石の移動処理
     position.x += 5.0f;
+
+    int push = s->IsWallRight(position + VECTOR2(39, 0));
+
     // ステージの壁判定を取得
    // Stage* stage = FindGameObject<Stage>();
     //f (stage && stage->IsWall(position)) {
