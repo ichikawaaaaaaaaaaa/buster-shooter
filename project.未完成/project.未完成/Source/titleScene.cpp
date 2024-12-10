@@ -15,10 +15,6 @@ TitleScene::~TitleScene()
 
 void TitleScene::Update()
 {
-	if (CheckHitKey(KEY_INPUT_P)) {
-
-		SceneManager::ChangeScene("PlayScene");
-	}
 	if (CheckHitKey(KEY_INPUT_1)) {
 		StageUtility::SetStageNo(1);
 		SceneManager::ChangeScene("PlayScene");
