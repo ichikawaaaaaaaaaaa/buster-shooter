@@ -15,6 +15,11 @@ int map[HEIGHT][WIDTH];
 
 Stage::Stage()
 {
+<<<<<<< HEAD
+=======
+	int stageNo = 2;
+	
+>>>>>>> 2260b765b84104874210d2f06a6d2c076ff96c57
 	for (int y = 0; y < HEIGHT; y++)
 	{
 		for (int x = 0; x < WIDTH; x++)
