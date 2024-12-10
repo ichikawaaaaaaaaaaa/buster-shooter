@@ -9,7 +9,7 @@ GoalText::GoalText()
 {
 	hImage = LoadGraph("data/image/mob.png");
 	IsGoal = false;
-
+	timer = 0.0f;
 }
 
 GoalText::~GoalText()
@@ -50,6 +50,11 @@ void GoalText::Update()
 				//	SceneManager::ChangeScene("TitleScene");
 			}
 		}
+
+		if (timer >= 5.0f)
+		{
+			SceneManager::ChangeScene("TitleScene");
+		}
 	}
 }
 
@@ -57,7 +62,7 @@ void GoalText::Update()
 void GoalText::Draw()
 {
 	Stage* s = FindGameObject<Stage>();//ŠG‚Ì•\Ž¦‚ð‚·‚é
-	if(IsGoal)
+	if (IsGoal)
 	{
 		int size = GetFontSize();
 		SetFontSize(50);
@@ -72,6 +77,5 @@ void GoalText::Draw()
 		if (timer >= 2.0f) {
 			DrawString(200, 500, "PUSH SPACE KEY", GetColor(255, 255, 255));
 		}
-		SetFontSize(size);
 	}
 }
