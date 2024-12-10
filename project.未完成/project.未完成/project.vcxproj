@@ -156,10 +156,10 @@
     <ClInclude Include="Source\sceneFactory.h" />
     <ClInclude Include="Source\Stage.h" />
     <ClInclude Include="Source\stage1.h" />
+    <ClInclude Include="Source\stage2.h" />
     <ClInclude Include="Source\timer.h" />
     <ClInclude Include="Source\titleScene.h" />
     <ClInclude Include="Source\Vector2.h" />
-    <ClInclude Include="stage2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Library\app.cpp" />
