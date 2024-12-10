@@ -14,7 +14,7 @@ int map[HEIGHT][WIDTH];
 
 Stage::Stage()
 {
-	int stageNo = 1;
+	int stageNo = 2;
 	
 	for (int y = 0; y < HEIGHT; y++)
 	{
