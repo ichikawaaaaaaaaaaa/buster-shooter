@@ -22,5 +22,5 @@ public:
 	int hImage;
 
 	int scroll;
-	int stageNo = 0;
+	//int stageNo = 0;
 };

@@ -8,19 +8,18 @@ const int CHIP_SIZE = 40;
 
 #include "stage1.h"
 #include "stage2.h"
+#include "StageUtility.h"
 #include <iostream>
 
 int map[HEIGHT][WIDTH];
 
 Stage::Stage()
 {
-	int stageNo = 1;
-	
 	for (int y = 0; y < HEIGHT; y++)
 	{
 		for (int x = 0; x < WIDTH; x++)
 		{
-			switch(stageNo)
+			switch(StageUtility::GetStageNo())
 			{
 				case 1:
 					map[y][x] = map_stage1[y][x];

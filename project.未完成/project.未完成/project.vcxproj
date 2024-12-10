@@ -157,6 +157,7 @@
     <ClInclude Include="Source\Stage.h" />
     <ClInclude Include="Source\stage1.h" />
     <ClInclude Include="Source\stage2.h" />
+    <ClInclude Include="Source\StageUtility.h" />
     <ClInclude Include="Source\timer.h" />
     <ClInclude Include="Source\titleScene.h" />
     <ClInclude Include="Source\Vector2.h" />
@@ -179,6 +180,7 @@
     <ClCompile Include="Source\playScene.cpp" />
     <ClCompile Include="Source\sceneFactory.cpp" />
     <ClCompile Include="Source\Stage.cpp" />
+    <ClCompile Include="Source\StageUtility.cpp" />
     <ClCompile Include="Source\timer.cpp" />
     <ClCompile Include="Source\titleScene.cpp" />
     <ClCompile Include="Source\Vector2.cpp" />
