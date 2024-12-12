@@ -7,7 +7,7 @@
 
 GoalText::GoalText()
 {
-	hImage = LoadGraph("data/image/mob.png");
+	hImage = LoadGraph("data/image/Goal.png");
 	IsGoal = false;
 	timer = 0.0f;
 }
@@ -62,6 +62,7 @@ void GoalText::Update()
 void GoalText::Draw()
 {
 	Stage* s = FindGameObject<Stage>();//ŠG‚Ì•\Ž¦‚ð‚·‚é
+	DrawRectGraph(position.x - s->scroll, position.y, 0, 0, 40, 40, hImage, TRUE);
 	if (IsGoal)
 	{
 		int size = GetFontSize();
