@@ -4,6 +4,7 @@
 #include <DxLib.h>
 #include "Stage.h"
 #include "Fader.h"
+#include <iostream>
 
 
 PlayScene::PlayScene()
@@ -21,6 +22,8 @@ PlayScene::~PlayScene()
 
 void PlayScene::Update()
 {
+	//std::cout << stageNo;
+	//std::cin >> stageNo;
 
 	if (CheckHitKey(KEY_INPUT_T)) {
 		SceneManager::ChangeScene("TitleScene");

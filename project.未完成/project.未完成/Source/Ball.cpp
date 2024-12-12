@@ -1,29 +1,39 @@
 #include "Ball.h"
-#include "DxLib.h"
+#include "config.h"
+#include "Stage.h" // 壁判定用
 
-Ball::Ball(float startX, float startY, float speedX, float speedY) {
-    position.x = startX;
-    position.y = startY;
-    velocity.x = speedX;
-    velocity.y = speedY;
-    active = true;  // 玉は初めは有効
+Ball::Ball() {
+    hImage = LoadGraph("data/image/Stone.png");
+    position.x = 10;   // 初期X座標
+    position.y = 90;  // 初期Y座標
 }
+Ball::~Ball() {
+    DeleteGraph(hImage); // 画像の解放
+}
+void Ball::Update() {
+    // 石の移動処理
+    position.x += 5.0f;
+    // ステージの壁判定を取得
+   // Stage* stage = FindGameObject<Stage>();
+    //f (stage && stage->IsWall(position)) {
+        // 壁に当たった場合、石を削除
+       // DestroyMe();
+    //} 
 
-void Ball::Update()
-{
-    position.x += velocity.x;  // 速度分、x方向に移動
-    position.y += velocity.y;  // 速度分、y方向に移動
-
-    // 画面外に出た場合、玉を無効化する
-    if (position.x < 0 || position.x > 640 || position.y < 0 || position.y > 480) {
-        active = false;  // 画面外に出たら無効化
+    Stage* stage = FindGameObject<Stage>();
+    if (stage && stage->IsWall(position)) {
+        // 壁に当たった場合、ボールを削除
+        DestroyMe();
+        return;
+    }
+    //画面外に出た場合の削除
+    if (position.x > SCREEN_WIDTH || position.y > SCREEN_HEIGHT || position.x < 0 || position.y < 0) {
+        DestroyMe();
     }
 }
 
+//描画処理
 void Ball::Draw() {
-
-    if (active) 
-    {
-        DrawCircle(position.x, position.y, 5, GetColor(255, 0, 0), TRUE);  // 赤い玉を描画
-    }
+    DrawGraph(position.x, position.y, hImage, TRUE); // 石の描画
 }
+
