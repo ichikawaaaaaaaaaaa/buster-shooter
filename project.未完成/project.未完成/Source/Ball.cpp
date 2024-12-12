@@ -5,7 +5,7 @@
 Ball::Ball() {
     hImage = LoadGraph("data/image/Stone.png");
     position.x = 10;   // ‰ŠúXÀ•W
-    position.y = 100;  // ‰ŠúYÀ•W
+    position.y = 90;  // ‰ŠúYÀ•W
 }
 Ball::~Ball() {
     DeleteGraph(hImage); // ‰æ‘œ‚Ì‰ğ•ú
