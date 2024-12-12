@@ -3,12 +3,35 @@
 #include "Coin.h"
 #include "Enemy.h"
 #include "GoalText.h"
+
 const int CHIP_SIZE = 40;
 
 #include "stage1.h"
+#include "stage2.h"
+#include "StageUtility.h"
+#include <iostream>
+
+int map[HEIGHT][WIDTH];
 
 Stage::Stage()
 {
+	
+	for (int y = 0; y < HEIGHT; y++)
+	{
+		for (int x = 0; x < WIDTH; x++)
+		{
+			switch(StageUtility::GetStageNo())
+			{
+				case 1:
+					map[y][x] = map_stage1[y][x];
+					break;
+				case 2:
+					map[y][x] = map_stage2[y][x];
+					break;
+			}
+		}
+	}
+
 	hImage = LoadGraph("data/image/parts.png");
 	for (int j = 0; j < HEIGHT; j++) {
 		for (int i = 0; i < WIDTH; i++) {

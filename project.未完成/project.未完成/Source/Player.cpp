@@ -13,7 +13,7 @@ float V0 = -sqrtf(3.0f * Gravity * jumpHeight);//初速計算
 //コンストラクタ
 Player::Player()
 {
-	hImage = LoadGraph("data/image/chara.png");//キャラ画像の読み込み
+	hImage = LoadGraph("data/image/Player.png");//キャラ画像の読み込み
 	position.x = 10;  //初期X座標
 	position.y = 100;  //初期座標
 	velocity = 0;    //初期速度
