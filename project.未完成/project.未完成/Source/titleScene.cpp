@@ -23,6 +23,18 @@ void TitleScene::Update()
 		StageUtility::SetStageNo(2);
 		SceneManager::ChangeScene("PlayScene");
 	}
+	if (CheckHitKey(KEY_INPUT_3)) {
+		StageUtility::SetStageNo(3);
+		SceneManager::ChangeScene("PlayScene");
+	}
+	if (CheckHitKey(KEY_INPUT_4)) {
+		StageUtility::SetStageNo(4);
+		SceneManager::ChangeScene("PlayScene");
+	}
+	if (CheckHitKey(KEY_INPUT_5)) {
+		StageUtility::SetStageNo(5);
+		SceneManager::ChangeScene("PlayScene");
+	}
 
 	SceneBase::Update();
 }

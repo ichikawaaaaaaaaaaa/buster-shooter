@@ -116,6 +116,15 @@
       <Filter>PlayScene</Filter>
     </ClInclude>
     <ClInclude Include="Source\StageUtility.h" />
+    <ClInclude Include="stage3.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="stage4.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="stage5.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">

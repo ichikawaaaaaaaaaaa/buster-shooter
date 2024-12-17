@@ -161,6 +161,9 @@
     <ClInclude Include="Source\timer.h" />
     <ClInclude Include="Source\titleScene.h" />
     <ClInclude Include="Source\Vector2.h" />
+    <ClInclude Include="stage3.h" />
+    <ClInclude Include="stage4.h" />
+    <ClInclude Include="stage5.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Library\app.cpp" />
