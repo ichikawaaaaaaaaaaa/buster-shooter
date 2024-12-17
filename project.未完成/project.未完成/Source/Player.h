@@ -27,6 +27,8 @@ public:
 	bool crying;
 
 	bool prevRightMouse;
+private:
+	float timer;               // タイマー（テキストの表示時間）
 
 };
 

@@ -43,5 +43,5 @@ void TitleScene::Draw()
 {
 	SceneBase::Draw();
 	DrawString(0, 0, "TITLE SCENE", GetColor(255,255,255));
-	DrawString(100, 100, "プレイしたいステージを１～2を押して選択してください。", GetColor(255, 255, 255));
+	DrawString(100, 100, "プレイしたいステージを１～5を押して選択してください。", GetColor(255, 255, 255));
 }

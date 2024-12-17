@@ -5,6 +5,8 @@
 #include "config.h"
 #include "Enemy.h"
 #include "VECTOR2.h"
+#include "../Library/time.h"
+
 
 float Gravity = 0.1f;     //重力加速度
 float jumpHeight = 20*2;  //ジャンプの高さ
@@ -147,12 +149,40 @@ void Player::Update()
 	//Enemyの当たり判定
 	std::list<Enemy*> enemys = FindGameObjects<Enemy>();
 	for (Enemy* e : enemys) {
-		if (CircleHit(position, e->position, 56)) {
+		if (CircleHit(position, e->position, 100)) {
 			patternY = 4;
 			crying = true;
+			break;
 		}
 	}
-
+	if (crying)
+	{
+		if (timer <= 5.0f)
+		{
+			CheckHitKey(KEY_INPUT_D);
+			{
+				position.x += 0;
+			}
+			CheckHitKey(KEY_INPUT_A);
+			{
+				position.x += 0;
+			}
+			CheckHitKey(KEY_INPUT_W);
+			{
+				position.y += 0;
+			}
+			CheckHitKey(KEY_INPUT_S);
+			{
+				position.x += 0;
+			}
+		}
+		timer += Time::DeltaTime();
+		if (timer >= 10.0f)
+		{
+			SceneManager::ChangeScene("TitleScene");
+		}	
+		
+	}
 	//400までプレイヤーが行ったらスクロール
 
 	//- s->scrollしているがscrollに値を入れていないので　ただのposition.x(プレイヤーのx座標）
