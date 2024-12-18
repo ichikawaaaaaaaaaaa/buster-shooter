@@ -15,13 +15,13 @@ Stage::Stage()
 		for (int i = 0; i < WIDTH; i++) {
 			if (map[j][i] == 9) {
 				Player* p = Instantiate<Player>();
-				p->position.x = i * 40 ;
-				p->position.y = j * 40 ;
+				p->position.x = i * 40;
+				p->position.y = j * 40;
 			}
-			if (map[j][i]==2) {
+			if (map[j][i] == 2) {
 				Coin* c = Instantiate<Coin>();
-				c->position.x = i * 40 ;
-				c->position.y = j * 40 ;
+				c->position.x = i * 40;
+				c->position.y = j * 40;
 			}
 			if (map[j][i] == 3) {
 				Enemy* e = Instantiate<Enemy>();

@@ -75,22 +75,12 @@ void Ball::Update() {
         DestroyMe();
     }
 
+
     // 敵との衝突判定
 
     Enemy* enemy = FindGameObject<Enemy>();  // 敵を取得
 
-    if (enemy) {
-        float dx = position.x - enemy->GetPosition().x;
-        float dy = position.y - enemy->GetPosition().y;
-        float distance = sqrt(dx * dx + dy * dy);
-        if (distance < 0) {  // 衝突判定（ボールと敵の半径が23と仮定）
-            currentImage = hImageCollide;  // 衝突後のボール画像に変更
-            printf("Image changed to collide\n");//デバック用
-            enemy->OnCollide();  // 衝突時の処理を呼ぶ
-
-           // DestroyMe();         // ボールを削除
-        }
-    }
+    
 }
 
 void Ball::Draw() {

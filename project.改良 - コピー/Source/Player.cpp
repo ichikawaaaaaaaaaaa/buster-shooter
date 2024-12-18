@@ -7,7 +7,7 @@
 #include "Vector2.h"
 
 float Gravity = 0.1f;     //重力加速度
-float jumpHeight = 20*2;  //ジャンプの高さ
+float jumpHeight = 50*2;  //ジャンプの高さ
 float V0 = -sqrtf(3.0f * Gravity * jumpHeight);//初速計算
 
 //コンストラクタ
