@@ -1,6 +1,8 @@
 #pragma once
 #include "../Library/gameObject.h"
 #include "VECTOR2.h"
+#include <vector>
+
 
 class Stage : public GameObject {
 public:
@@ -20,6 +22,9 @@ public:
 	bool IsGoal(VECTOR2 position);
 
 	int hImage;
+	std::vector<std::vector<int>> map;
+	int HEIGHT;
+	int WIDTH;
 
 	int scroll;
 };
