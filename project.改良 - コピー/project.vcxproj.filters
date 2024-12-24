@@ -53,6 +53,9 @@
     <ClCompile Include="Source\CsvReader.cpp">
       <Filter>PlayScene</Filter>
     </ClCompile>
+    <ClCompile Include="StageUtility.cpp">
+      <Filter>TitleScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\sceneFactory.h" />
@@ -118,6 +121,9 @@
     <ClInclude Include="Source\Enemy1.h" />
     <ClInclude Include="Source\CsvReader.h">
       <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="StageUtility.h">
+      <Filter>TitleScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

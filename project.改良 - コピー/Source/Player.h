@@ -1,6 +1,7 @@
 #pragma once
 #include "../Library/gameObject.h"
 #include "Vector2.h"
+#include <DxLib.h>
 
 //GameObject ÉNÉâÉXÇÃåpè≥
 class Player : public GameObject {
@@ -30,6 +31,14 @@ public:
 
 	bool prevRightMouse;
 	bool prevLeftMouse;
+
+	int XInput;
+	int YInput;
+
+	int GetJoypadInputState(int InputType);
+
+	int GetJoypadAnalogInput(int* XBuf, int* YBuf, int InputType);
+
 };
 
 

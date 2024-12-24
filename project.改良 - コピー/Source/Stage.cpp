@@ -6,6 +6,7 @@
 #include "GoalText.h"
 const int CHIP_SIZE = 40;
 #include "CsvReader.h"
+#include "../StageUtility.h"
 
 using namespace std;
 //#include "stage1.h"
@@ -57,7 +58,6 @@ Stage::Stage()
 	}
 	scroll = 0;
 }
-
 Stage::~Stage()
 {
 }
