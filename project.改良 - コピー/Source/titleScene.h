@@ -13,4 +13,10 @@ public:
 	void Update() override;
 	void Draw() override;
 private:
+	int hBGImage;		//	画像ハンドル(タイトル画面)
+	int hKeyImage;		//	画像ハンドル(PUSH SPACE KEY)
+
+	const float DRAW_KEY_WAIT = 1.0f;	//	[PUSH SPACE KEY]表示間隔(1.0sec)
+	bool isDrawKey;			//	[PUSH SPACE KEY]を表示する/しないフラグ
+	float DrawKeyTimer;		//	タイマー
 };
