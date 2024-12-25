@@ -6,6 +6,7 @@
 #include "Enemy.h"
 #include "Vector2.h"
 
+
 float Gravity = 0.1f;     //重力加速度
 float jumpHeight = 50*2;  //ジャンプの高さ
 float V0 = -sqrtf(3.0f * Gravity * jumpHeight);//初速計算
@@ -27,17 +28,12 @@ Player::Player()
 	scroll = 0;  //スクロール位置初期化
 
 
+	
+
+
 }
 
-int Player::GetJoypadInputState(int InputType)
-{
-	return 0;
-}
 
-int Player::GetJoypadAnalogInput(int* XBuf, int* YBuf, int InputType)
-{
-	return 0;
-}
 
 //デストラクタ
 Player::~Player()
@@ -50,12 +46,10 @@ void Player::Update()
 {
 	GetJoypadInputState(DX_INPUT_KEY_PAD1);
 	int PadInput;
-	PadInput = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 
 	GetJoypadAnalogInput(&XInput, &YInput, DX_INPUT_KEY_PAD1);
+	PadInput = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 
-
-	XINPUT_STATE input;
 
 
 	Stage* s = FindGameObject<Stage>();// ステージオブジェクト取得
@@ -83,7 +77,7 @@ void Player::Update()
 	}
 
 	//左の移動処理(PAD)
-	if (XInput < -500) {
+	if (XInput < -100) {
 		position.x -= 2;  
 
 		//キャラクターの左上隅ので衝突をチェックする場合
@@ -120,7 +114,7 @@ void Player::Update()
 	}
 
 	//右の移動処理(PAD)
-	if ((XInput > 500)) {
+	if ((XInput > 100)) {
 		position.x += 2;  //右に〇(数字)ピクセル移動
 
 		//右の壁との衝突判定
@@ -271,6 +265,16 @@ void Player::Draw()
 {
 	Stage* s = FindGameObject<Stage>();
 	DrawRectGraph(position.x - s->scroll, position.y , 0, 0, 54, 64, hImage, TRUE);
+}
+
+int Player::GetJoypadInputState(int InputType)
+{
+	return 0;
+}
+
+int Player::GetJoypadAnalogInput(int* XBuf, int* YBuf, int InputType)
+{
+	return 0;
 }
 
 
