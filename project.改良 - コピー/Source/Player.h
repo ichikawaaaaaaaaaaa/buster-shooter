@@ -35,7 +35,6 @@ public:
 	int XInput;
 	int YInput;
 
-public:
 	int GetJoypadInputState(int InputType);
 
 	int GetJoypadAnalogInput(int* XBuf, int* YBuf, int InputType);
