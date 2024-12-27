@@ -35,11 +35,7 @@ Player::Player()
 
 
 
-//デストラクタ
-Player::~Player()
-{
-	DeleteGraph(hImage);
-}
+
 
 //更新処理
 void Player::Update()
@@ -266,17 +262,3 @@ void Player::Draw()
 	Stage* s = FindGameObject<Stage>();
 	DrawRectGraph(position.x - s->scroll, position.y , 0, 0, 54, 64, hImage, TRUE);
 }
-
-int Player::GetJoypadInputState(int InputType)
-{
-	return 0;
-}
-
-int Player::GetJoypadAnalogInput(int* XBuf, int* YBuf, int InputType)
-{
-	return 0;
-}
-
-
-
-
