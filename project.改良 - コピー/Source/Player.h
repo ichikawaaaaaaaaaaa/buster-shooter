@@ -7,7 +7,7 @@
 class Player : public GameObject {
 public:
 	Player();//コンストラクタ
-	~Player();//デストラクタ
+	//~Player();//デストラクタ
 	void Update() override;//プレイヤーの更新処理
 	void Draw() override;
 	void Animation();
@@ -35,9 +35,9 @@ public:
 	int XInput;
 	int YInput;
 
-	int GetJoypadInputState(int InputType);
+	//int GetJoypadInputState(int InputType);
 
-	int GetJoypadAnalogInput(int* XBuf, int* YBuf, int InputType);
+	//int GetJoypadAnalogInput(int* XBuf, int* YBuf, int InputType);
 
 };
 
