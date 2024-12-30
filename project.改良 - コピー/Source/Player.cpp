@@ -191,6 +191,39 @@ void Player::Update()
 		}
 	}
 
+	// Ballを投げる(PAD)
+	if (PadInput & PAD_INPUT_Y) {
+		if (prevRightMouse == false) {
+			Ball* Ba = Instantiate<Ball>();
+			// 代入してから足す方法
+			Ba->position = position;
+			Ba->position.x = position.x;
+			Ba->position.y += 5;
+			Ba->velocity = VECTOR2(5.0f, 0.0f); // 右方向の速度を設定
+			// ここまで、どちらかを使う
+		}
+		prevRightMouse = true;
+	}
+	else {
+		prevRightMouse = false;
+	}
+
+	if (PadInput & PAD_INPUT_A) {
+		if (prevLeftMouse == false) {
+			Ball* Ba = Instantiate<Ball>();
+			// 代入してから足す方法
+			Ba->position = position;
+			Ba->position.x = position.x;
+			Ba->position.y += 5;
+			Ba->velocity = VECTOR2(-5.0f, 0.0f); // 左方向の速度を設定
+			// ここまで、どちらかを使う
+		}
+		prevLeftMouse = true;
+	}
+	else {
+		prevLeftMouse = false;
+	}
+
 	// Ballを投げる
 	if (GetMouseInput() & MOUSE_INPUT_RIGHT) {
 		if (prevRightMouse == false) {
@@ -223,7 +256,6 @@ void Player::Update()
 	else {
 		prevLeftMouse = false;
 	}
-
 	//Enemyの当たり判定
 	std::list<Enemy*> enemys = FindGameObjects<Enemy>();
 	for (Enemy* e : enemys) {
