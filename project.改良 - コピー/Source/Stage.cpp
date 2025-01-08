@@ -7,6 +7,7 @@
 const int CHIP_SIZE = 40;
 #include "CsvReader.h"
 #include "../StageUtility.h"
+#include "titleScene.h"
 
 using namespace std;
 //#include "stage1.h"
@@ -14,7 +15,12 @@ Stage::Stage()
 
 {
 	map.clear();
-	CsvReader* csv = new CsvReader("data/stage.1.csv");
+
+		CsvReader* csv = new CsvReader("data/stage.1.csv");
+
+
+
+
 	for (int y = 0; y < csv->GetLines(); y++) {
 		vector<int> m;
 		for (int x = 0; x < csv->GetColumns(y); x++) {

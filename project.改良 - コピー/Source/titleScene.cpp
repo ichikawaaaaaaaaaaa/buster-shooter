@@ -4,6 +4,8 @@
 
 #include "../StageUtility.h"
 #include "../Library/time.h"
+#include "CsvReader.h"
+
 
 TitleScene::TitleScene()
 {
@@ -23,12 +25,13 @@ TitleScene::~TitleScene()
 
 void TitleScene::Update()
 {
+
 	if (CheckHitKey(KEY_INPUT_1)) {
-		StageUtility::SetStageNo(1);
+		CsvReader* csv = new CsvReader("data/stage.1.csv");
 		SceneManager::ChangeScene("PlayScene");
 	}
 	if (CheckHitKey(KEY_INPUT_2)) {
-		StageUtility::SetStageNo(2);
+		CsvReader* csv = new CsvReader("data/stage.1.csv");
 		SceneManager::ChangeScene("PlayScene");
 	}
 	if (CheckHitKey(KEY_INPUT_3)) {
@@ -43,6 +46,31 @@ void TitleScene::Update()
 		StageUtility::SetStageNo(5);
 		SceneManager::ChangeScene("PlayScene");
 	}
+
+
+
+
+
+	//if (CheckHitKey(KEY_INPUT_1)) {
+	//	StageUtility::SetStageNo(1);
+	//	SceneManager::ChangeScene("PlayScene");
+	//}
+	//if (CheckHitKey(KEY_INPUT_2)) {
+	//	StageUtility::SetStageNo(2);
+	//	SceneManager::ChangeScene("PlayScene");
+	//}
+	//if (CheckHitKey(KEY_INPUT_3)) {
+	//	StageUtility::SetStageNo(3);
+	//	SceneManager::ChangeScene("PlayScene");
+	//}
+	//if (CheckHitKey(KEY_INPUT_4)) {
+	//	StageUtility::SetStageNo(4);
+	//	SceneManager::ChangeScene("PlayScene");
+	//}
+	//if (CheckHitKey(KEY_INPUT_5)) {
+	//	StageUtility::SetStageNo(5);
+	//	SceneManager::ChangeScene("PlayScene");
+	//}
 
 	//	前フレームからの経過時間を取得
 	DrawKeyTimer += Time::DeltaTime();

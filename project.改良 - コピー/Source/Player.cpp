@@ -140,7 +140,8 @@ void Player::Update()
 	}
 
 	// ジャンプ処理(PAD)
-	if (PadInput & PAD_INPUT_B) {
+	// Bボタン　PAD_INPUT_2
+	if (PadInput & PAD_INPUT_2) {
 		if (!prevJumpKey && onGround) { //地上にいてジャンプキーが押された場合
 
 			velocity = V0;             //初速を設定
@@ -191,8 +192,9 @@ void Player::Update()
 		}
 	}
 
-	// Ballを投げる(PAD)
-	if (PadInput & PAD_INPUT_Y) {
+	// 右にBallを投げる(PAD)
+	// Xボタン PAD_INPUT_3
+	if (PadInput & PAD_INPUT_3) {
 		if (prevRightMouse == false) {
 			Ball* Ba = Instantiate<Ball>();
 			// 代入してから足す方法
@@ -208,7 +210,9 @@ void Player::Update()
 		prevRightMouse = false;
 	}
 
-	if (PadInput & PAD_INPUT_A) {
+	// 左にBallを投げる(PAD)
+	// Aボタン PAD_INPUT_1
+	if (PadInput & PAD_INPUT_1) {
 		if (prevLeftMouse == false) {
 			Ball* Ba = Instantiate<Ball>();
 			// 代入してから足す方法
