@@ -25,4 +25,6 @@ private:
 	const float DRAW_KEY_WAIT = 1.0f;	//	[PUSH SPACE KEY]表示間隔(1.0sec)
 	bool isDrawKey;			//	[PUSH SPACE KEY]を表示する/しないフラグ
 	float DrawKeyTimer;		//	タイマー
+
+	int KeyimputCount;
 };

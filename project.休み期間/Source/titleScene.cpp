@@ -70,17 +70,25 @@ void TitleScene::Draw()
 	DrawGraph(300, 1800, hBGImage, TRUE);
 	DrawGraph(300, 200, hBGImage, TRUE);
 
-	DrawGraph(300, 400, Stage1Image, TRUE);
+	DrawGraph(100, 600, Stage1Image, TRUE);
 	DrawGraph(300, 600, Stage2Image, TRUE);
-	DrawGraph(300, 100, Stage3Image, TRUE);
-	DrawGraph(300, 400, Stage4Image, TRUE);
-	DrawGraph(300, 800, Stage5Image, TRUE);
+	DrawGraph(500, 600, Stage3Image, TRUE);
+	DrawGraph(700, 600, Stage4Image, TRUE);
+	DrawGraph(900, 600, Stage5Image, TRUE);
 
 
 	//	[PUSH SPACE KEY]
 	if (isDrawKey)
 	{
 		DrawGraph(300, 2000, hKeyImage, TRUE);
+	}
+
+	if (CheckHitKey(KEY_INPUT_1)) {
+		if (isDrawKey)
+		{
+			DrawGraph(100, 600, Stage1Image, TRUE);
+
+		}
 	}
 
 		SceneBase::Draw();
