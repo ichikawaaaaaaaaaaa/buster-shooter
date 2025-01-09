@@ -10,6 +10,16 @@ TitleScene::TitleScene()
 	hBGImage = LoadGraph("image/Title.png");
 	hKeyImage = LoadGraph("image/PushSpace.png");
 
+	Stage1Image = LoadGraph("data/image/Stage1.png");
+	Stage2Image = LoadGraph("data/image/Stage2.png");
+	Stage3Image = LoadGraph("data/image/Stage3.png");
+	Stage4Image = LoadGraph("data/image/Stage4.png");
+	Stage5Image = LoadGraph("data/image/Stage5.png");
+
+
+
+
+
 	//	[PUSH SPACE KEY]表示設定の初期化
 	DrawKeyTimer = 0.0f;
 	isDrawKey = true;
@@ -57,15 +67,22 @@ void TitleScene::Update()
 void TitleScene::Draw()
 {
 	//	タイトル画面
-	DrawGraph(0, 0, hBGImage, TRUE);
+	DrawGraph(300, 1800, hBGImage, TRUE);
+	DrawGraph(300, 200, hBGImage, TRUE);
+
+	DrawGraph(300, 400, Stage1Image, TRUE);
+	DrawGraph(300, 600, Stage2Image, TRUE);
+	DrawGraph(300, 100, Stage3Image, TRUE);
+	DrawGraph(300, 400, Stage4Image, TRUE);
+	DrawGraph(300, 800, Stage5Image, TRUE);
+
 
 	//	[PUSH SPACE KEY]
 	if (isDrawKey)
 	{
-		DrawGraph(300, 500, hKeyImage, TRUE);
+		DrawGraph(300, 2000, hKeyImage, TRUE);
 	}
 
 		SceneBase::Draw();
-		DrawString(0, 0, "TITLE SCENE", GetColor(255, 255, 255));
 		DrawString(100, 100, "プレイしたいステージを１～5を押して選択してください。", GetColor(255, 255, 255));
 }

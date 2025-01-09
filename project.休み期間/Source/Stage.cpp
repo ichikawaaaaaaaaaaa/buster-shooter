@@ -79,6 +79,7 @@ void Stage::Draw()//ècâ°Ç≈âÒÇ∑
 				
 				DrawRectGraph(x - scroll, y, 0, 40, 40, 40, hImage, TRUE);
 			}
+
 		}
 	}
 }
