@@ -53,7 +53,6 @@ Stage::Stage()
 				Enemy1* e1 = Instantiate<Enemy1>();
 				e1->position.x = i * 40;
 				e1->position.y = j * 40;
-
 			}
 		}
 	}
