@@ -266,6 +266,7 @@ void Player::Update()
 		if (CircleHit(position, e->position, 56)) {
 			patternY = 4;
 			crying = true;
+			SceneManager::ChangeScene("TitleScene");
 		}
 	}
 
