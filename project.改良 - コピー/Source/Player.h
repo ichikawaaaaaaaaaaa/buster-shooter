@@ -8,11 +8,13 @@ public:
 	Player();//コンストラクタ
 	~Player();//デストラクタ
 	void Update() override;//プレイヤーの更新処理
-	void Draw() override;//プレイヤーの描画処理
+	void Draw() override;
+	void Animation();
+	//プレイヤーの描画処理
 
 	int hImage;//プレイヤーの画像ハンドル
 	VECTOR2 position;// プレイヤーの座標（Vector2）
-	float velocity;  // 垂直方向の速度（ジャンプ・落下用）
+	float velocity;  // 垂直方向の速度
 	bool prevJumpKey;      // 前フレームのジャンプキーの状態
 	bool onGround; // プレイヤーが地面に接しているか
 	int IsGoal;  // ゴールフラグ
@@ -27,9 +29,7 @@ public:
 	bool crying;
 
 	bool prevRightMouse;
-private:
-	float timer;               // タイマー（テキストの表示時間）
-
+	bool prevLeftMouse;
 };
 
 

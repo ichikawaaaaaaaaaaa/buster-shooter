@@ -10,6 +10,9 @@ const int CHIP_SIZE = 40;
 #include "stage2.h"
 #include "StageUtility.h"
 #include <iostream>
+#include "../stage4.h"
+#include "../stage5.h"
+#include "../stage3.h"
 
 int map[HEIGHT][WIDTH];
 
@@ -27,6 +30,15 @@ Stage::Stage()
 					break;
 				case 2:
 					map[y][x] = map_stage2[y][x];
+					break;
+				case 3:
+					map[y][x] = map_stage3[y][x];
+					break;
+				case 4:
+					map[y][x] = map_stage4[y][x];
+					break;
+				case 5:
+					map[y][x] = map_stage5[y][x];
 					break;
 			}
 		}

@@ -1,0 +1,31 @@
+#pragma once
+#include "../Library/gameObject.h"
+#include "Vector2.h"
+
+class Enemy : public GameObject {
+public:
+	Enemy(); // コンストラクター (最初に一回だけ呼ばれる)
+	~Enemy(); // デストラクター（最後に一回だけ呼ばれる)
+	void Update() override;
+	void Draw() override;
+
+	int hImage; // 画像
+	VECTOR2 position;
+	VECTOR2 speed;
+
+	int patternX; //表示パターンの横の番号
+	int patternY; //表示パターンの縦の番号
+
+	int frameCounter;
+	VECTOR2 GetPosition() const;  // 敵の位置を取得
+	void OnCollide();             // 衝突時の処理
+
+	int timer; //時間を測るため
+	bool attacking; //突入してます。
+
+	bool dead;
+	int deadCounter;
+
+	float velocity;
+	bool onGround;
+};

@@ -49,7 +49,7 @@
     <ClCompile Include="Source\Ball.cpp" />
     <ClCompile Include="Source\Fader.cpp" />
     <ClCompile Include="Source\GoalText.cpp" />
-    <ClCompile Include="Source\StageUtility.cpp" />
+    <ClCompile Include="Source\Enemy1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\sceneFactory.h" />
@@ -112,19 +112,7 @@
     </ClInclude>
     <ClInclude Include="Source\Fader.h" />
     <ClInclude Include="Source\GoalText.h" />
-    <ClInclude Include="Source\stage2.h">
-      <Filter>PlayScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StageUtility.h" />
-    <ClInclude Include="stage3.h">
-      <Filter>PlayScene</Filter>
-    </ClInclude>
-    <ClInclude Include="stage4.h">
-      <Filter>PlayScene</Filter>
-    </ClInclude>
-    <ClInclude Include="stage5.h">
-      <Filter>PlayScene</Filter>
-    </ClInclude>
+    <ClInclude Include="Source\Enemy1.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">
