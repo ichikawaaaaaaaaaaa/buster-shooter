@@ -26,7 +26,7 @@ Stage::Stage()
 	WIDTH = csv->GetColumns(0);
 	delete csv;
 
-	hImage = LoadGraph("data/image/maptile_renga.png");
+	hImage = LoadGraph("data/image/parts.png");
 	for (int j = 0; j < HEIGHT; j++) {
 		for (int i = 0; i < WIDTH; i++) {
 			if (map[j][i] == 9) {
@@ -53,6 +53,7 @@ Stage::Stage()
 				Enemy1* e1 = Instantiate<Enemy1>();
 				e1->position.x = i * 40;
 				e1->position.y = j * 40;
+
 			}
 		}
 	}
