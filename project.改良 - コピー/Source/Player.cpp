@@ -6,9 +6,12 @@
 #include "Enemy.h"
 #include "Vector2.h"
 
+
 float Gravity = 0.1f;     //重力加速度
 float jumpHeight = 50*2;  //ジャンプの高さ
 float V0 = -sqrtf(3.0f * Gravity * jumpHeight);//初速計算
+
+
 
 //コンストラクタ
 Player::Player()
@@ -23,17 +26,27 @@ Player::Player()
 	IsGoal = 0;//ゴールフラグ初期化
 	goaled = 0;  //ゴール達成フラグ初期化
 	scroll = 0;  //スクロール位置初期化
+
+
+	
+
+
 }
 
-//デストラクタ
-Player::~Player()
-{
-	DeleteGraph(hImage);
-}
+
+
+
 
 //更新処理
 void Player::Update()
 {
+	GetJoypadInputState(DX_INPUT_KEY_PAD1);
+	int PadInput;
+
+	GetJoypadAnalogInput(&XInput, &YInput, DX_INPUT_KEY_PAD1);
+	PadInput = GetJoypadInputState(DX_INPUT_KEY_PAD1);
+
+
 
 	Stage* s = FindGameObject<Stage>();// ステージオブジェクト取得
 	if (goaled)return;  // ゴール済みの場合、処理を終了
@@ -59,6 +72,23 @@ void Player::Update()
 		position.x += push;
 	}
 
+	//左の移動処理(PAD)
+	if (XInput < -100) {
+		position.x -= 2;  
+
+		//キャラクターの左上隅ので衝突をチェックする場合
+		int push = s->IsWallLeft(position + VECTOR2(0, 0));
+
+		//衝突した場合、その押し返し量　(壁にぶつからないようにする)
+		position.x += push; 
+
+		//キャラクターの下半分で衝突を確認
+		push = s->IsWallLeft(position + VECTOR2(0, 39));  
+
+		//下側で壁にぶつかっていた場合、その押し返し量を考慮して位置を調整
+		position.x += push;
+	}
+
 	//右の移動処理
 	if (CheckHitKey(KEY_INPUT_D)) {
 		position.x += 2;  //右に〇(数字)ピクセル移動
@@ -78,6 +108,29 @@ void Player::Update()
 		//下側で壁にぶつかっていた場合、その押し返し量を考慮して位置を調整
 		position.x -= push;
 	}
+
+	//右の移動処理(PAD)
+	if ((XInput > 100)) {
+		position.x += 2;  //右に〇(数字)ピクセル移動
+
+		//右の壁との衝突判定
+		//キャラクターの右上隅の位置での衝突をチェックする場合
+		int push = s->IsWallRight(position + VECTOR2(39, 0)); //例(1111)はキャラクターの高さ
+
+		//衝突した場合、その押し返し量　(壁にぶつからないようにする)
+
+		position.x -= push; //壁の手前に位置を戻して調節
+
+		//キャラクターの下端の位置でも衝突判定を行う場合
+		//キャラクターの下半分衝突の確認
+		push = s->IsWallRight(position + VECTOR2(39, 39)); //例(1111)はキャラクターの高さ
+
+		//下側で壁にぶつかっていた場合、その押し返し量を考慮して位置を調整
+		position.x -= push;
+	}
+
+
+
 	// ジャンプ処理
 	if (CheckHitKey(KEY_INPUT_SPACE)) {
 		if (!prevJumpKey && onGround) { //地上にいてジャンプキーが押された場合
@@ -85,6 +138,16 @@ void Player::Update()
 			velocity = V0;             //初速を設定
 		}
 	}
+
+	// ジャンプ処理(PAD)
+	// Bボタン　PAD_INPUT_2
+	if (PadInput & PAD_INPUT_2) {
+		if (!prevJumpKey && onGround) { //地上にいてジャンプキーが押された場合
+
+			velocity = V0;             //初速を設定
+		}
+	}
+
 	prevJumpKey = CheckHitKey(KEY_INPUT_SPACE); //現在のジャンプキー状態を記録
 
 	// 垂直方向の移動と重力処理
@@ -129,6 +192,42 @@ void Player::Update()
 		}
 	}
 
+	// 右にBallを投げる(PAD)
+	// Xボタン PAD_INPUT_3
+	if (PadInput & PAD_INPUT_3) {
+		if (prevRightMouse == false) {
+			Ball* Ba = Instantiate<Ball>();
+			// 代入してから足す方法
+			Ba->position = position;
+			Ba->position.x = position.x;
+			Ba->position.y += 5;
+			Ba->velocity = VECTOR2(5.0f, 0.0f); // 右方向の速度を設定
+			// ここまで、どちらかを使う
+		}
+		prevRightMouse = true;
+	}
+	else {
+		prevRightMouse = false;
+	}
+
+	// 左にBallを投げる(PAD)
+	// Aボタン PAD_INPUT_1
+	if (PadInput & PAD_INPUT_1) {
+		if (prevLeftMouse == false) {
+			Ball* Ba = Instantiate<Ball>();
+			// 代入してから足す方法
+			Ba->position = position;
+			Ba->position.x = position.x;
+			Ba->position.y += 5;
+			Ba->velocity = VECTOR2(-5.0f, 0.0f); // 左方向の速度を設定
+			// ここまで、どちらかを使う
+		}
+		prevLeftMouse = true;
+	}
+	else {
+		prevLeftMouse = false;
+	}
+
 	// Ballを投げる
 	if (GetMouseInput() & MOUSE_INPUT_RIGHT) {
 		if (prevRightMouse == false) {
@@ -161,7 +260,6 @@ void Player::Update()
 	else {
 		prevLeftMouse = false;
 	}
-
 	//Enemyの当たり判定
 	std::list<Enemy*> enemys = FindGameObjects<Enemy>();
 	for (Enemy* e : enemys) {

@@ -5,11 +5,33 @@
 #include "Enemy1.h"
 #include "GoalText.h"
 const int CHIP_SIZE = 40;
+#include "CsvReader.h"
+#include "../StageUtility.h"
+#include "titleScene.h"
 
-#include "stage1.h"
-
+using namespace std;
+//#include "stage1.h"
 Stage::Stage()
+
 {
+	map.clear();
+
+		CsvReader* csv = new CsvReader("data/stage.1.csv");
+
+
+
+
+	for (int y = 0; y < csv->GetLines(); y++) {
+		vector<int> m;
+		for (int x = 0; x < csv->GetColumns(y); x++) {
+			m.push_back(csv->GetInt(y, x));
+		}
+		map.push_back(m);
+	}
+	HEIGHT = csv->GetLines();
+	WIDTH = csv->GetColumns(0);
+	delete csv;
+
 	hImage = LoadGraph("data/image/parts.png");
 	for (int j = 0; j < HEIGHT; j++) {
 		for (int i = 0; i < WIDTH; i++) {
@@ -42,7 +64,6 @@ Stage::Stage()
 	}
 	scroll = 0;
 }
-
 Stage::~Stage()
 {
 }
