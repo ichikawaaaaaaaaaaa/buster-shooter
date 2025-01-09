@@ -14,7 +14,10 @@ Stage::Stage()
 
 {
 	map.clear();
-	CsvReader* csv = new CsvReader("data/stage.1.csv");
+	std::string filename = "data/stage.";
+	filename += std::to_string(StageUtility::GetStageNo());
+	filename += ".csv";
+	CsvReader* csv = new CsvReader(filename);
 	for (int y = 0; y < csv->GetLines(); y++) {
 		vector<int> m;
 		for (int x = 0; x < csv->GetColumns(y); x++) {
