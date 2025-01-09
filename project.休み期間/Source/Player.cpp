@@ -7,11 +7,11 @@
 #include "Vector2.h"
 
 float Gravity = 0.1f;     //重力加速度
-float jumpHeight = 50 * 2;  //ジャンプの高さ
+float jumpHeight = 20 * 2;  //ジャンプの高さ
 float V0 = -sqrtf(3.0f * Gravity * jumpHeight);//初速計算
 
 // プレイヤーのライフと敵に触れた回数
-int life = 3;  // 初期ライフは3
+int life = 2;  // 初期ライフは3
 int enemyCollisionCount = 0; // 敵に触れた回数
 
 // コンストラクタ
@@ -105,7 +105,7 @@ void Player::Update()
 
         int push = s->IsWallLeft(position + VECTOR2(0, 0));
         position.x += push; //壁の奥に進まないように位置を調節
-        push = s->IsWallLeft(position + VECTOR2(0, 63));  //キャラクターの下半分で衝突確認
+        push = s->IsWallLeft(position + VECTOR2(0, 39));  //キャラクターの下半分で衝突確認
         position.x += push;
     }
 
@@ -129,10 +129,10 @@ void Player::Update()
 
         //右の壁との衝突判定
 
-        int push = s->IsWallRight(position + VECTOR2(63, 0));
+        int push = s->IsWallRight(position + VECTOR2(39, 0));
 
         position.x -= push;
-        push = s->IsWallRight(position + VECTOR2(63, 63));
+        push = s->IsWallRight(position + VECTOR2(39, 39));
         position.x -= push;
     }
 
@@ -172,7 +172,7 @@ void Player::Update()
     // 地面衝突判定
 
     if (velocity >= 0) {
-        int push = s->IsWallDown(position + VECTOR2(0, 63 + 1)); //地面判定
+        int push = s->IsWallDown(position + VECTOR2(0, 39 + 1)); //地面判定
 
         if (push > 0) { // 地面に触れた場合
             velocity = 0.0f; // 速度を0にする
@@ -188,7 +188,7 @@ void Player::Update()
                 velocity = 0.0f;  // 頭に衝突した場合、速度を0にする
                 position.y += push; // 頭上に押し戻す
             }
-            push = s->IsWallUP(position + VECTOR2(63, 0));
+            push = s->IsWallUP(position + VECTOR2(39, 0));
 
             if (push > 0) {
                 velocity = 0.0f;
@@ -197,7 +197,7 @@ void Player::Update()
         }
         // 右足地面判定
 
-        push = s->IsWallDown(position + VECTOR2(63, 63));
+        push = s->IsWallDown(position + VECTOR2(39, 39));
 
         if (push > 0) {
             velocity = 0.0f;
@@ -257,19 +257,19 @@ void Player::Draw()
     Stage* s = FindGameObject<Stage>();
     if (isRightClicked) {
         // 右クリックされている場合、右クリック用の画像を描画
-        DrawRectGraph(position.x - s->scroll, position.y, 0, 0, 54, 64, hImageRightClick, TRUE);
+        DrawRectGraph(position.x - s->scroll, position.y, 0, 0, 32, 40, hImageRightClick, TRUE);
     }
     else {
         // 通常時の画像を描画
-        DrawRectGraph(position.x - s->scroll, position.y, 0, 0, 54, 64, hImage, TRUE);
+        DrawRectGraph(position.x - s->scroll, position.y, 0, 0, 32, 40, hImage, TRUE);
         // ライフを表示（例えば、画面の上部にライフのアイコンを表示する）
 
         if (isLeftClicked) {
-            DrawRectGraph(position.x - s->scroll, position.y, 0, 0, 54, 64, hImageLeftClick, TRUE);
+            DrawRectGraph(position.x - s->scroll, position.y, 0, 0, 32, 40, hImageLeftClick, TRUE);
         }
         else {
             // 通常時の画像を描画
-            DrawRectGraph(position.x - s->scroll, position.y, 0, 0, 54, 64, hImage, TRUE);
+            DrawRectGraph(position.x - s->scroll, position.y, 0, 0, 32, 40, hImage, TRUE);
             // ライフを表示（例えば、画面の上部にライフのアイコンを表示する）
 
             for (int i = 0; i < life; i++) {

@@ -6,39 +6,42 @@
 //GameObject クラスの継承
 class Player : public GameObject {
 public:
-	Player();//コンストラクタ
-	//~Player();//デストラクタ
-	void Update() override;//プレイヤーの更新処理
-	void Draw() override;
-	void Animation();
-	//プレイヤーの描画処理
+    Player(); // コンストラクタ
+    //~Player(); // デストラクタ（必要に応じてコメントアウトを外してください）
+    void Update() override; // プレイヤーの更新処理
+    void Draw() override;   // プレイヤーの描画処理
+    void Animation();       // プレイヤーのアニメーション処理
+    int hImage;             // プレイヤーの画像ハンドル
+    int hImageRightClick;
+    int hImageLeftClick;
+    VECTOR2 position;       // プレイヤーの座標（Vector2）
+    float velocity;         // 垂直方向の速度
+    bool prevJumpKey;       // 前フレームのジャンプキーの状態
+    bool onGround;          // プレイヤーが地面に接しているか
+    int IsGoal;             // ゴールフラグ
+    int goaled;             // ゴール達成フラグ
+    int scroll;             // スクロール位置（仮想）
+    int patternX;           // アニメーション用Xパターン
+    int patternY;           // アニメーション用Yパターン
+    int frameCounter;       // フレームカウント
+    bool crying;            // 泣いている状態
+    bool prevRightMouse;    // 右クリックの前回の状態
+    bool prevLeftMouse;     // 左クリックの前回の状態
+    int XInput;             // ジョイパッドX軸入力
+    int YInput;             // ジョイパッドY軸入力
 
-	int hImage;//プレイヤーの画像ハンドル
-	VECTOR2 position;// プレイヤーの座標（Vector2）
-	float velocity;  // 垂直方向の速度
-	bool prevJumpKey;      // 前フレームのジャンプキーの状態
-	bool onGround; // プレイヤーが地面に接しているか
-	int IsGoal;  // ゴールフラグ
-	int goaled;    // ゴール達成フラグ
+    // ライフ管理
 
-	int scroll;  // スクロール位置（仮想）
+    int life;               // プレイヤーのライフ
+    int enemyCollisionCount; // 敵に触れた回数
+    // ゲームオーバー処理
+    void GameOver();        // ゲームオーバー処理（後で実装）
 
-	int patternX;  
-	int patternY;
-	int frameCounter;
+    // 右クリックを検出して画像を変更する処理
+    bool prevRightClick = false;  // 右クリックの前回状態
+    bool isRightClicked = false;  // 現在右クリックされているかの状態
 
-	bool crying;
-
-	bool prevRightMouse;
-	bool prevLeftMouse;
-
-	int XInput;
-	int YInput;
-
-	//int GetJoypadInputState(int InputType);
-
-	//int GetJoypadAnalogInput(int* XBuf, int* YBuf, int InputType);
+    // 左クリックを検出して画像を変更する処理
+    bool prevLeftClick = false;  // 右クリックの前回状態
+    bool isLeftClicked = false;  // 現在右クリックされているかの状態
 };
-
-
-
