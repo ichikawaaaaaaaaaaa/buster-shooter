@@ -22,7 +22,11 @@ void GoalText::Update()
 	Player* p = FindGameObject<Player>();//相手のインスタンスを取得
 	VECTOR2 playerPos = p->position;//相手の座標を取得
 
+<<<<<<< HEAD
+	if (CircleHit(playerPos, position, 10)) {//円の当たり判定
+=======
 	if (CircleHit(playerPos, position, 16)) {//円の当たり判定
+>>>>>>> 03de87913239dd26686ab55ad4e8f20efc0ab31b
 		//DestroyMe();
 
  		IsGoal = true;
