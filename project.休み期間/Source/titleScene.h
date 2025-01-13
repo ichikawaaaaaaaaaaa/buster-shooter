@@ -21,6 +21,9 @@ private:
 	int Stage3Image;
 	int Stage4Image;
 	int Stage5Image;
+	
+	int StagePositipnX;
+	int StagePositipnY;
 
 	const float DRAW_KEY_WAIT = 1.0f;	//	[PUSH SPACE KEY]表示間隔(1.0sec)
 	bool isDrawKey;			//	[PUSH SPACE KEY]を表示する/しないフラグ

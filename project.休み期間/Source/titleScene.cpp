@@ -33,26 +33,26 @@ TitleScene::~TitleScene()
 
 void TitleScene::Update()
 {
-	if (CheckHitKey(KEY_INPUT_1)) {
-		StageUtility::SetStageNo(1);
-		SceneManager::ChangeScene("PlayScene");
-	}
-	if (CheckHitKey(KEY_INPUT_2)) {
-		StageUtility::SetStageNo(2);
-		SceneManager::ChangeScene("PlayScene");
-	}
-	if (CheckHitKey(KEY_INPUT_3)) {
-		StageUtility::SetStageNo(3);
-		SceneManager::ChangeScene("PlayScene");
-	}
-	if (CheckHitKey(KEY_INPUT_4)) {
-		StageUtility::SetStageNo(4);
-		SceneManager::ChangeScene("PlayScene");
-	}
-	if (CheckHitKey(KEY_INPUT_5)) {
-		StageUtility::SetStageNo(5);
-		SceneManager::ChangeScene("PlayScene");
-	}
+//	if (CheckHitKey(KEY_INPUT_1)) {
+//		StageUtility::SetStageNo(1);
+//		SceneManager::ChangeScene("PlayScene");
+//	}
+//	if (CheckHitKey(KEY_INPUT_2)) {
+//		StageUtility::SetStageNo(2);
+//		SceneManager::ChangeScene("PlayScene");
+//	}
+//	if (CheckHitKey(KEY_INPUT_3)) {
+//		StageUtility::SetStageNo(3);
+//		SceneManager::ChangeScene("PlayScene");
+//	}
+//	if (CheckHitKey(KEY_INPUT_4)) {
+//		StageUtility::SetStageNo(4);
+//		SceneManager::ChangeScene("PlayScene");
+//	}
+//	if (CheckHitKey(KEY_INPUT_5)) {
+//		StageUtility::SetStageNo(5);
+//		SceneManager::ChangeScene("PlayScene");
+//	}
 
 	//	前フレームからの経過時間を取得
 	DrawKeyTimer += Time::DeltaTime();
@@ -70,7 +70,7 @@ void TitleScene::Draw()
 	DrawGraph(300, 1800, hBGImage, TRUE);
 	DrawGraph(300, 200, hBGImage, TRUE);
 
-	DrawGraph(100, 600, Stage1Image, TRUE);
+
 	DrawGraph(300, 600, Stage2Image, TRUE);
 	DrawGraph(500, 600, Stage3Image, TRUE);
 	DrawGraph(700, 600, Stage4Image, TRUE);
@@ -84,11 +84,7 @@ void TitleScene::Draw()
 	}
 
 	if (CheckHitKey(KEY_INPUT_1)) {
-		if (isDrawKey)
-		{
-			DrawGraph(100, 600, Stage1Image, TRUE);
-
-		}
+		DrawGraph(100, 600, Stage1Image, TRUE);
 	}
 
 		SceneBase::Draw();
