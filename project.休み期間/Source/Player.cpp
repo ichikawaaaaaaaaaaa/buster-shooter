@@ -44,7 +44,7 @@ void Player::Update()
     GoalText* g = FindGameObject<GoalText>(); // ƒS[ƒ‹ˆ—Žæ“¾
 
     //ƒS[ƒ‹‚µ‚Ä‚¢‚½‚ç‘S‚Ä‚Ìˆ—‚ð’âŽ~
-    if (IsGoal == true)
+    if (g->IsGoal == true)
     {
         return;
     }
