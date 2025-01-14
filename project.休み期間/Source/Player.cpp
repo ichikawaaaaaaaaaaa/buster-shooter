@@ -6,8 +6,8 @@
 #include "Enemy.h"
 #include "Vector2.h"
 
-float Gravity = 0.1f;     //重力加速度
-float jumpHeight = 20 * 2;  //ジャンプの高さ
+float Gravity = 0.5f;     //重力加速度
+float jumpHeight = 20 * 3;  //ジャンプの高さ
 float V0 = -sqrtf(3.0f * Gravity * jumpHeight);//初速計算
 
 // プレイヤーのライフと敵に触れた回数
@@ -37,9 +37,18 @@ Player::Player()
 
 // 更新処理
 
+
 void Player::Update()
 
 {
+    GoalText* g = FindGameObject<GoalText>(); // ゴール処理取得
+
+    //ゴールしていたら全ての処理を停止
+    if (IsGoal == true)
+    {
+        return;
+    }
+
     GetJoypadInputState(DX_INPUT_KEY_PAD1);
     int PadInput;
 
@@ -280,7 +289,7 @@ void Player::Draw()
             for (int i = 0; i < life; i++) {
              //   DrawGraph(10 + i * 40, 34, life, TRUE);
 
-                // ここでライフアイコンを描画するコードを追加
+                // ここでライフアイコンを描画するコードを追加 
                 // 例: DrawGraph(10 + i * 30, 10, lifeIconImage, TRUE);
             }
         }

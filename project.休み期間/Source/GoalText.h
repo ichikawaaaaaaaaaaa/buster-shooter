@@ -14,10 +14,12 @@ public:
 	int PushSpaceKey;
 	int GaneclearText;
 
+	int scroll;
+
 	bool IsGoal;
 
 private:
-	int timer;               // タイマー（テキストの表示時間）
+	float timer;               // タイマー（テキストの表示時間）
 	bool fadeStarted;          // フェード開始フラグ
 	int alpha;                 // 文字の透明度（フェード用）
 

@@ -3,6 +3,7 @@
 #include "Fader.h"
 #include "Player.h"
 #include "Stage.h"
+#include "Stage.h"
 
 
 GoalText::GoalText()
@@ -12,7 +13,9 @@ GoalText::GoalText()
 	PushSpaceKey = LoadGraph("data/image/PushSpace.png");
 
 	IsGoal = false;
+	timer = 0.0f;
 
+	scroll = 0;  //スクロール位置初期化
 }
 
 GoalText::~GoalText()
@@ -21,6 +24,7 @@ GoalText::~GoalText()
 
 void GoalText::Update()
 {
+	Stage* s = FindGameObject<Stage>(); // ステージオブジェクト取得
 
 	//当たり判定
 	Player* p = FindGameObject<Player>();//相手のインスタンスを取得
@@ -33,6 +37,7 @@ void GoalText::Update()
 	}
 	if (IsGoal)
 	{
+
 		if (fadeStarted) {
 			Fader* f = FindGameObject <Fader>();
 			if (f->IsFinish()) {
@@ -41,22 +46,28 @@ void GoalText::Update()
 			return;
 		}
 
+	
 		timer += Time::DeltaTime();
 		if (timer >= 2.5f) {
-			//if (CheckHitKey(KEY_INPUT_SPACE)) {
+			if (CheckHitKey(KEY_INPUT_B)) {
 				Fader* f = FindGameObject <Fader>();
 				f->FadeOut(GetColor(0, 0, 0), 0.5f);
-				fadeStarted = true;
-					//SceneManager::ChangeScene("TitleScene");
+				fadeStarted % true;
+					SceneManager::ChangeScene("TitleScene");
 			}
 		}
 	}
-//}
+}
 
 
 void GoalText::Draw()
 {
+
 	Stage* s = FindGameObject<Stage>();//絵の表示をする
+
+	DrawGraph(position.x - s->scroll, position.y,  hImage, TRUE);
+
+	
 	if(IsGoal)
 	{
 		//int size = GetFontSize();
@@ -70,7 +81,7 @@ void GoalText::Draw()
 		//		"SCORE..... %6d");
 		}
 		if (timer >= 2.0f) {
-			DrawGraph(300, 2000, PushSpaceKey, TRUE);
+			DrawGraph(0, 0, PushSpaceKey, TRUE);
 		}
 		//SetFontSize(size);
 	}

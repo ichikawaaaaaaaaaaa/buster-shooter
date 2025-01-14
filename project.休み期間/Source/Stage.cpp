@@ -57,6 +57,8 @@ Stage::Stage()
 				e1->position.x = i * 40;
 				e1->position.y = j * 40;
 			}
+
+
 		}
 	}
 	scroll = 0;
@@ -78,29 +80,40 @@ void Stage::Draw()//縦横で回す
 			{
 				
 				DrawRectGraph(x - scroll, y, 0, 40, 40, 40, hImage, TRUE);
+
+				int x = i * 40;
+				if (map[j][i] == 0)
+				{
+
+					DrawRectGraph(x - scroll, y, 0, 40, 40, 40, hImage, TRUE);
+				}
 			}
 
 		}
 	}
 }
 
-int Stage::IsWallRight(VECTOR2 pos) {
+int Stage::IsWallRight(VECTOR2 pos) 
+{
 	// pos.xはボールの右端の座標
 	int i = pos.x / CHIP_SIZE; // x座標をマス単位に変換
 	int j = pos.y / CHIP_SIZE; // y座標をマス単位に変換
 	// ボールが壁の右端に当たるかどうかをチェック
-	if (map[j][i] == 1) {  // map[j][i] == 1は壁の位置を意味
+	if (map[j][i] == 1) 
+	{  // map[j][i] == 1は壁の位置を意味
 		int push = ((int)pos.x) % CHIP_SIZE + 1;  // 壁の右端までの距離
 		return push;  // 壁に当たったら距離を返す
 	}
 	return 0;  // 壁に当たっていない場合は0を返す
 }
-int Stage::IsWallLeft(VECTOR2 pos) {
+int Stage::IsWallLeft(VECTOR2 pos) 
+{
 	// pos.xはボールの左端の座標
 	int i = (pos.x) / CHIP_SIZE;  // x座標をマス単位に変換
 	int j = pos.y / CHIP_SIZE;    // y座標をマス単位に変換
 	// ボールが壁の左端に当たるかどうかをチェック
-	if (map[j][i] == 1) {  // map[j][i] == 1は壁の位置を意味
+	if (map[j][i] == 1) 
+	{  // map[j][i] == 1は壁の位置を意味
 		int push = CHIP_SIZE - ((int)pos.x) % CHIP_SIZE;  // 壁の左端までの距離
 		return push;  // 壁に当たったら距離を返す
 	}
