@@ -7,7 +7,10 @@
 
 GoalText::GoalText()
 {
-	hImage = LoadGraph("data/image/mob.png");
+	hImage = LoadGraph("data/image/Goal.png");
+	GaneclearText = LoadGraph("data/image/GameClear.png");
+	PushSpaceKey = LoadGraph("data/image/PushSpace.png");
+
 	IsGoal = false;
 
 }
@@ -18,6 +21,7 @@ GoalText::~GoalText()
 
 void GoalText::Update()
 {
+
 	//当たり判定
 	Player* p = FindGameObject<Player>();//相手のインスタンスを取得
 	VECTOR2 playerPos = p->position;//相手の座標を取得
@@ -39,15 +43,15 @@ void GoalText::Update()
 
 		timer += Time::DeltaTime();
 		if (timer >= 2.5f) {
-			if (CheckHitKey(KEY_INPUT_SPACE)) {
+			//if (CheckHitKey(KEY_INPUT_SPACE)) {
 				Fader* f = FindGameObject <Fader>();
 				f->FadeOut(GetColor(0, 0, 0), 0.5f);
 				fadeStarted = true;
-				//	SceneManager::ChangeScene("TitleScene");
+					//SceneManager::ChangeScene("TitleScene");
 			}
 		}
 	}
-}
+//}
 
 
 void GoalText::Draw()
@@ -55,19 +59,19 @@ void GoalText::Draw()
 	Stage* s = FindGameObject<Stage>();//絵の表示をする
 	if(IsGoal)
 	{
-		int size = GetFontSize();
-		SetFontSize(50);
-		DrawString(200, 200, "GOAL", GetColor(255, 255, 127));
+		//int size = GetFontSize();
+		//SetFontSize(50);
+		DrawGraph(200, 200, GaneclearText, TRUE);
 		if (timer >= 1.0f) {
 
 
-			SetFontSize(25);
-			DrawFormatString(200, 300, GetColor(255, 255, 255),
-				"SCORE..... %6d");
+		//	SetFontSize(25);
+		//	DrawFormatString(200, 300, GetColor(255, 255, 255),
+		//		"SCORE..... %6d");
 		}
 		if (timer >= 2.0f) {
-			DrawString(200, 500, "PUSH SPACE KEY", GetColor(255, 255, 255));
+			DrawGraph(300, 2000, PushSpaceKey, TRUE);
 		}
-		SetFontSize(size);
+		//SetFontSize(size);
 	}
 }

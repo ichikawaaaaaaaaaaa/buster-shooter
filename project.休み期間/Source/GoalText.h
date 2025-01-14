@@ -10,6 +10,10 @@ public:
 	void Draw() override;      // •`‰æˆ—
 	VECTOR2 position;
 	int hImage;
+
+	int PushSpaceKey;
+	int GaneclearText;
+
 	bool IsGoal;
 
 private:

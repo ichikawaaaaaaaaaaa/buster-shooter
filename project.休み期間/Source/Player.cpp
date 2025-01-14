@@ -6,7 +6,7 @@
 #include "Enemy.h"
 #include "Vector2.h"
 
-float Gravity = 0.5f;     //重力加速度
+float Gravity = 0.1f;     //重力加速度
 float jumpHeight = 20 * 2;  //ジャンプの高さ
 float V0 = -sqrtf(3.0f * Gravity * jumpHeight);//初速計算
 
@@ -30,6 +30,9 @@ Player::Player()
     IsGoal = 0; //ゴールフラグ初期化
     goaled = 0;  //ゴール達成フラグ初期化
     scroll = 0;  //スクロール位置初期化
+
+    //プレイヤーのライフ
+    life = LoadGraph("data/image/heart.png");
 }
 
 // 更新処理
@@ -125,7 +128,7 @@ void Player::Update()
 
     if (CheckHitKey(KEY_INPUT_D)) {
 
-        position.x += 2;  //右に〇(数字)ピクセル移動
+        position.x += 6;  //右に〇(数字)ピクセル移動
 
         //右の壁との衝突判定
 
@@ -155,8 +158,9 @@ void Player::Update()
     }
 
     // ジャンプ処理(PAD)
+     // Bボタン　PAD_INPUT_2
 
-    if (PadInput & PAD_INPUT_B) {
+    if (PadInput & PAD_INPUT_2) {
         if (!prevJumpKey && onGround) { //地上にいてジャンプキーが押された場合
             velocity = V0;             //初速を設定
         }
@@ -207,8 +211,9 @@ void Player::Update()
     }
 
 
-    // Ballを投げる処理(PAD)
-    if (PadInput & PAD_INPUT_Y || GetMouseInput() & MOUSE_INPUT_RIGHT) {
+    // 右にBallを投げる(PAD)
+    // Xボタン PAD_INPUT_3
+    if (PadInput & PAD_INPUT_3 || GetMouseInput() & MOUSE_INPUT_RIGHT) {
 
         if (!prevRightMouse) {
             Ball* ba = Instantiate<Ball>();   // ボールを生成
@@ -222,9 +227,9 @@ void Player::Update()
     else {
         prevRightMouse = false;
     }
-    // 左方向
-
-    if (PadInput & PAD_INPUT_A || GetMouseInput() & MOUSE_INPUT_LEFT) {
+    // 左にBallを投げる(PAD)
+      // Aボタン PAD_INPUT_1
+    if (PadInput & PAD_INPUT_1 || GetMouseInput() & MOUSE_INPUT_LEFT) {
 
         if (!prevLeftMouse) {
             Ball* ba = Instantiate<Ball>();  // ボールを生成
@@ -273,6 +278,8 @@ void Player::Draw()
             // ライフを表示（例えば、画面の上部にライフのアイコンを表示する）
 
             for (int i = 0; i < life; i++) {
+             //   DrawGraph(10 + i * 40, 34, life, TRUE);
+
                 // ここでライフアイコンを描画するコードを追加
                 // 例: DrawGraph(10 + i * 30, 10, lifeIconImage, TRUE);
             }

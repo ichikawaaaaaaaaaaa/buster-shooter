@@ -141,7 +141,7 @@ void Enemy::Update()
 void Enemy::Draw()
 {
 	Stage* s = FindGameObject<Stage>();
-	DrawRectGraph(position.x - s->scroll, position.y, patternX * 64, patternY * 64, 64, 64, hImage, TRUE);
+//	DrawRectGraph(position.x - s->scroll, position.y, patternX * 64, patternY * 64, 64, 64, hImage, TRUE);
 }
 
 VECTOR2 Enemy::GetPosition() const
