@@ -7,8 +7,9 @@
 
 TitleScene::TitleScene()
 {
-	hBGImage = LoadGraph("image/Title.png");
-	hKeyImage = LoadGraph("image/PushSpace.png");
+	hBGImage = LoadGraph("data/image/Title.png");
+	hKeyImage = LoadGraph("data/image/PushSpace.png");
+	BackScreen = LoadGraph("data/image/Titiebackscreen.png");
 
 	Stage1Image = LoadGraph("data/image/Stage1.png");
 	Stage2Image = LoadGraph("data/image/Stage2.png");
@@ -16,7 +17,9 @@ TitleScene::TitleScene()
 	Stage4Image = LoadGraph("data/image/Stage4.png");
 	Stage5Image = LoadGraph("data/image/Stage5.png");
 
+	StageFlame = LoadGraph("data/image/StageFlame.png");
 
+	Stageflame = 0;
 
 
 
@@ -54,27 +57,48 @@ void TitleScene::Update()
 //		SceneManager::ChangeScene("PlayScene");
 //	}
 
+
+	if (CheckHitKey(KEY_INPUT_1)) {
+		Stageflame = 1;
+			}
+			if (CheckHitKey(KEY_INPUT_2)) {
+				Stageflame = 2;
+			}
+			if (CheckHitKey(KEY_INPUT_3)) {
+				Stageflame = 3;
+			}
+			if (CheckHitKey(KEY_INPUT_4)) {
+				Stageflame = 4;
+			}
+			if (CheckHitKey(KEY_INPUT_5)) {
+				Stageflame = 5;
+			}
+
+			if (CheckHitKey(KEY_INPUT_SPACE))
+			{
+				StageUtility::SetStageNo(Stageflame);
+				SceneManager::ChangeScene("PlayScene");
+			}
+
 	//	前フレームからの経過時間を取得
 	DrawKeyTimer += Time::DeltaTime();
 	//	一定時間(DRAW_KEY_WAIT)経過したら、[PUSH SPACE KEY]を描画する・しないを切りかえる
 	if (DrawKeyTimer >= DRAW_KEY_WAIT)
 	{
 		isDrawKey = !isDrawKey;
-		DrawKeyTimer = 0.0f;
+		DrawKeyTimer = 0.5f;
 	}
 }
 
 void TitleScene::Draw()
 {
 	//	タイトル画面
-	DrawGraph(300, 1800, hBGImage, TRUE);
-	DrawGraph(300, 200, hBGImage, TRUE);
+	DrawGraph(0, 0, BackScreen, TRUE);
+	DrawGraph(160, 200, hBGImage, TRUE);
+	DrawGraph(340, 600, hKeyImage, TRUE);
+	
 
-
-	DrawGraph(300, 600, Stage2Image, TRUE);
-	DrawGraph(500, 600, Stage3Image, TRUE);
-	DrawGraph(700, 600, Stage4Image, TRUE);
-	DrawGraph(900, 600, Stage5Image, TRUE);
+	
 
 
 	//	[PUSH SPACE KEY]
@@ -83,10 +107,50 @@ void TitleScene::Draw()
 		DrawGraph(300, 2000, hKeyImage, TRUE);
 	}
 
-	if (CheckHitKey(KEY_INPUT_1)) {
-		DrawGraph(100, 600, Stage1Image, TRUE);
+	if (Stageflame ==1) {
+		if (isDrawKey)
+		{
+		DrawGraph(100, 500, StageFlame, TRUE);
+		}
 	}
 
+	if (Stageflame == 2) {
+		if (isDrawKey)
+		{
+			DrawGraph(300, 500, StageFlame, TRUE);
+		}				   
+	}					   
+						  
+						   
+	if (Stageflame == 3) { 
+		if (isDrawKey)	   
+		{				   
+			DrawGraph(500, 500, StageFlame, TRUE);
+		}				   
+	}					   
+						   
+	if (Stageflame == 4) { 
+		if (isDrawKey)	   
+		{				   
+			DrawGraph(700, 500, StageFlame, TRUE);
+		}				   
+	}					   
+						   
+	if (Stageflame == 5) { 
+		if (isDrawKey)	   
+		{				   
+			DrawGraph(900, 500, StageFlame, TRUE);
+		}
+	}
+
+
+	DrawGraph(100, 500, Stage1Image, TRUE);
+	DrawGraph(300, 500, Stage2Image, TRUE);
+	DrawGraph(500, 500, Stage3Image, TRUE);
+	DrawGraph(700, 500, Stage4Image, TRUE);
+	DrawGraph(900, 500, Stage5Image, TRUE);
+
+
 		SceneBase::Draw();
-		DrawString(100, 100, "プレイしたいステージを１～5を押して選択してください。", GetColor(255, 255, 255));
+		DrawString(100, 100, "プレイしたいステージを１～5を押して選択してください。Spaceで確定します", GetColor(255, 255, 255));
 }
