@@ -22,6 +22,7 @@ public:
 	bool IsGoal(VECTOR2 position);
 
 	int hImage;
+	int hashiraImage;
 	std::vector<std::vector<int>> map;
 	int HEIGHT;
 	int WIDTH;

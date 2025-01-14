@@ -12,6 +12,8 @@ using namespace std;
 //#include "stage1.h"
 Stage::Stage()
 
+
+//hashira.png
 {
 	map.clear();
 	std::string filename = "data/stage.";
@@ -29,7 +31,7 @@ Stage::Stage()
 	WIDTH = csv->GetColumns(0);
 	delete csv;
 
-	hImage = LoadGraph("data/image/parts.png");
+	hImage = LoadGraph("data/image/maptile_renga.png");
 	for (int j = 0; j < HEIGHT; j++) {
 		for (int i = 0; i < WIDTH; i++) {
 			if (map[j][i] == 9) {
