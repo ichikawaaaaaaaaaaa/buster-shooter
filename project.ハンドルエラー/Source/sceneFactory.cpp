@@ -5,10 +5,10 @@
 #include "titleScene.h"
 #include "playScene.h"
 #include "GameOver.h"
-
+<<<<<< < HEAD
 #include "GameClear.h"
-
-
+	====== =
+	>>>>>> > ed758e6451ebfd41b311136bd82e9f5c2f3ba03d
 
 SceneBase* SceneFactory::CreateFirst()
 {
@@ -27,7 +27,7 @@ SceneBase * SceneFactory::Create(const std::string & name)
 	if (name == "PlayScene") {
 		return new PlayScene();
 	}
-	if (name == "CLEAR") {
+	if (name == "GameClear") {
 		return new GameClear();
 	}
 	MessageBox(NULL, ("éüÇÃÉVÅ[ÉìÇÕÇ†ÇËÇ‹ÇπÇÒ\n" + name).c_str(), "SceneFactory", MB_ICONERROR | MB_OK);
