@@ -4,12 +4,12 @@
 
 #include "Vector2.h"
 
-class Jet : public GameObject {
+class Walker : public GameObject {
 
 public:
 
-    Jet();            // コンストラクタ
-    ~Jet();           // デストラクタ
+    Walker();            // コンストラクタ
+    ~Walker();           // デストラクタ
 
     void Update() override;  // 更新処理
     void Draw() override;    // 描画処理

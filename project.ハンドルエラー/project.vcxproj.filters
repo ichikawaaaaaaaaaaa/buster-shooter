@@ -59,6 +59,8 @@
     <ClCompile Include="Source\GameOver.cpp">
       <Filter>TitleScene</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Spring.cpp" />
+    <ClCompile Include="Source\Walker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\sceneFactory.h" />
@@ -131,6 +133,8 @@
     <ClInclude Include="Source\GameOver.h">
       <Filter>TitleScene</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Spring.h" />
+    <ClInclude Include="Source\Walker.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">

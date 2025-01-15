@@ -157,11 +157,13 @@
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\playScene.h" />
     <ClInclude Include="Source\sceneFactory.h" />
+    <ClInclude Include="Source\Spring.h" />
     <ClInclude Include="Source\Stage.h" />
     <ClInclude Include="Source\stage1.h" />
     <ClInclude Include="Source\timer.h" />
     <ClInclude Include="Source\titleScene.h" />
     <ClInclude Include="Source\Vector2.h" />
+    <ClInclude Include="Source\Walker.h" />
     <ClInclude Include="StageUtility.h" />
   </ItemGroup>
   <ItemGroup>
@@ -184,10 +186,12 @@
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\playScene.cpp" />
     <ClCompile Include="Source\sceneFactory.cpp" />
+    <ClCompile Include="Source\Spring.cpp" />
     <ClCompile Include="Source\Stage.cpp" />
     <ClCompile Include="Source\timer.cpp" />
     <ClCompile Include="Source\titleScene.cpp" />
     <ClCompile Include="Source\Vector2.cpp" />
+    <ClCompile Include="Source\Walker.cpp" />
     <ClCompile Include="StageUtility.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

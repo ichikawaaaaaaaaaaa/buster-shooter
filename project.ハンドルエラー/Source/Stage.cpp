@@ -3,6 +3,8 @@
 #include "Coin.h"
 #include "Enemy.h"
 #include "Jet.h"
+#include "Spring.h"
+#include "Walker.h"
 #include "GoalText.h"
 const int CHIP_SIZE = 40;
 #include "CsvReader.h"
@@ -56,6 +58,16 @@ Stage::Stage()
 				Jet* jet = Instantiate<Jet>();
 				jet->position.x = i * 40;
 				jet->position.y = j * 40;
+			}
+			if (map[j][i] == 6) {
+				Spring* sp = Instantiate<Spring>();
+				sp->position.x = i * 40;
+				sp->position.y = j * 40;
+			}
+			if (map[j][i] == 7) {
+				Walker* w = Instantiate<Walker>();
+				w->position.x = i * 40;
+				w->position.y = j * 40;
 			}
 		}
 	}

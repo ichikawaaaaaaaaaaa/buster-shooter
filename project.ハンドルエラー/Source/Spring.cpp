@@ -1,13 +1,13 @@
-#include "Jet.h"
+#include "Spring.h"
 #include "Ball.h"
 #include "Vector2.h"
 #include "Player.h"
 #include "Stage.h"
 #include "config.h"
 // コンストラクタ
-Jet::Jet()
+Spring::Spring()
 {
-    hImage = LoadGraph("data/image/Jet.png");
+    hImage = LoadGraph("data/image/Spring.png");
     // スプライトシートの幅と高さを取得
     GetGraphSize(hImage, &imageWidth, &imageHeight);
     position.x = rand() % 1000; // 初期位置 (x座標)
@@ -18,7 +18,7 @@ Jet::Jet()
     patternY = 0;
     currentImage = hImage;
     // アニメーションの設定
-    frameWidth = 50;  // 1フレームの幅
+    frameWidth = 40;  // 1フレームの幅
     frameHeight = 50; // 1フレームの高さ
     maxFrames = 2;    // 総フレーム数 (フレーム数が 2 に設定)
     currentFrame = 0; // 現在のフレーム
@@ -29,11 +29,11 @@ Jet::Jet()
     dead = false;
     deadCounter = 0;
 }
-Jet::~Jet()
+Spring::~Spring()
 {
     DeleteGraph(hImage); // 使用した画像を削除
 }
-void Jet::Update()
+void Spring::Update()
 {
     if (dead) // 敵が死亡している場合の処理
     {
@@ -133,7 +133,7 @@ void Jet::Update()
         }
     }
 }
-void Jet::Draw()
+void Spring::Draw()
 {
     Stage* s = FindGameObject<Stage>();
     if (s)
@@ -154,11 +154,11 @@ void Jet::Draw()
         );
     }
 }
-VECTOR2 Jet::GetPosition() const
+VECTOR2 Spring::GetPosition() const
 {
     return position;
 }
-void Jet::OnCollide()
+void Spring::OnCollide()
 {
     DestroyMe(); // 衝突時に削除
 }
