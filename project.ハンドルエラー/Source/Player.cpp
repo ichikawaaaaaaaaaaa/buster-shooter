@@ -5,7 +5,7 @@
 #include "config.h"
 #include "Enemy.h"
 #include "Vector2.h"
-#include"GameOver.h"
+#include "GameOver.h"
 
 float Gravity = 0.1f;     //重力加速度
 float jumpHeight = 40 * 2;  //ジャンプの高さ
