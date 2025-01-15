@@ -151,6 +151,7 @@
     <ClInclude Include="Source\debugScreen.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\Fader.h" />
+    <ClInclude Include="Source\GameClear.h" />
     <ClInclude Include="Source\GameOver.h" />
     <ClInclude Include="Source\GoalText.h" />
     <ClInclude Include="Source\Jet.h" />
@@ -180,6 +181,7 @@
     <ClCompile Include="Source\debugScreen.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\Fader.cpp" />
+    <ClCompile Include="Source\GameClear.cpp" />
     <ClCompile Include="Source\GameOver.cpp" />
     <ClCompile Include="Source\GoalText.cpp" />
     <ClCompile Include="Source\Jet.cpp" />
