@@ -107,14 +107,14 @@ void Player::Update()
         Stage* s = FindGameObject<Stage>();
         if (goaled == false) {
             if (CheckHitKey(KEY_INPUT_A)) {
-                position.x -= 2;
+                position.x -= 6;
                 int push = s->IsWallLeft(position + VECTOR2(0, 0));
                 position.x += push;
-                push = s->IsWallLeft(position + VECTOR2(0, 39));
+                push = s->IsWallLeft(position + VECTOR2(0, 29));
                 position.x += push;
             }
             if (CheckHitKey(KEY_INPUT_D)) {
-                position.x += 2;
+                position.x += 6;
                 // 右に壁があるか調べる
                 int push = s->IsWallRight(position + VECTOR2(39, 0));
                 position.x -= push;
@@ -138,7 +138,7 @@ void Player::Update()
         velocity += Gravity; // 速度には重力を足す
         onGround = false;
         if (velocity >= 0) {
-            int push = s->IsWallDown(position + VECTOR2(0, 40));
+            int push = s->IsWallDown(position + VECTOR2(1, 38));
             // ジャンプの足元チェックは、１ドット下を見て、
             // 押し返す量は、-1する
             if (push > 0) { // 地面に触れたので
