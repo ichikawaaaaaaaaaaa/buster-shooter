@@ -37,12 +37,10 @@ void GoalText::Update()
 	}
 	if (IsGoal)
 	{
-		timer += 1.0f / 60.0f;
+		timer += 1.0f / 60;
 		if (fadeStarted) {
 			Fader* f = FindGameObject <Fader>();
-				if (timer > 3) {
 					SceneManager::ChangeScene("TitleScene");
-				}
 			return;
 		}
 
