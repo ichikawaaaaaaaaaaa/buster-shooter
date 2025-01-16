@@ -28,5 +28,6 @@ private:
 	int frameCounter = 0;     // アニメーションのカウンタ
 	int maxFrames;
 	int frameTimer;
+	float timer;
 	int animationSpeed;
 };

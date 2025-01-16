@@ -4,6 +4,7 @@
 #include "Stage.h"  // 壁判定用
 #include "Vector2.h"
 #include "Enemy.h"
+#include "../Library/time.h"
 
 // コンストラクタで初期化
 
@@ -34,9 +35,14 @@ Ball::~Ball() {
 void Ball::Update() {
     Stage* s = FindGameObject<Stage>();
     if (goaled) return;
-
     // 左の壁との衝突判定
+    
     {
+        timer += Time::DeltaTime();
+        if (timer >= 2.5f)
+        {
+            DestroyMe();
+        }
         int push = s->IsWallLeft(position + VECTOR2(0, 0));
         if (push != 0) {
 
