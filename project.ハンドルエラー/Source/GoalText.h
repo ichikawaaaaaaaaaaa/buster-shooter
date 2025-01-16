@@ -16,6 +16,8 @@ public:
 
 	bool IsGoal;
 	int scroll;
+	int XInput;             // ジョイパッドX軸入力
+	int YInput;             // ジョイパッドY軸入力
 
 private:
 	float timer;               // タイマー（テキストの表示時間）

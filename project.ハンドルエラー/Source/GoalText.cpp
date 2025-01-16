@@ -23,6 +23,11 @@ GoalText::~GoalText()
 
 void GoalText::Update()
 {
+	GetJoypadInputState(DX_INPUT_KEY_PAD1);
+	int PadInput;
+
+	GetJoypadAnalogInput(&XInput, &YInput, DX_INPUT_KEY_PAD1);
+	PadInput = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 
 	Stage* s = FindGameObject<Stage>(); // ステージオブジェクト取得
 
@@ -48,6 +53,14 @@ void GoalText::Update()
 
 		timer  += Time::DeltaTime();
 		if (timer >= 2.5f) {
+			if (PadInput & PAD_INPUT_2)  {
+				Fader* f = FindGameObject <Fader>();
+				f->FadeOut(GetColor(0, 0, 0), 0.5f);
+				fadeStarted = true;
+				SceneManager::ChangeScene("TitleScene");
+			}
+
+
 			if (CheckHitKey(KEY_INPUT_B)) {
 				Fader* f = FindGameObject <Fader>();
 				f->FadeOut(GetColor(0, 0, 0), 0.5f);

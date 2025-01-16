@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Stage.h"
 #include "config.h"
+#include "GoalText.h"
 // コンストラクタ
 Jet::Jet()
 {
@@ -35,6 +36,15 @@ Jet::~Jet()
 }
 void Jet::Update()
 {
+    std::list<GoalText*> gls = FindGameObjects<GoalText>(); // ゴール処理取得
+    for (auto g : gls) {
+        //ゴールしていたら全ての処理を停止
+        if (g->IsGoal == true)
+        {
+            return;
+        }
+    }
+
     if (dead) // 敵が死亡している場合の処理
     {
         deadCounter++;

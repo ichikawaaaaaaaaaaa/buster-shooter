@@ -43,7 +43,7 @@ Player::Player()
 void Player::Update()
 
 {
-<<<<<<< HEAD
+
     std::list<GoalText*> gls = FindGameObjects<GoalText>(); // ゴール処理取得
     for (auto g : gls) {
         //ゴールしていたら全ての処理を停止
@@ -53,8 +53,6 @@ void Player::Update()
         }
     }
 
-=======
->>>>>>> 22785fc63763e0367779acd117806a6a2e23f18e
     GetJoypadInputState(DX_INPUT_KEY_PAD1);
     int PadInput;
 
@@ -119,6 +117,8 @@ void Player::Update()
     {
         Stage* s = FindGameObject<Stage>();
         if (goaled == false) {
+
+            //右移動
             if (CheckHitKey(KEY_INPUT_A)) {
                 position.x -= 2;
                 int push = s->IsWallLeft(position + VECTOR2(0, 0));
@@ -126,6 +126,18 @@ void Player::Update()
                 push = s->IsWallLeft(position + VECTOR2(0, 39));
                 position.x += push;
             }
+
+            // 右の移動処理(PAD)
+
+            if (XInput > 100) {
+                position.x += 2;
+                int push = s->IsWallRight(position + VECTOR2(39, 0));
+                position.x -= push;
+                push = s->IsWallRight(position + VECTOR2(39, 39));
+                position.x -= push;
+            }
+
+            //左移動
             if (CheckHitKey(KEY_INPUT_D)) {
                 position.x += 2;
                 // 右に壁があるか調べる
@@ -134,6 +146,20 @@ void Player::Update()
                 push = s->IsWallRight(position + VECTOR2(39, 39));
                 position.x -= push;
             }
+
+            // 左の移動処理(PAD)
+
+            if (XInput < -100) {
+                position.x -= 2;
+                //キャラクターの左上隅で衝突チェック
+
+                int push = s->IsWallLeft(position + VECTOR2(0, 0));
+                position.x += push;
+                push = s->IsWallLeft(position + VECTOR2(0, 39));
+                position.x += push;
+            }
+
+            //ジャンプ
             if (CheckHitKey(KEY_INPUT_SPACE)) {
                 if (prevJumpKey == false) {
                     if (onGround) {
@@ -147,6 +173,21 @@ void Player::Update()
                 prevJumpKey = false;
             }
         }
+
+        //ジャンプ
+        if (CheckHitKey(KEY_INPUT_SPACE)) {
+            if (prevJumpKey == false) {
+                if (onGround) {
+                    // ジャンプ開始
+                    velocity = V0; // 初速を決める
+                }
+            }
+            prevJumpKey = true;
+        }
+        else {
+            prevJumpKey = false;
+        }
+
         position.y += velocity; // 座標には速度を足す
         velocity += Gravity; // 速度には重力を足す
         onGround = false;
