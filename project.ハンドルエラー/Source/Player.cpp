@@ -6,7 +6,7 @@
 #include "Enemy.h"
 #include "Vector2.h"
 #include "GameOver.h"
-#include "../Library/ObjectManager.h"
+
 
 
 float Gravity = 0.5f;     //èdóÕâ¡ë¨ìx
@@ -43,7 +43,7 @@ Player::Player()
 void Player::Update()
 
 {
-<<<<<<< HEAD
+
     std::list<GoalText*> gls = FindGameObjects<GoalText>(); // ÉSÅ[ÉãèàóùéÊìæ
     for (auto g : gls) {
         //ÉSÅ[ÉãÇµÇƒÇ¢ÇΩÇÁëSÇƒÇÃèàóùÇí‚é~
@@ -53,8 +53,8 @@ void Player::Update()
         }
     }
 
-=======
->>>>>>> 22785fc63763e0367779acd117806a6a2e23f18e
+
+
     GetJoypadInputState(DX_INPUT_KEY_PAD1);
     int PadInput;
 
