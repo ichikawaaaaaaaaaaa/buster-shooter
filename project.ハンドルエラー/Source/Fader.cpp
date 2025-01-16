@@ -40,7 +40,7 @@ void Fader::FadeOut(unsigned int color, float time)
 bool Fader::IsFinish() const
 {
 	if (timer >= fadeTime) {
-		return false;
+		return true;
 	}
 	
 }
