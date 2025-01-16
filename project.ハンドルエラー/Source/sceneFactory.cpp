@@ -9,6 +9,7 @@
 #include "GameClear.h"
 
 
+<<<<<<< HEAD
 //<<<<<<< HEAD
                            
 //<<<<<< < HEAD
@@ -19,6 +20,8 @@
 
 #include "GameClear.h"
 //>>>>>>> 14b7e478f85fe04b605a79ca55e94df9108b5eca
+=======
+>>>>>>> 49c980feb97e41f305e93e61c798674777291dba
 
 
 SceneBase* SceneFactory::CreateFirst()
