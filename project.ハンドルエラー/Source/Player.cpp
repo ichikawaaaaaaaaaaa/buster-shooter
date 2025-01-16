@@ -6,7 +6,7 @@
 #include "Enemy.h"
 #include "Vector2.h"
 #include "GameOver.h"
-#include "../Library/ObjectManager.h"
+
 
 
 float Gravity = 0.5f;     //重力加速度
@@ -43,7 +43,15 @@ Player::Player()
 void Player::Update()
 
 {
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+//<<<<<<< HEAD
+>>>>>>> d2eb35d7477e272531dc84b7e3f0b22498cdcede
+>>>>>>> 5d79de6ccb60ac6f891e69151ef7d963e9ff127c
     std::list<GoalText*> gls = FindGameObjects<GoalText>(); // ゴール処理取得
     for (auto g : gls) {
         //ゴールしていたら全ての処理を停止
@@ -53,6 +61,16 @@ void Player::Update()
         }
     }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+
+=======
+//=======
+//>>>>>> 22785fc63763e0367779acd117806a6a2e23f18e
+>>>>>>> d2eb35d7477e272531dc84b7e3f0b22498cdcede
+>>>>>>> 5d79de6ccb60ac6f891e69151ef7d963e9ff127c
     GetJoypadInputState(DX_INPUT_KEY_PAD1);
     int PadInput;
 
@@ -120,10 +138,10 @@ void Player::Update()
 
             //右移動
             if (CheckHitKey(KEY_INPUT_A)) {
-                position.x -= 2;
+                position.x -= 6;
                 int push = s->IsWallLeft(position + VECTOR2(0, 0));
                 position.x += push;
-                push = s->IsWallLeft(position + VECTOR2(0, 39));
+                push = s->IsWallLeft(position + VECTOR2(0, 29));
                 position.x += push;
             }
 
@@ -139,7 +157,7 @@ void Player::Update()
 
             //左移動
             if (CheckHitKey(KEY_INPUT_D)) {
-                position.x += 2;
+                position.x += 6;
                 // 右に壁があるか調べる
                 int push = s->IsWallRight(position + VECTOR2(39, 0));
                 position.x -= push;
@@ -192,7 +210,7 @@ void Player::Update()
         velocity += Gravity; // 速度には重力を足す
         onGround = false;
         if (velocity >= 0) {
-            int push = s->IsWallDown(position + VECTOR2(0, 40));
+            int push = s->IsWallDown(position + VECTOR2(1, 38));
             // ジャンプの足元チェックは、１ドット下を見て、
             // 押し返す量は、-1する
             if (push > 0) { // 地面に触れたので
