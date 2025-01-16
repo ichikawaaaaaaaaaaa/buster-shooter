@@ -44,11 +44,11 @@ Stage::Stage()
 			//	c->position.x = i * 40;
 			//	c->position.y = j * 40;
 			//}
-			if (map[j][i] == 3) {
+			/*if (map[j][i] == 3) {
 				Enemy* e = Instantiate<Enemy>();
 				e->position.x = i * 40;
 				e->position.y = j * 40;
-			}
+			}*/
 			if (map[j][i] == 4) {
 				GoalText* g = Instantiate<GoalText>();
 				g->position.x = i * 40;
