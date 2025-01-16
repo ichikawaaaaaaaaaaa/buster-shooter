@@ -37,15 +37,16 @@ void GoalText::Update()
 	}
 	if (IsGoal)
 	{
+		timer += 1.0f / 60.0f;
 		if (fadeStarted) {
 			Fader* f = FindGameObject <Fader>();
-			if (f->IsFinish()) {
-				SceneManager::ChangeScene("TitleScene");
-			}
+				if (timer > 3) {
+					SceneManager::ChangeScene("TitleScene");
+				}
 			return;
 		}
 
-		timer += Time::DeltaTime();
+		timer  += Time::DeltaTime();
 		if (timer >= 2.5f) {
 			if (CheckHitKey(KEY_INPUT_B)) {
 				Fader* f = FindGameObject <Fader>();

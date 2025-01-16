@@ -8,6 +8,7 @@
 #include "GameOver.h"
 #include "../Library/ObjectManager.h"
 
+
 float Gravity = 0.5f;     //重力加速度
 float jumpHeight = 40 * 1.5;  //ジャンプの高さ
 float V0 = -sqrtf(3.0f * Gravity * jumpHeight);//初速計算
@@ -42,6 +43,7 @@ Player::Player()
 void Player::Update()
 
 {
+<<<<<<< HEAD
     std::list<GoalText*> gls = FindGameObjects<GoalText>(); // ゴール処理取得
     for (auto g : gls) {
         //ゴールしていたら全ての処理を停止
@@ -51,6 +53,8 @@ void Player::Update()
         }
     }
 
+=======
+>>>>>>> 22785fc63763e0367779acd117806a6a2e23f18e
     GetJoypadInputState(DX_INPUT_KEY_PAD1);
     int PadInput;
 
@@ -111,120 +115,84 @@ void Player::Update()
         }
     }
 
-    // 左の移動処理
 
-    if (CheckHitKey(KEY_INPUT_A)) {
-        position.x -= 5;  //左に〇(数字)ピクセル移動
-
-        //左の壁との衝突判定
-
-        int push = s->IsWallLeft(position + VECTOR2(0, 0));
-        position.x += push; //壁の奥に進まないように位置を調節
-        push = s->IsWallLeft(position + VECTOR2(0, 39));  //キャラクターの下半分で衝突確認
-        position.x += push;
-    }
-
-    // 左の移動処理(PAD)
-
-    if (XInput < -100) {
-        position.x -= 2;
-        //キャラクターの左上隅で衝突チェック
-
-        int push = s->IsWallLeft(position + VECTOR2(0, 0));
-        position.x += push;
-        push = s->IsWallLeft(position + VECTOR2(0, 39));
-        position.x += push;
-    }
-
-    // 右の移動処理
-
-    if (CheckHitKey(KEY_INPUT_D)) {
-
-        position.x += 5;  //右に〇(数字)ピクセル移動
-
-        //右の壁との衝突判定
-
-        int push = s->IsWallRight(position + VECTOR2(39, 0));
-
-        position.x -= push;
-        push = s->IsWallRight(position + VECTOR2(39, 39));
-        position.x -= push;
-    }
-
-    // 右の移動処理(PAD)
-
-    if (XInput > 100) {
-        position.x += 2;
-        int push = s->IsWallRight(position + VECTOR2(39, 0));
-        position.x -= push;
-        push = s->IsWallRight(position + VECTOR2(39, 39));
-        position.x -= push;
-    }
-
-    // ジャンプ処理
-
-    if (CheckHitKey(KEY_INPUT_SPACE)) {
-        if (!prevJumpKey && onGround) { //地上にいてジャンプキーが押された場合
-            velocity = V0;             //初速を設定
+    {
+        Stage* s = FindGameObject<Stage>();
+        if (goaled == false) {
+            if (CheckHitKey(KEY_INPUT_A)) {
+                position.x -= 2;
+                int push = s->IsWallLeft(position + VECTOR2(0, 0));
+                position.x += push;
+                push = s->IsWallLeft(position + VECTOR2(0, 39));
+                position.x += push;
+            }
+            if (CheckHitKey(KEY_INPUT_D)) {
+                position.x += 2;
+                // 右に壁があるか調べる
+                int push = s->IsWallRight(position + VECTOR2(39, 0));
+                position.x -= push;
+                push = s->IsWallRight(position + VECTOR2(39, 39));
+                position.x -= push;
+            }
+            if (CheckHitKey(KEY_INPUT_SPACE)) {
+                if (prevJumpKey == false) {
+                    if (onGround) {
+                        // ジャンプ開始
+                        velocity = V0; // 初速を決める
+                    }
+                }
+                prevJumpKey = true;
+            }
+            else {
+                prevJumpKey = false;
+            }
         }
-    }
+        position.y += velocity; // 座標には速度を足す
+        velocity += Gravity; // 速度には重力を足す
+        onGround = false;
+        if (velocity >= 0) {
+            int push = s->IsWallDown(position + VECTOR2(0, 40));
+            // ジャンプの足元チェックは、１ドット下を見て、
+            // 押し返す量は、-1する
+            if (push > 0) { // 地面に触れたので
+                velocity = 0.0f; // 地面に触ったら速度を0にする
+                position.y -= push - 1; // 地面の上に押し返す
+                onGround = true;
+            }
 
-    // ジャンプ処理(PAD)
-     // Bボタン　PAD_INPUT_2
-
-    if (PadInput & PAD_INPUT_2) {
-        if (!prevJumpKey && onGround) { //地上にいてジャンプキーが押された場合
-            velocity = V0;             //初速を設定
-        }
-    }
-
-    prevJumpKey = CheckHitKey(KEY_INPUT_SPACE); //現在のジャンプキー状態を記録
-
-    // 垂直方向の移動と重力処理
-    position.y += velocity;  //座標に速度を加算
-    velocity += Gravity;     //速度に重力を加算
-    onGround = false;        //地面接触フラグをリセット
-
-    // 地面衝突判定
-
-    if (velocity >= 0) {
-        int push = s->IsWallDown(position + VECTOR2(0, 39 + 1)); //地面判定
-
-        if (push > 0) { // 地面に触れた場合
-            velocity = 0.0f; // 速度を0にする
-            position.y -= push - 1; // 地面に押し戻す
-            onGround = true;        // 地上判定をON
-        }
-
-        else {
-            // 頭の衝突判定
-            push = s->IsWallUP(position + VECTOR2(0, 0));
-
+            push = s->IsWallDown(position + VECTOR2(39, 40));
             if (push > 0) {
-                velocity = 0.0f;  // 頭に衝突した場合、速度を0にする
-                position.y += push; // 頭上に押し戻す
+                velocity = 0.0f;
+                position.y -= push - 1;
+                onGround = true;
+            }
+        }
+        else {
+            int push = s->IsWallUP(position + VECTOR2(0, 0));
+            if (push > 0) {
+                velocity = 0.0f;
+                position.y += push;
             }
             push = s->IsWallUP(position + VECTOR2(39, 0));
-
             if (push > 0) {
                 velocity = 0.0f;
                 position.y += push;
             }
         }
-        // 右足地面判定
+        if (position.x - s->scroll > 400) {
+            s->scroll = position.x - 400;
+        }
+        if (position.x - s->scroll < 0) {
+            s->scroll = position.x;
+        }
 
-        push = s->IsWallDown(position + VECTOR2(39, 39));
-
-        if (push > 0) {
-            velocity = 0.0f;
-            position.y -= push - 1;
-            onGround = true; // 地面に着地したとき、地上判定をONにする
+        if (s->IsGoal(position + VECTOR2(20, 20))) {
+            goaled = true;
+            Instantiate<GoalText>();
         }
     }
-
-
     // 右にBallを投げる(PAD)
-    // Xボタン PAD_INPUT_3
+  // Xボタン PAD_INPUT_3
     if (PadInput & PAD_INPUT_3 || GetMouseInput() & MOUSE_INPUT_RIGHT) {
 
         if (!prevRightMouse) {
@@ -268,6 +236,7 @@ void Player::Update()
     }
 }
 
+
 void Player::Draw()
 
 {
@@ -290,10 +259,10 @@ void Player::Draw()
             // ライフを表示（例えば、画面の上部にライフのアイコンを表示する）
 
             for (int i = 0; i < life; i++) {
-             //   DrawGraph(10 + i * 40, 34, life, TRUE);
+                //   DrawGraph(10 + i * 40, 34, life, TRUE);
 
-                // ここでライフアイコンを描画するコードを追加
-                // 例: DrawGraph(10 + i * 30, 10, lifeIconImage, TRUE);
+                   // ここでライフアイコンを描画するコードを追加
+                   // 例: DrawGraph(10 + i * 30, 10, lifeIconImage, TRUE);
             }
         }
     }
