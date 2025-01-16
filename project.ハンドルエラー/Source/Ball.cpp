@@ -44,10 +44,26 @@ void Ball::Update() {
             DestroyMe();         // 壁と衝突したら消す
         }
 
-        push = s->IsWallRight(position + VECTOR2(0, 22));
+        push = s->IsWallLeft(position + VECTOR2(0, 22));
         if (push != 0) {
             position.x += push;  // 衝突時に位置を修正
             DestroyMe();         // 壁と衝突したら消す
+        }
+
+        //　右の壁との衝突判定
+        {
+            int push = s->IsWallRight(position + VECTOR2(26, 0));
+            if (push != 0) {
+
+                position.x += push;  // 衝突時に位置を修正
+                DestroyMe();         // 壁と衝突したら消す
+            }
+
+            push = s->IsWallRight(position + VECTOR2(22, 22));
+            if (push != 0) {
+                position.x += push;  // 衝突時に位置を修正
+                DestroyMe();
+            }
         }
     }
 
