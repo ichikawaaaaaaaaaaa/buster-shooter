@@ -8,7 +8,7 @@
 GoalText::GoalText()
 {
 	hImage = LoadGraph("data/image/Goal.png");
-	GaneclearText = LoadGraph("data/image/GameClear.png");
+	GameclearText = LoadGraph("data/image/GameClear.png");
 	PushSpaceKey = LoadGraph("data/image/PushSpace.png");
 
 	IsGoal = false;
@@ -23,6 +23,8 @@ GoalText::~GoalText()
 
 void GoalText::Update()
 {
+
+	Stage* s = FindGameObject<Stage>(); // ステージオブジェクト取得
 
 	//当たり判定
 	Player* p = FindGameObject<Player>();//相手のインスタンスを取得
@@ -59,12 +61,13 @@ void GoalText::Update()
 void GoalText::Draw()
 {
 	Stage* s = FindGameObject<Stage>();//絵の表示をする
+
 	DrawGraph(position.x - s->scroll, position.y, hImage, TRUE);
 
 	if(IsGoal)
 	{
 		
-		DrawGraph(200, 200, GaneclearText, TRUE);
+		DrawGraph(200, 200, GameclearText, TRUE);
 		if (timer >= 1.0f) {
 
 

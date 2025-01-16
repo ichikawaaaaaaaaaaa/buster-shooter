@@ -6,6 +6,7 @@
 #include "Enemy.h"
 #include "Vector2.h"
 #include "GameOver.h"
+#include "../Library/ObjectManager.h"
 
 float Gravity = 0.5f;     //重力加速度
 float jumpHeight = 40 * 1.5;  //ジャンプの高さ
@@ -41,12 +42,13 @@ Player::Player()
 void Player::Update()
 
 {
-    GoalText* g = FindGameObject<GoalText>(); // ゴール処理取得
-
-    //ゴールしていたら全ての処理を停止
-    if (g->IsGoal == true)
-    {
-        return;
+    std::list<GoalText*> gls = FindGameObjects<GoalText>(); // ゴール処理取得
+    for (auto g : gls) {
+        //ゴールしていたら全ての処理を停止
+        if (g->IsGoal == true)
+        {
+            return;
+        }
     }
 
     GetJoypadInputState(DX_INPUT_KEY_PAD1);
@@ -79,7 +81,7 @@ void Player::Update()
         isLeftClicked = false;  // 左クリックが離れた時
     }
 
-    Stage* s = FindGameObject<Stage>(); // ステージオブジェクト取得
+   Stage* s = FindGameObject<Stage>(); // ステージオブジェクト取得
     if (goaled) return; // ゴール済みの場合、処理を終了
 
     // プレイヤーと敵の衝突判定

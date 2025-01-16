@@ -12,7 +12,7 @@ public:
 	int hImage;
 
 	int PushSpaceKey;
-	int GaneclearText;
+	int GameclearText;
 
 	bool IsGoal;
 	int scroll;
