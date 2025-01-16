@@ -41,6 +41,14 @@ Player::Player()
 void Player::Update()
 
 {
+    GoalText* g = FindGameObject<GoalText>(); // ƒS[ƒ‹ˆ—Žæ“¾
+
+    //ƒS[ƒ‹‚µ‚Ä‚¢‚½‚ç‘S‚Ä‚Ìˆ—‚ð’âŽ~
+    if (g->IsGoal == true)
+    {
+        return;
+    }
+
     GetJoypadInputState(DX_INPUT_KEY_PAD1);
     int PadInput;
 
