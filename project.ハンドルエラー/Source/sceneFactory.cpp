@@ -9,14 +9,14 @@
 #include "GameClear.h"
 
 
-<<<<<<< HEAD
 //<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
 
 
 
 
->>>>>>> 7b1c12b2e42899502f100adb7dd9f19a32baf73c
+//>>>>>>> 7b1c12b2e42899502f100adb7dd9f19a32baf73c
 //<<<<<<< HEAD
 
                            
@@ -32,13 +32,13 @@
 
 
 //>>>>>>> 14b7e478f85fe04b605a79ca55e94df9108b5eca
-<<<<<<< HEAD
+//<<<<<<< HEAD
 //=======
 //>>>>>>> 49c980feb97e41f305e93e61c798674777291dba
-=======
+//=======
 
 
->>>>>>> 7b1c12b2e42899502f100adb7dd9f19a32baf73c
+//>>>>>>> 7b1c12b2e42899502f100adb7dd9f19a32baf73c
 
 
 SceneBase* SceneFactory::CreateFirst()
