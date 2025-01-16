@@ -5,16 +5,13 @@
 #include "titleScene.h"
 #include "playScene.h"
 #include "GameOver.h"
-<<<<<<< HEAD
+
 #include "GameClear.h"
 
 
-=======
-//<<<<<< < HEAD
+
 #include "GameClear.h"
-	//====== =
-	//>>>>>> > ed758e6451ebfd41b311136bd82e9f5c2f3ba03d
->>>>>>> 5ddccd65dae444268ecf95a9696944cca0780640
+
 
 SceneBase* SceneFactory::CreateFirst()
 {
