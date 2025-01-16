@@ -5,7 +5,6 @@
 #include "titleScene.h"
 #include "playScene.h"
 #include "GameOver.h"
-<<<<<<< HEAD
 #include "GameClear.h"
 
 =======
