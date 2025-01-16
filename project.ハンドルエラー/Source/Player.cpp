@@ -7,8 +7,8 @@
 #include "Vector2.h"
 #include "GameOver.h"
 
-float Gravity = 0.1f;     //重力加速度
-float jumpHeight = 40 * 2;  //ジャンプの高さ
+float Gravity = 0.5f;     //重力加速度
+float jumpHeight = 40 * 1.5;  //ジャンプの高さ
 float V0 = -sqrtf(3.0f * Gravity * jumpHeight);//初速計算
 
 // プレイヤーのライフと敵に触れた回数
@@ -104,7 +104,7 @@ void Player::Update()
     // 左の移動処理
 
     if (CheckHitKey(KEY_INPUT_A)) {
-        position.x -= 2;  //左に〇(数字)ピクセル移動
+        position.x -= 5;  //左に〇(数字)ピクセル移動
 
         //左の壁との衝突判定
 
@@ -130,7 +130,7 @@ void Player::Update()
 
     if (CheckHitKey(KEY_INPUT_D)) {
 
-        position.x += 6;  //右に〇(数字)ピクセル移動
+        position.x += 5;  //右に〇(数字)ピクセル移動
 
         //右の壁との衝突判定
 
