@@ -21,7 +21,7 @@ TitleScene::TitleScene()
 
 	Stageflame = 0;
 
-
+	
 
 	//	[PUSH SPACE KEY]•\¦İ’è‚Ì‰Šú‰»
 	DrawKeyTimer = 0.0f;
@@ -88,17 +88,16 @@ void TitleScene::Update()
 			}
 
 
+			if (XInput > 200) {
+				Stageflame = ((Stageflame + 1) % 5 ) + 1;
 
-			if (XInput > 100) {
-				Stageflame + 1;
-			
 			}
 
-			//¶ˆÚ“®
 			if (XInput < -100) {
-				Stageflame - 1;
+				Stageflame = ((Stageflame - 1) % 5) + 1;
 			}
-			if (CheckHitKey(PAD_INPUT_2))
+			
+			if (PadInput & PAD_INPUT_2)
 			{
 				StageUtility::SetStageNo(Stageflame);
 				SceneManager::ChangeScene("PlayScene");

@@ -53,13 +53,8 @@ void Player::Update()
         }
     }
 
-<<<<<<< HEAD
-//<<<<<<< HEAD
 
-//=======
-//>>>>>>> origin/main
-=======
->>>>>>> bfb472ca19d1c446e95265541c780f047aedcfc4
+
     GetJoypadInputState(DX_INPUT_KEY_PAD1);
     int PadInput;
 
@@ -137,7 +132,7 @@ void Player::Update()
             // 右の移動処理(PAD)
 
             if (XInput > 100) {
-                position.x += 2;
+                position.x += 7;
                 int push = s->IsWallRight(position + VECTOR2(39, 0));
                 position.x -= push;
                 push = s->IsWallRight(position + VECTOR2(39, 39));
@@ -157,7 +152,7 @@ void Player::Update()
             // 左の移動処理(PAD)
 
             if (XInput < -100) {
-                position.x -= 2;
+                position.x -= 7;
                 //キャラクターの左上隅で衝突チェック
 
                 int push = s->IsWallLeft(position + VECTOR2(0, 0));
@@ -170,7 +165,7 @@ void Player::Update()
         }
 
         //ジャンプ
-        if (CheckHitKey(PAD_INPUT_2) || CheckHitKey (KEY_INPUT_SPACE)) {
+        if (PadInput & PAD_INPUT_1 || CheckHitKey (KEY_INPUT_SPACE)) {
             if (prevJumpKey == false) {
                 if (onGround) {
                     // ジャンプ開始
@@ -229,7 +224,7 @@ void Player::Update()
     }
     // 右にBallを投げる(PAD)
   // Xボタン PAD_INPUT_3
-    if (PadInput & PAD_INPUT_3 || GetMouseInput() & MOUSE_INPUT_RIGHT) {
+    if (PadInput & PAD_INPUT_2 || GetMouseInput() & MOUSE_INPUT_RIGHT) {
 
         if (!prevRightMouse) {
             Ball* ba = Instantiate<Ball>();   // ボールを生成
@@ -245,7 +240,7 @@ void Player::Update()
     }
     // 左にBallを投げる(PAD)
       // Aボタン PAD_INPUT_1
-    if (PadInput & PAD_INPUT_1 || GetMouseInput() & MOUSE_INPUT_LEFT) {
+    if (PadInput & PAD_INPUT_3 || GetMouseInput() & MOUSE_INPUT_LEFT) {
 
         if (!prevLeftMouse) {
             Ball* ba = Instantiate<Ball>();  // ボールを生成

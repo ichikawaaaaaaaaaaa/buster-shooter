@@ -59,11 +59,13 @@ void GoalText::Update()
 			}
 
 
-			if (CheckHitKey(KEY_INPUT_B)) {
-				Fader* f = FindGameObject <Fader>();
-				f->FadeOut(GetColor(0, 0, 0), 0.5f);
-				fadeStarted = true;
-				SceneManager::ChangeScene("TitleScene");
+			if (PadInput & PAD_INPUT_1 || CheckHitKey(KEY_INPUT_B)) {
+				{
+					Fader* f = FindGameObject <Fader>();
+					f->FadeOut(GetColor(0, 0, 0), 0.5f);
+					fadeStarted = true;
+					SceneManager::ChangeScene("TitleScene");
+				}
 			}
 		}
 	}
