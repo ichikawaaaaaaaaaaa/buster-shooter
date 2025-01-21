@@ -53,10 +53,13 @@ void Player::Update()
         }
     }
 
+<<<<<<< HEAD
 //<<<<<<< HEAD
 
 //=======
 //>>>>>>> origin/main
+=======
+>>>>>>> bfb472ca19d1c446e95265541c780f047aedcfc4
     GetJoypadInputState(DX_INPUT_KEY_PAD1);
     int PadInput;
 
