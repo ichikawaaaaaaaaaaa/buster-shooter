@@ -36,6 +36,13 @@ TitleScene::~TitleScene()
 
 void TitleScene::Update()
 {
+
+	GetJoypadInputState(DX_INPUT_KEY_PAD1);
+	int PadInput;
+
+	GetJoypadAnalogInput(&XInput, &YInput, DX_INPUT_KEY_PAD1);
+	PadInput = GetJoypadInputState(DX_INPUT_KEY_PAD1);
+
 //	if (CheckHitKey(KEY_INPUT_1)) {
 //		StageUtility::SetStageNo(1);
 //		SceneManager::ChangeScene("PlayScene");
@@ -79,6 +86,25 @@ void TitleScene::Update()
 				StageUtility::SetStageNo(Stageflame);
 				SceneManager::ChangeScene("PlayScene");
 			}
+
+
+
+			if (XInput > 100) {
+				Stageflame + 1;
+			
+			}
+
+			//左移動
+			if (XInput < -100) {
+				Stageflame - 1;
+			}
+			if (CheckHitKey(PAD_INPUT_2))
+			{
+				StageUtility::SetStageNo(Stageflame);
+				SceneManager::ChangeScene("PlayScene");
+			}
+
+
 
 	//	前フレームからの経過時間を取得
 	DrawKeyTimer += Time::DeltaTime();

@@ -49,12 +49,12 @@ Stage::Stage()
 				e->position.x = i * 40;
 				e->position.y = j * 40;
 			}*/
-			if (map[j][i] == 4) {
+			if (map[j][i] == 5) {
 				GoalText* g = Instantiate<GoalText>();
 				g->position.x = i * 40;
 				g->position.y = j * 40;
 			}
-			if (map[j][i] == 5) {
+			if (map[j][i] == 4) {
 				Jet* jet = Instantiate<Jet>();
 				jet->position.x = i * 40;
 				jet->position.y = j * 40;
