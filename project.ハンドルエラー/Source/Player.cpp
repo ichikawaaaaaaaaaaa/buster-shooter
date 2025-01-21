@@ -10,7 +10,7 @@
 
 
 float Gravity = 2.0f;     //重力加速度
-float jumpHeight = 40 * 1.5;  //ジャンプの高さ
+float jumpHeight = 40 * 2.0;  //ジャンプの高さ
 float V0 = -sqrtf(3.0f * Gravity * jumpHeight);//初速計算
 
 // プレイヤーのライフと敵に触れた回数
@@ -159,19 +159,7 @@ void Player::Update()
                 position.x += push;
             }
 
-            //ジャンプ
-            if (CheckHitKey(KEY_INPUT_SPACE)) {
-                if (prevJumpKey == false) {
-                    if (onGround) {
-                        // ジャンプ開始
-                        velocity = V0; // 初速を決める
-                    }
-                }
-                prevJumpKey = true;
-            }
-            else {
-                prevJumpKey = false;
-            }
+            
         }
 
         //ジャンプ
@@ -240,7 +228,7 @@ void Player::Update()
             Ball* ba = Instantiate<Ball>();   // ボールを生成
             ba->position = position;          // プレイヤーの位置に生成
             ba->position.y += 2;              // 少し下にずらす
-            ba->velocity = VECTOR2(10.0f, -2.0f); // 右方向の速度
+            ba->velocity = VECTOR2(10.0f, 0.0f); // 右方向の速度
         }
         prevRightMouse = true;
     }
