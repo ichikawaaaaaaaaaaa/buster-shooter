@@ -9,7 +9,7 @@
 
 
 
-float Gravity = 0.5f;     //重力加速度
+float Gravity = 2.0f;     //重力加速度
 float jumpHeight = 40 * 1.5;  //ジャンプの高さ
 float V0 = -sqrtf(3.0f * Gravity * jumpHeight);//初速計算
 
@@ -53,7 +53,10 @@ void Player::Update()
         }
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
     GetJoypadInputState(DX_INPUT_KEY_PAD1);
     int PadInput;
 
@@ -63,7 +66,7 @@ void Player::Update()
     // 右クリックが押されているかを検出
     if (GetMouseInput() & MOUSE_INPUT_RIGHT) {
         if (!prevRightClick) {  // クリックが新たに始まった時
-            isRightClicked = true;
+          //isRightClicked = true;
         }
         prevRightClick = true;
     }
@@ -75,7 +78,7 @@ void Player::Update()
     // 左クリックが押されているかを検出
     if (GetMouseInput() & MOUSE_INPUT_LEFT) {
         if (!prevLeftClick) {  // クリックが新たに始まった時
-            isLeftClicked = true;
+            //isLeftClicked = true;
         }
         prevLeftClick = true;
     }
@@ -121,7 +124,7 @@ void Player::Update()
 
             //右移動
             if (CheckHitKey(KEY_INPUT_A)) {
-                position.x -= 6;
+                position.x -= 7;
                 int push = s->IsWallLeft(position + VECTOR2(0, 0));
                 position.x += push;
                 push = s->IsWallLeft(position + VECTOR2(0, 29));
@@ -140,7 +143,7 @@ void Player::Update()
 
             //左移動
             if (CheckHitKey(KEY_INPUT_D)) {
-                position.x += 6;
+                position.x += 7;
                 // 右に壁があるか調べる
                 int push = s->IsWallRight(position + VECTOR2(39, 0));
                 position.x -= push;
@@ -240,8 +243,8 @@ void Player::Update()
         if (!prevRightMouse) {
             Ball* ba = Instantiate<Ball>();   // ボールを生成
             ba->position = position;          // プレイヤーの位置に生成
-            ba->position.y += 5;              // 少し下にずらす
-            ba->velocity = VECTOR2(5.0f, 0.0f); // 右方向の速度
+            ba->position.y += 2;              // 少し下にずらす
+            ba->velocity = VECTOR2(10.0f, -2.0f); // 右方向の速度
         }
         prevRightMouse = true;
     }
@@ -256,8 +259,8 @@ void Player::Update()
         if (!prevLeftMouse) {
             Ball* ba = Instantiate<Ball>();  // ボールを生成
             ba->position = position;
-            ba->position.y += 5;
-            ba->velocity = VECTOR2(-5.0f, 0.0f); // 左方向の速度
+            ba->position.y += 2;
+            ba->velocity = VECTOR2(-10.0f, 0.0f); // 左方向の速度
 
         }
         prevLeftMouse = true;
