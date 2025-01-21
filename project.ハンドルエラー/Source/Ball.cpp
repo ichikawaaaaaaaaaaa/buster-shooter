@@ -39,7 +39,7 @@ void Ball::Update() {
     
     {
         timer += Time::DeltaTime();
-        if (timer >= 2.5f)
+        if (timer >= 1.0f)
         {
             DestroyMe();
         }
