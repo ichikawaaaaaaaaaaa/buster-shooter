@@ -82,7 +82,8 @@ Stage::~Stage()
 
 void Stage::Draw()//ècâ°Ç≈âÒÇ∑
 {
-	
+	DrawGraph(0, 0, StageBackScreen, TRUE);
+
 	//scroll += 1;
 	for (int j = 0; j < HEIGHT; j++)
 	{
