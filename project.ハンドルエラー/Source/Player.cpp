@@ -53,10 +53,10 @@ void Player::Update()
         }
     }
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 
-=======
->>>>>>> origin/main
+//=======
+//>>>>>>> origin/main
     GetJoypadInputState(DX_INPUT_KEY_PAD1);
     int PadInput;
 
@@ -167,7 +167,7 @@ void Player::Update()
         }
 
         //ジャンプ
-        if (CheckHitKey(PAD_INPUT_2)) {
+        if (CheckHitKey(PAD_INPUT_2) || CheckHitKey (KEY_INPUT_SPACE)) {
             if (prevJumpKey == false) {
                 if (onGround) {
                     // ジャンプ開始
