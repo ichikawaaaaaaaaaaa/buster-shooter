@@ -41,6 +41,8 @@ private:
 	int XInput;             // ジョイパッドX軸入力
 	int YInput;             // ジョイパッドY軸入力
 
-	int StageCount;
+	bool prevInputPad;
+	float timer;
+
 	VECTOR2 position;       // プレイヤーの座標（Vector2）
 };

@@ -20,7 +20,7 @@ TitleScene::TitleScene()
 	StageFlame = LoadGraph("data/image/StageFlame.png");
 
 	Stageflame = 0;
-
+	prevInputPad = false;   
 	
 
 	//	[PUSH SPACE KEY]•\Ž¦Ý’è‚Ì‰Šú‰»
@@ -88,14 +88,32 @@ void TitleScene::Update()
 			}
 
 
-			if (XInput > 200) {
-				Stageflame = ((Stageflame + 1) % 5 ) + 1;
-
+			timer += 0.1f;
+			if (timer >= 5.0f) {
+				prevInputPad = false;
 			}
 
-			if (XInput < -100) {
-				Stageflame = ((Stageflame - 1) % 5) + 1;
-			}
+				if (prevInputPad == false) {
+					if (XInput > 100) {
+					//if (CheckHitKey(KEY_INPUT_RIGHT)) {
+						Stageflame = ((Stageflame + 1) % 5) + 1;
+					}
+				if (XInput < -100) {
+				//if (CheckHitKey(KEY_INPUT_LEFT)) {
+						Stageflame -= 1;
+						if (Stageflame == 0)
+						{
+							Stageflame = 5;
+						}
+					}
+
+				prevInputPad = true;
+				timer = 0.0f;
+
+				}
+				
+					
+			
 			
 			if (PadInput & PAD_INPUT_2)
 			{
