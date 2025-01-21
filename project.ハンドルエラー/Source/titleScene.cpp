@@ -3,6 +3,7 @@
 #include "DebugScreen.h"
 
 #include "../StageUtility.h"
+#include "../Library/time.h"
 
 
 TitleScene::TitleScene()
@@ -22,6 +23,9 @@ TitleScene::TitleScene()
 	Stageflame = 0;
 	prevInputPad = false;   
 	
+
+	int PlaySoundFile(char* FileName, int PlayType);
+
 
 	//	[PUSH SPACE KEY]•\Ž¦Ý’è‚Ì‰Šú‰»
 	DrawKeyTimer = 0.0f;
@@ -89,14 +93,19 @@ void TitleScene::Update()
 
 
 			timer += 0.1f;
-			if (timer >= 5.0f) {
+			if (timer >= 1.0f) {
 				prevInputPad = false;
 			}
 
 				if (prevInputPad == false) {
 					if (XInput > 100) {
+						PlaySoundFile("StageSelect.mp3", DX_PLAYTYPE_NORMAL);
 					//if (CheckHitKey(KEY_INPUT_RIGHT)) {
-						Stageflame = ((Stageflame + 1) % 5) + 1;
+						Stageflame = ((Stageflame + 1) % 5) ;
+					}
+					if (Stageflame == 0)
+					{
+						Stageflame = 5;
 					}
 				if (XInput < -100) {
 				//if (CheckHitKey(KEY_INPUT_LEFT)) {
@@ -105,6 +114,7 @@ void TitleScene::Update()
 						{
 							Stageflame = 5;
 						}
+					
 					}
 
 				prevInputPad = true;
@@ -112,14 +122,14 @@ void TitleScene::Update()
 
 				}
 				
-					
+				if (PadInput & (PAD_INPUT_1))
+				{
+					StageUtility::SetStageNo(Stageflame);
+					SceneManager::ChangeScene("PlayScene");
+				}
 			
 			
-			if (PadInput & PAD_INPUT_2)
-			{
-				StageUtility::SetStageNo(Stageflame);
-				SceneManager::ChangeScene("PlayScene");
-			}
+		
 
 
 
@@ -146,44 +156,44 @@ void TitleScene::Draw()
 
 	//	[PUSH SPACE KEY]
 	if (isDrawKey)
-	{
+	//{
 		DrawGraph(300, 2000, hKeyImage, TRUE);
-	}
+	//}
 
 	if (Stageflame ==1) {
-		if (isDrawKey)
-		{
+		//if (isDrawKey)
+		//{
 		DrawGraph(100, 500, StageFlame, TRUE);
-		}
+	//	}
 	}
 
 	if (Stageflame == 2) {
-		if (isDrawKey)
-		{
+		//if (isDrawKey)
+		//{
 			DrawGraph(300, 500, StageFlame, TRUE);
-		}				   
+		//}				   
 	}					   
 						  
 						   
 	if (Stageflame == 3) { 
-		if (isDrawKey)	   
-		{				   
+		//if (isDrawKey)	   
+	//	{				   
 			DrawGraph(500, 500, StageFlame, TRUE);
-		}				   
+	//	}				   
 	}					   
 						   
 	if (Stageflame == 4) { 
-		if (isDrawKey)	   
-		{				   
+		//if (isDrawKey)	   
+		//{				   
 			DrawGraph(700, 500, StageFlame, TRUE);
-		}				   
+	//	}				   
 	}					   
 						   
 	if (Stageflame == 5) { 
-		if (isDrawKey)	   
-		{				   
+		//if (isDrawKey)	   
+		//{				   
 			DrawGraph(900, 500, StageFlame, TRUE);
-		}
+		//}
 	}
 
 

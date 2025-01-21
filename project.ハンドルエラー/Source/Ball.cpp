@@ -4,6 +4,7 @@
 #include "Stage.h"  // 壁判定用
 #include "Vector2.h"
 #include "Enemy.h"
+#include "../Library/time.h"
 
 
 // コンストラクタで初期化

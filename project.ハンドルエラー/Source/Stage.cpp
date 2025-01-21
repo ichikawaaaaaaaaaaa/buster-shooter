@@ -10,6 +10,7 @@ const int CHIP_SIZE = 40;
 #include "CsvReader.h"
 #include "../StageUtility.h"
 
+
 using namespace std;
 //#include "stage1.h"
 Stage::Stage()
@@ -82,7 +83,8 @@ Stage::~Stage()
 
 void Stage::Draw()//ècâ°Ç≈âÒÇ∑
 {
-	DrawGraph(0, 0, StageBackScreen, TRUE);
+	//DrawGraph(x - scroll, y, StageBackScreen, TRUE);
+	
 
 	//scroll += 1;
 	for (int j = 0; j < HEIGHT; j++)
