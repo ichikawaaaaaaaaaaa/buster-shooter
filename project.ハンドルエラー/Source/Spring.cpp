@@ -7,7 +7,6 @@
 // コンストラクタ
 Spring::Spring()
 {
-    a
     hImage = LoadGraph("data/image/Spring.png");
     // スプライトシートの幅と高さを取得
     GetGraphSize(hImage, &imageWidth, &imageHeight);
