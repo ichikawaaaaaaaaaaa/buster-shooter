@@ -15,6 +15,8 @@ using namespace std;
 Stage::Stage()
 
 {
+	StageBackScreen = LoadGraph("data/image/BackScreen.png");
+
 	map.clear();
 	std::string filename = "data/stage.";
 	filename += std::to_string(StageUtility::GetStageNo());
@@ -80,6 +82,7 @@ Stage::~Stage()
 
 void Stage::Draw()//ècâ°Ç≈âÒÇ∑
 {
+	
 	//scroll += 1;
 	for (int j = 0; j < HEIGHT; j++)
 	{
