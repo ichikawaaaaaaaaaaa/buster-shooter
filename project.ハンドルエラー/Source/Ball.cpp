@@ -14,7 +14,7 @@ Ball::Ball() {
     hImageCollide = LoadGraph("data/image/Ball_Collide.png"); // 衝突後のボール画像
     position.x = 10;   // 初期X座標
     position.y = 100;  // 初期Y座標
-    velocity.x = 10;    // ボールのX方向の速度
+    velocity.x = 5;    // ボールのX方向の速度
     velocity.y = 0;    // ボールのY方向の速度
     currentImage = hImage;  // 初期状態では通常のボール画像
 

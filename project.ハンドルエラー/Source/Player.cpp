@@ -240,7 +240,7 @@ void Player::Update()
             Ball* ba = Instantiate<Ball>();   // ボールを生成
             ba->position = position;          // プレイヤーの位置に生成
             ba->position.y += 2;              // 少し下にずらす
-            ba->velocity = VECTOR2(5.0f, 0.0f); // 右方向の速度
+            ba->velocity = VECTOR2(10.0f, 0.0f); // 右方向の速度
         }
         prevRightMouse = true;
     }
@@ -256,7 +256,7 @@ void Player::Update()
             Ball* ba = Instantiate<Ball>();  // ボールを生成
             ba->position = position;
             ba->position.y += 2;
-            ba->velocity = VECTOR2(-5.0f, 0.0f); // 左方向の速度
+            ba->velocity = VECTOR2(-10.0f, 0.0f); // 左方向の速度
 
         }
         prevLeftMouse = true;
