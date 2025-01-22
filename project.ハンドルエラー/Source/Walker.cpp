@@ -28,6 +28,8 @@ Walker::Walker()
     attacking = false;
     dead = false;
     deadCounter = 0;
+
+	Walkerlife = 4; //“Gƒ‰ƒCƒt
 }
 Walker::~Walker()
 {
@@ -51,6 +53,7 @@ void Walker::Update()
         frameTimer = 0;
         currentFrame = (currentFrame + 1) % maxFrames; // ƒtƒŒ[ƒ€‚ğƒ‹[ƒv
     }
+
     if (attacking) // UŒ‚ƒ‚[ƒh‚Ìê‡
     {
         Player* player = FindGameObject<Player>();
@@ -84,11 +87,18 @@ void Walker::Update()
         VECTOR2 bCenter = { position.x + frameWidth / 2, position.y + frameHeight / 2 }; // “G‚Ì’†SÀ•W
         if (CircleHit(sCenter, bCenter, 20 + 8)) // Õ“Ë”¼Œa: ’e(8) + “G(20)
         {
-            dead = true; // “G‚ğ€–Só‘Ô‚É‚·‚é
-            deadCounter = 0;
-            currentFrame = maxFrames - 1; // ÅŒã‚ÌƒtƒŒ[ƒ€‚ğ€–Só‘Ô‚Éİ’è
-            Ba->DestroyMe(); // ’e‚ğíœ
+            Walkerlife--;
+            Ba->DestroyMe();
+            if (Walkerlife <= 0)
+            {
+                dead = true; // “G‚ğ€–Só‘Ô‚É‚·‚é
+                deadCounter = 0;
+                currentFrame = maxFrames - 1; // ÅŒã‚ÌƒtƒŒ[ƒ€‚ğ€–Só‘Ô‚Éİ’è
+                DestroyMe(); // ’e‚ğíœ
+                return;
+            }
         }
+        
     }
     Stage* s = FindGameObject<Stage>();
     {

@@ -5,6 +5,8 @@
 #include "Stage.h"
 #include "config.h"
 #include "GoalText.h"
+
+
 // ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 Jet::Jet()
 {
@@ -29,6 +31,8 @@ Jet::Jet()
     attacking = false;
     dead = false;
     deadCounter = 0;
+
+    Jetlife = 4; //“Gƒ‰ƒCƒt
 }
 Jet::~Jet()
 {
@@ -44,6 +48,7 @@ void Jet::Update()
             return;
         }
     }
+
 
     if (dead) // “G‚ªŽ€–S‚µ‚Ä‚¢‚éê‡‚Ìˆ—
     {
@@ -94,10 +99,15 @@ void Jet::Update()
         VECTOR2 bCenter = { position.x + frameWidth / 2, position.y + frameHeight / 2 }; // “G‚Ì’†SÀ•W
         if (CircleHit(sCenter, bCenter, 20 + 8)) // Õ“Ë”¼Œa: ’e(8) + “G(20)
         {
-            dead = true; // “G‚ðŽ€–Só‘Ô‚É‚·‚é
-            deadCounter = 0;
-            currentFrame = maxFrames - 1; // ÅŒã‚ÌƒtƒŒ[ƒ€‚ðŽ€–Só‘Ô‚ÉÝ’è
-            Ba->DestroyMe(); // ’e‚ðíœ
+            Jetlife--;
+            Ba->DestroyMe();
+            if (Jetlife <= 0)
+            {
+                dead = true; // “G‚ðŽ€–Só‘Ô‚É‚·‚é
+                deadCounter = 0;
+                currentFrame = maxFrames - 1; // ÅŒã‚ÌƒtƒŒ[ƒ€‚ðŽ€–Só‘Ô‚ÉÝ’è
+                return; //ˆ—I—¹
+            }
         }
     }
     Stage* s = FindGameObject<Stage>();
