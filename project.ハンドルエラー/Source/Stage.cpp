@@ -11,6 +11,7 @@ const int CHIP_SIZE = 40;
 #include "../StageUtility.h"
 
 
+
 using namespace std;
 //#include "stage1.h"
 Stage::Stage()
@@ -34,7 +35,7 @@ Stage::Stage()
 	WIDTH = csv->GetColumns(0);
 	delete csv;
 
-	hImage = LoadGraph("data/image/parts.png");
+	hImage = LoadGraph("data/image/maptile_renga.png");
 	for (int j = 0; j < HEIGHT; j++) {
 		for (int i = 0; i < WIDTH; i++) {
 			if (map[j][i] == 9) {
@@ -83,7 +84,7 @@ Stage::~Stage()
 
 void Stage::Draw()//c‰¡‚Å‰ñ‚·
 {
-	//DrawGraph(x - scroll, y, StageBackScreen, TRUE);
+	//DrawRectGraph(x - scroll, y, 0, 0, 1280, 720, StageBackScreen, TRUE);
 	
 
 	//scroll += 1;
@@ -96,7 +97,7 @@ void Stage::Draw()//c‰¡‚Å‰ñ‚·
 			if (map[j][i] == 1)
 			{
 				
-				DrawRectGraph(x - scroll, y, 0, 40, 40, 40, hImage, TRUE);
+				DrawRectGraph(x - scroll, y, 0, 0, 40, 40, hImage, TRUE);
 			}
 
 		}
