@@ -18,7 +18,7 @@ public:
     float velocity;         // 垂直方向の速度
     bool prevJumpKey;       // 前フレームのジャンプキーの状態
     bool onGround;          // プレイヤーが地面に接しているか
-    int IsGoal;             // ゴールフラグ
+    int IsGdoal;             // ゴールフラグ
     int goaled;             // ゴール達成フラグ
     int scroll;             // スクロール位置（仮想）
     int patternX;           // アニメーション用Xパターン

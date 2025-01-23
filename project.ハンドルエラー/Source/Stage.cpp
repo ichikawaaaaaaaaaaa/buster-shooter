@@ -40,8 +40,8 @@ Stage::Stage()
 		for (int i = 0; i < WIDTH; i++) {
 			if (map[j][i] == 9) {
 				Player* p = Instantiate<Player>();
-				p->position.x = i ;
-				p->position.y = j ;
+				p->position.x = i * 40;
+				p->position.y = j * 40;
 			}
 			//if (map[j][i] == 2) {
 			//	Coin* c = Instantiate<Coin>();
@@ -63,12 +63,12 @@ Stage::Stage()
 				jet->position.x = i * 40;
 				jet->position.y = j * 40;
 			}
-			if (map[j][i] == 6) {
+			if (map[j][i] == 3) {
 				Spring* sp = Instantiate<Spring>();
 				sp->position.x = i * 40;
 				sp->position.y = j * 40;
 			}
-			if (map[j][i] == 7) {
+			if (map[j][i] == 2) {
 				Walker* w = Instantiate<Walker>();
 				w->position.x = i * 40;
 				w->position.y = j * 40;
