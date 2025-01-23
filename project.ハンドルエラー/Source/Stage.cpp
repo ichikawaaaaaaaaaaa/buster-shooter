@@ -63,12 +63,12 @@ Stage::Stage()
 				jet->position.x = i * 40;
 				jet->position.y = j * 40;
 			}
-			if (map[j][i] == 6) {
+			if (map[j][i] == 3) {
 				Spring* sp = Instantiate<Spring>();
 				sp->position.x = i * 40;
 				sp->position.y = j * 40;
 			}
-			if (map[j][i] == 7) {
+			if (map[j][i] == 2) {
 				Walker* w = Instantiate<Walker>();
 				w->position.x = i * 40;
 				w->position.y = j * 40;

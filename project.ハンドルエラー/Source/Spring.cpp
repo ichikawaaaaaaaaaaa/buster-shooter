@@ -55,31 +55,31 @@ void Spring::Update()
         frameTimer = 0;
         currentFrame = (currentFrame + 1) % maxFrames; // フレームをループ
     }
-    if (attacking) // 攻撃モードの場合
-    {
-        Player* player = FindGameObject<Player>();
-        if (player)
-        {
-            VECTOR2 to = VSub(player->position, position); // プレイヤーへのベクトル
-            to = VNorm(to); // 正規化
-            position = VAdd(position, VScale(to, 2.0f)); // 移動処理
-        }
-    }
-    else // 通常モードの場合
-    {
-        timer -= 1;
-        if (timer == 0)
-        {
-            attacking = true; // 攻撃モード開始
-            timer = rand() % (5 * 60) + 60; // 次の攻撃開始タイマーをリセット
-        }
-        position.x -= 2.0f; // 左方向に移動
-        if (position.x < -64) // 画面外に出た場合
-        {
-            position.x = SCREEN_WIDTH;
-            position.y = rand() % 700;
-        }
-    }
+   // if (attacking) // 攻撃モードの場合
+   // {
+   //     Player* player = FindGameObject<Player>();
+   //     if (player)
+   //     {
+   //         VECTOR2 to = VSub(player->position, position); // プレイヤーへのベクトル
+   //         to = VNorm(to); // 正規化
+   //         position = VAdd(position, VScale(to, 2.0f)); // 移動処理
+   //     }
+   // }
+   // else // 通常モードの場合
+   // {
+   //     timer -= 1;
+   //     if (timer == 0)
+   //     {
+   //         attacking = true; // 攻撃モード開始
+   //         timer = rand() % (5 * 60) + 60; // 次の攻撃開始タイマーをリセット
+   //     }
+   //     position.x -= 2.0f; // 左方向に移動
+   //     if (position.x < -64) // 画面外に出た場合
+   //     {
+   //         position.x = SCREEN_WIDTH;
+   //         position.y = rand() % 700;
+   //     }
+   // }
     // 弾との衝突判定
     std::list<Ball*> balls = FindGameObjects<Ball>();
     for (Ball* Ba : balls)

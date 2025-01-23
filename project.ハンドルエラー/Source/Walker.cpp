@@ -146,6 +146,7 @@ void Walker::Update()
 void Walker::Draw()
 {
     Stage* s = FindGameObject<Stage>();
+   
     if (s)
     {
         // 現在のフレーム位置を計算
@@ -153,15 +154,7 @@ void Walker::Draw()
         int frameY = 0;   // 横方向のフレーム位置
         // スプライトシートの指定した部分を描画
         DrawRectGraph(
-            position.x - s->scroll,
-            position.y,
-            frameX,
-            frameY,
-            frameWidth,
-            frameHeight,
-            currentImage,
-            TRUE
-        );
+            position.x - s->scroll,position.y,frameX,frameY, frameWidth,frameHeight,currentImage,TRUE);
     }
 }
 VECTOR2 Walker::GetPosition() const
