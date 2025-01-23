@@ -42,8 +42,9 @@ Player::Player()
     scroll = 0;  //スクロール位置初期化
 
     //プレイヤーのライフ
-    life = LoadGraph("data/image/heart.png");
+    hImagelife = LoadGraph("data/image/heart.png");
     blinkCounter = 0;
+    life = 3;
 }
 
 // 更新処理
@@ -366,6 +367,11 @@ void Player::Update()
 void Player::Draw()
 
 {
+    for (int i = 0; i < life; i++) {
+        DrawGraph(i * 40, 34, hImagelife, TRUE);
+        // ここでライフアイコンを描画するコードを追加
+        // 例: DrawGraph(10 + i * 30, 10, lifeIconImage, TRUE);
+    }
     if (blinkCounter > 0) {
         blinkCounter--;
     }
@@ -392,13 +398,9 @@ void Player::Draw()
             // 通常時の画像を描画
             DrawRectGraph(position.x - s->scroll, position.y, 0, 0, 32, 40, hImage, TRUE);
             // ライフを表示（例えば、画面の上部にライフのアイコンを表示する）
-
-            for (int i = 0; i < life; i++) {
-                //   DrawGraph(10 + i * 40, 34, life, TRUE);
-
-                   // ここでライフアイコンを描画するコードを追加
-                   // 例: DrawGraph(10 + i * 30, 10, lifeIconImage, TRUE);
+            
             }
+           
         }
 
     }
@@ -416,4 +418,4 @@ void Player::Draw()
     //}
 
 
-}
+

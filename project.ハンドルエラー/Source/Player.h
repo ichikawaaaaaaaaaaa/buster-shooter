@@ -14,6 +14,7 @@ public:
     int hImage;             // プレイヤーの画像ハンドル
     int hImageRightClick;
     int hImageLeftClick;
+    int hImagelife;
     VECTOR2 position;       // プレイヤーの座標（Vector2）
     float velocity;         // 垂直方向の速度
     bool prevJumpKey;       // 前フレームのジャンプキーの状態
