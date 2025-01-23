@@ -44,4 +44,7 @@ public:
     // 左クリックを検出して画像を変更する処理
     bool prevLeftClick = false;  // 右クリックの前回状態
     bool isLeftClicked = false;  // 現在右クリックされているかの状態
+
+    bool Changeflame;
+    float timer;
 };

@@ -7,6 +7,8 @@
 // コンストラクタ
 Walker::Walker()
 {
+
+    float Gravity = 2.0f;     //重力加速度
     hImage = LoadGraph("data/image/Walker.png");
     // スプライトシートの幅と高さを取得
     GetGraphSize(hImage, &imageWidth, &imageHeight);
@@ -37,7 +39,8 @@ Walker::~Walker()
 }
 void Walker::Update()
 {
-    position.x += 4;
+    position.y += velocity; // 座標には速度を足す
+    velocity += Gravity; // 速度には重力を足す
 
 
     if (dead) // 敵が死亡している場合の処理
@@ -105,16 +108,30 @@ void Walker::Update()
     }
     Stage* s = FindGameObject<Stage>();
     {
-        int push = s->IsWallLeft(position + VECTOR2(0, 0));
-        position.x += push;
+        //モーション
+        //position.x += 4;
+        int push = s->IsWallRight(position + VECTOR2(0, 0));
+        if (push > 0) {
+            position.x -= push;
+            position.x -= 4;
+        }
         push = s->IsWallLeft(position + VECTOR2(0, 49));
-        position.x += push;
+        if (push > 0) {
+            position.x -= push;
+            position.x -= 4;
+        }
     }
     {
-        int push = s->IsWallRight(position + VECTOR2(49, 0));
-        position.x -= push;
+        int push = s->IsWallLeft(position + VECTOR2(49, 0));
+        if (push < 0) {
+            position.x += push;
+            position.x += 4;
+        }
         push = s->IsWallRight(position + VECTOR2(49, 49));
-        position.x -= push;
+        if (push < 0) {
+            position.x += push;
+            position.x += 4;
+        }
     }
     if (velocity >= 0) {
         // キャラクターの位置に応じた地面衝突判定
@@ -144,6 +161,38 @@ void Walker::Update()
             position.y -= push - 1;
             onGround = true; // 地面に着地したとき、地上判定をONにする
         }
+        if (velocity >= 0) {
+            int push = s->IsWallDown(position + VECTOR2(1, 38));
+            // ジャンプの足元チェックは、１ドット下を見て、
+            // 押し返す量は、-1する
+            if (push > 0) { // 地面に触れたので
+                velocity = 0.0f; // 地面に触ったら速度を0にする
+                position.y -= push - 1; // 地面の上に押し返す
+                onGround = true;
+            }
+
+            push = s->IsWallDown(position + VECTOR2(39, 40));
+            if (push > 0) {
+                velocity = 0.0f;
+                position.y -= push - 1;
+                onGround = true;
+            }
+        }
+        else {
+            int push = s->IsWallUP(position + VECTOR2(0, 0));
+            if (push > 0) {
+                velocity = 0.0f;
+                position.y += push;
+            }
+            push = s->IsWallUP(position + VECTOR2(39, 0));
+            if (push > 0) {
+                velocity = 0.0f;
+                position.y += push;
+            }
+        }
+
+
+      
     }
 }
 void Walker::Draw()
