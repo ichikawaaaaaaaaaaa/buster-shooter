@@ -47,5 +47,6 @@ public:
 
     bool Changeflame;
     float timer;
+    int blinkCounter;
 
 };

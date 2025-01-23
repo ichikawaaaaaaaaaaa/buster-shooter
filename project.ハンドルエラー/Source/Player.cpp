@@ -3,17 +3,28 @@
 #include "Stage.h"
 #include "Ball.h"
 #include "config.h"
+#include "Enemy.h"
+#include "Vector2.h"
+#include "GameOver.h"
 #include "Jet.h"
 #include "Spring.h"
 #include "Walker.h"
-#include "Vector2.h"
-#include "GameOver.h"
+#include "../Library/time.h"
+#include <iostream>
+
+
 
 
 
 float Gravity = 2.0f;     //重力加速度
 float jumpHeight = 40 * 2.0;  //ジャンプの高さ
 float V0 = -sqrtf(3.0f * Gravity * jumpHeight);//初速計算
+
+// プレイヤーのライフと敵に触れた回数
+int life = 2;  // 初期ライフは3
+int enemyCollisionCount = 1; // 敵に触れた回数
+
+// コンストラクタ
 
 Player::Player()
 
@@ -26,15 +37,13 @@ Player::Player()
     velocity = 0; //初期速度
     prevJumpKey = false;   //初期ジャンプキー状態
     onGround = false;  //地上判定初期化
-    
+   // IsGoal = 0; //ゴールフラグ初期化
     goaled = 0;  //ゴール達成フラグ初期化
     scroll = 0;  //スクロール位置初期化
 
     //プレイヤーのライフ
     life = LoadGraph("data/image/heart.png");
-    timer = 0.0f;
-
-    life = 3;
+    blinkCounter = 0;
 }
 
 // 更新処理
@@ -46,7 +55,7 @@ void Player::Update()
 
 
 
-//<<<<<<< HEAD
+    //<<<<<<< HEAD
 
 
     std::list<GoalText*> gls = FindGameObjects<GoalText>(); // ゴール処理取得
@@ -63,8 +72,8 @@ void Player::Update()
 
 
 
-//=======
-//>>>>>> 22785fc63763e0367779acd117806a6a2e23f18e
+    //=======
+    //>>>>>> 22785fc63763e0367779acd117806a6a2e23f18e
 
 
 
@@ -77,7 +86,7 @@ void Player::Update()
     // 右クリックが押されているかを検出
     if (GetMouseInput() & MOUSE_INPUT_RIGHT) {
         if (!prevRightClick) {  // クリックが新たに始まった時
-          //isRightClicked = true;
+            //isRightClicked = true;
         }
         prevRightClick = true;
     }
@@ -98,26 +107,113 @@ void Player::Update()
         isLeftClicked = false;  // 左クリックが離れた時
     }
 
-   Stage* s = FindGameObject<Stage>(); // ステージオブジェクト取得
+    Stage* s = FindGameObject<Stage>(); // ステージオブジェクト取得
     if (goaled) return; // ゴール済みの場合、処理を終了
 
     // プレイヤーと敵の衝突判定
 
- 
+    //std::list<Enemy*> enemys = FindGameObjects<Enemy>();
+    if (blinkCounter == 0) {
+        std::list<Jet*> Jets = FindGameObjects<Jet>();
+        for (Jet* j : Jets) {
+            if (CircleHit(position, j->position, 56)) {
 
-    // 画面外に出たらゲームオーバー
-    int x = position.x;
-    int y = position.y;
-    if (y < 0 || y >= SCREEN_HEIGHT) {
-        SceneManager::ChangeScene("GameOver");
-        return; // ゲームオーバー後の処理を終了
+                //	アルファ値の計算
+                blinkCounter = 30;
+                // 衝突回数が2回になったらライフを減らす
+                if (enemyCollisionCount >= 2) {
+
+                    life--; // ライフを1減らす
+
+                    enemyCollisionCount = 0; // 衝突回数リセット
+
+                    // ライフが0になったらゲームオーバー
+                    if (life <= 0) {
+                        // ゲームオーバー処理（ここで実際にゲームオーバー処理を書く）
+                        // 例えば、ゲームオーバー画面を表示したり、ゲームを終了したりする
+                        // GameOver(); // ゲームオーバー処理を呼び出す
+                        SceneManager::ChangeScene("GameOver");
+                        return; // ゲームオーバー後の処理を終了
+                    }
+                    std::list<GoalText*> gls = FindGameObjects<GoalText>(); // ゴール処理取得
+                    for (auto g : gls) {
+                        //ゴールしていたら全ての処理を停止
+                        if (g->IsGoal == true)
+                        {
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        std::list<Spring*> Springs = FindGameObjects<Spring>();
+        for (Spring* s : Springs) {
+            if (CircleHit(position, s->position, 56)) {
+
+                //	アルファ値の計算
+                blinkCounter = 30;
+                // 衝突回数が2回になったらライフを減らす
+                if (enemyCollisionCount >= 2) {
+
+                    life--; // ライフを1減らす
+
+                    enemyCollisionCount = 0; // 衝突回数リセット
+
+                    // ライフが0になったらゲームオーバー
+                    if (life <= 0) {
+                        // ゲームオーバー処理（ここで実際にゲームオーバー処理を書く）
+                        // 例えば、ゲームオーバー画面を表示したり、ゲームを終了したりする
+                        // GameOver(); // ゲームオーバー処理を呼び出す
+                        SceneManager::ChangeScene("GameOver");
+                        return; // ゲームオーバー後の処理を終了
+                    }
+                    std::list<GoalText*> gls = FindGameObjects<GoalText>(); // ゴール処理取得
+                    for (auto g : gls) {
+                        //ゴールしていたら全ての処理を停止
+                        if (g->IsGoal == true)
+                        {
+                            return;
+                        }
+                    }
+                }
+            }
+        }        std::list<Walker*> Walkers = FindGameObjects<Walker>();
+        for (Walker* w : Walkers) {
+            if (CircleHit(position, w->position, 56)) {
+
+                //	アルファ値の計算
+                blinkCounter = 30;
+                // 衝突回数が2回になったらライフを減らす
+                if (enemyCollisionCount >= 2) {
+
+                    life--; // ライフを1減らす
+
+                    enemyCollisionCount = 0; // 衝突回数リセット
+
+                    // ライフが0になったらゲームオーバー
+                    if (life <= 0) {
+                        // ゲームオーバー処理（ここで実際にゲームオーバー処理を書く）
+                        // 例えば、ゲームオーバー画面を表示したり、ゲームを終了したりする
+                        // GameOver(); // ゲームオーバー処理を呼び出す
+                        SceneManager::ChangeScene("GameOver");
+                        return; // ゲームオーバー後の処理を終了
+                    }
+                    std::list<GoalText*> gls = FindGameObjects<GoalText>(); // ゴール処理取得
+                    for (auto g : gls) {
+                        //ゴールしていたら全ての処理を停止
+                        if (g->IsGoal == true)
+                        {
+                            return;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     {
         Stage* s = FindGameObject<Stage>();
         if (goaled == false) {
-
-            timer;
 
             //右移動
             if (CheckHitKey(KEY_INPUT_A)) {
@@ -160,11 +256,11 @@ void Player::Update()
                 position.x += push;
             }
 
-            
+
         }
 
         //ジャンプ
-        if (PadInput & PAD_INPUT_1 || CheckHitKey (KEY_INPUT_SPACE)) {
+        if (PadInput & PAD_INPUT_1 || CheckHitKey(KEY_INPUT_SPACE)) {
             if (prevJumpKey == false) {
                 if (onGround) {
                     // ジャンプ開始
@@ -264,56 +360,21 @@ void Player::Update()
     if (position.x - s->scroll < 200) {
         s->scroll = position.x - 200;
     }
-
-    std::list<Spring*> springs = FindGameObjects<Spring>();
-    std::list<Jet*> jets = FindGameObjects<Jet>();
-    std::list<Walker*> walkers = FindGameObjects<Walker>();
-
-    for (Spring* spring : springs) {
-        if (CircleHit(position, spring->position, 56)) { // 衝突した場合
-            enemyCollisionCount++; // 衝突回数を増加
-            if (enemyCollisionCount >= 2) { // 衝突回数が2回になったら
-                life--; // ライフを1減らす
-                enemyCollisionCount = 0; // 衝突回数リセット
-                if (life <= 0) { // ライフが0になったらゲームオーバー
-                    SceneManager::ChangeScene("GameOver");
-                    return; // 処理を終了
-                }
-            }
-        }
-    }
-    for (Jet* jet : jets) {
-        if (CircleHit(position, jet->position, 56)) { // 衝突した場合
-            enemyCollisionCount++; // 衝突回数を増加
-            if (enemyCollisionCount >= 2) { // 衝突回数が2回になったら
-                life--; // ライフを1減らす
-                enemyCollisionCount = 0; // 衝突回数リセット
-                if (life <= 0) { // ライフが0になったらゲームオーバー
-                    SceneManager::ChangeScene("GameOver");
-                    return; // 処理を終了
-                }
-            }
-        }
-    }
-    for (Walker* walker : walkers) {
-        if (CircleHit(position, walker->position, 56)) { // 衝突した場合
-            enemyCollisionCount++; // 衝突回数を増加
-            if (enemyCollisionCount >= 2) { // 衝突回数が2回になったら
-                life--; // ライフを1減らす
-                enemyCollisionCount = 0; // 衝突回数リセット
-                if (life <= 0) { // ライフが0になったらゲームオーバー
-                    SceneManager::ChangeScene("GameOver");
-                    return; // 処理を終了
-                }
-            }
-        }
-    }
 }
 
 
 void Player::Draw()
 
 {
+    if (blinkCounter > 0) {
+        blinkCounter--;
+    }
+    if (blinkCounter % 2 != 0) {
+        return;
+    }
+
+
+
     Stage* s = FindGameObject<Stage>();
     if (isRightClicked) {
         // 右クリックされている場合、右クリック用の画像を描画
@@ -333,15 +394,26 @@ void Player::Draw()
             // ライフを表示（例えば、画面の上部にライフのアイコンを表示する）
 
             for (int i = 0; i < life; i++) {
-            }
-            {
-                   DrawGraph(1 * 40, 34, life, TRUE);
-                   DrawGraph(2 * 40, 34, life, TRUE);
-                   DrawGraph(3 * 40, 34, life, TRUE);
+                //   DrawGraph(10 + i * 40, 34, life, TRUE);
 
                    // ここでライフアイコンを描画するコードを追加
                    // 例: DrawGraph(10 + i * 30, 10, lifeIconImage, TRUE);
             }
         }
+
     }
+
+
+    //alpha += (int)(ofset * Time::DeltaTime());
+
+    //	前フレームからの経過時間を取得
+    //DrawStertTimer += Time::DeltaTime();
+    //	一定時間(DRAW_STERT_WAIT)経過したら、アルファ値の加算・減算を切りかえる
+    //if (DrawStertTimer >= DRAW_STERT_WAIT)
+    //{
+    //    ofset = -ofset;;
+    //    DrawStertTimer = 0.5f;
+    //}
+
+
 }
