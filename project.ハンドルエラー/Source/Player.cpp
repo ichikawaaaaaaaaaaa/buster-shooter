@@ -314,7 +314,11 @@ void Player::Draw()
             // ライフを表示（例えば、画面の上部にライフのアイコンを表示する）
 
             for (int i = 0; i < life; i++) {
-                //   DrawGraph(10 + i * 40, 34, life, TRUE);
+            }
+            {
+                   DrawGraph(1 * 40, 34, life, TRUE);
+                   DrawGraph(2 * 40, 34, life, TRUE);
+                   DrawGraph(3 * 40, 34, life, TRUE);
 
                    // ここでライフアイコンを描画するコードを追加
                    // 例: DrawGraph(10 + i * 30, 10, lifeIconImage, TRUE);
