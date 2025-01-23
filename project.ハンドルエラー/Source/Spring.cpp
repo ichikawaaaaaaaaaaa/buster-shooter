@@ -79,44 +79,36 @@ void Spring::Update()
     }
 
     Stage* s = FindGameObject<Stage>();
-    //モーション
-    position.x += speed.x;
+   
     {
-        int push = s->IsWallRight(position + VECTOR2(31, 0));
-        if (push > 0)
-        {
+        //モーション
+        position.x += speed.x;
+        int push = s->IsWallRight(position + VECTOR2(55, 0));
+        if (push > 0) {
 
             position.x -= push;
             speed.x = -4;
         }
-         push = s->IsWallRight(position + VECTOR2(31, 20));
-        if (push > 0) 
-        {
+        push = s->IsWallRight(position + VECTOR2(55, 20));
+        if (push > 0) {
             position.x -= push;
             speed.x = -4;
 
         }
-         push = s->IsWallLeft(position + VECTOR2(0, 20));
-        if (push > 0) 
-        {
+        push = s->IsWallLeft(position + VECTOR2(0, 20));
+        if (push > 0) {
             position.x += push;
             speed.x = 4;
         }
 
-         push = s->IsWallLeft(position + VECTOR2(0, 0));
-        if (push > 0) 
-        {
-            position.x += push;
-            speed.x = 4;
-        }
-    }
 
-    // キャラクターの位置に応じた地面衝突判定
-    int push1 = s->IsWallDown(position + VECTOR2(0, 39 + 5)); // 例(1111)はキャラクターの高さ
-    int push2 = s->IsWallDown(position + VECTOR2(39, 39 + 5)); // 例(1111)はキャラクターの高さ
-    if (push1 == 0 || push2 == 0) {
-        speed.x = -speed.x;
-    }
+       // キャラクターの位置に応じた地面衝突判定
+       //     int push1 = s->IsWallDown(position + VECTOR2(0, 39 + 5)); // 例(1111)はキャラクターの高さ
+       // int push2 = s->IsWallDown(position + VECTOR2(39, 39 + 5)); // 例(1111)はキャラクターの高さ
+       // if (push1 == 0 || push2 == 0) {
+       //     speed.x = -speed.x;
+       // }
+    }  //
 }
 
 
@@ -130,17 +122,17 @@ void Spring::Update()
     //         position.y -= push - 1; // 地面に押し戻す
     //         onGround = true;        // 地上判定をON
     //     }
-       //  else {
-             // 頭の衝突判定
-           //  int push = s->IsWallUP(position + VECTOR2(0, 0));
-           //  if (push > 0) {
-           //      velocity = 0.0f;  // 頭に衝突した場合、速度を0にする
-           //      position.y += push; // 頭上に押し戻す
-           //  }
-           //  push = s->IsWallUP(position + VECTOR2(49, 0)); // 例(1111)はキャラクターの高さ
-           //  if (push > 0) {
-           //      velocity = 0.0f;
-           //      position.y += push;
+    //   else {
+    //        頭の衝突判定
+    //         int push = s->IsWallUP(position + VECTOR2(0, 0));
+    //         if (push > 0) {
+    //             velocity = 0.0f;  // 頭に衝突した場合、速度を0にする
+    //             position.y += push; // 頭上に押し戻す
+    //         }
+    //         push = s->IsWallUP(position + VECTOR2(49, 0)); // 例(1111)はキャラクターの高さ
+    //         if (push > 0) {
+    //             velocity = 0.0f;
+    //             position.y += push;
 
 
 

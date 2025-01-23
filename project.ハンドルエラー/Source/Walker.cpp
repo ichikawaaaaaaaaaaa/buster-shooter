@@ -133,11 +133,6 @@ void Walker::Update()
             position.x += push;
             speed.x = 4;
         }
-        push = s->IsWallLeft(position + VECTOR2(0, 20));
-        if (push > 0) {
-            position.x += push;
-            speed.x = 4;
-        }
     }
 //    if (velocity >= 0) {
         // キャラクターの位置に応じた地面衝突判定
