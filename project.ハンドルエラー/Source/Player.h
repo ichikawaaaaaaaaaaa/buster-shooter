@@ -47,4 +47,5 @@ public:
 
     bool Changeflame;
     float timer;
+
 };

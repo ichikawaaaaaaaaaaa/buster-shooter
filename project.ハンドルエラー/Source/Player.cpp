@@ -3,7 +3,9 @@
 #include "Stage.h"
 #include "Ball.h"
 #include "config.h"
-#include "Enemy.h"
+#include "Jet.h"
+#include "Spring.h"
+#include "Walker.h"
 #include "Vector2.h"
 #include "GameOver.h"
 
@@ -12,12 +14,6 @@
 float Gravity = 2.0f;     //重力加速度
 float jumpHeight = 40 * 2.0;  //ジャンプの高さ
 float V0 = -sqrtf(3.0f * Gravity * jumpHeight);//初速計算
-
-// プレイヤーのライフと敵に触れた回数
-int life = 2;  // 初期ライフは3
-int enemyCollisionCount = 0; // 敵に触れた回数
-
-// コンストラクタ
 
 Player::Player()
 
@@ -37,6 +33,8 @@ Player::Player()
     //プレイヤーのライフ
     life = LoadGraph("data/image/heart.png");
     timer = 0.0f;
+
+    life = 3;
 }
 
 // 更新処理
@@ -105,30 +103,7 @@ void Player::Update()
 
     // プレイヤーと敵の衝突判定
 
-    std::list<Enemy*> enemys = FindGameObjects<Enemy>();
-
-    for (Enemy* e : enemys) {
-        if (CircleHit(position, e->position, 56)) { // 衝突した場合
-            enemyCollisionCount++; // 衝突回数を増加
-
-            // 衝突回数が2回になったらライフを減らす
-            if (enemyCollisionCount >= 2) {
-
-                life--; // ライフを1減らす
-
-                enemyCollisionCount = 0; // 衝突回数リセット
-
-                // ライフが0になったらゲームオーバー
-                if (life <= 0) {
-                    // ゲームオーバー処理（ここで実際にゲームオーバー処理を書く）
-                    // 例えば、ゲームオーバー画面を表示したり、ゲームを終了したりする
-                    // GameOver(); // ゲームオーバー処理を呼び出す
-                    SceneManager::ChangeScene("GameOver");
-                    return; // ゲームオーバー後の処理を終了
-                }
-            }
-        }
-    }
+ 
 
     // 画面外に出たらゲームオーバー
     int x = position.x;
@@ -288,6 +263,50 @@ void Player::Update()
 
     if (position.x - s->scroll < 200) {
         s->scroll = position.x - 200;
+    }
+
+    std::list<Spring*> springs = FindGameObjects<Spring>();
+    std::list<Jet*> jets = FindGameObjects<Jet>();
+    std::list<Walker*> walkers = FindGameObjects<Walker>();
+
+    for (Spring* spring : springs) {
+        if (CircleHit(position, spring->position, 56)) { // 衝突した場合
+            enemyCollisionCount++; // 衝突回数を増加
+            if (enemyCollisionCount >= 2) { // 衝突回数が2回になったら
+                life--; // ライフを1減らす
+                enemyCollisionCount = 0; // 衝突回数リセット
+                if (life <= 0) { // ライフが0になったらゲームオーバー
+                    SceneManager::ChangeScene("GameOver");
+                    return; // 処理を終了
+                }
+            }
+        }
+    }
+    for (Jet* jet : jets) {
+        if (CircleHit(position, jet->position, 56)) { // 衝突した場合
+            enemyCollisionCount++; // 衝突回数を増加
+            if (enemyCollisionCount >= 2) { // 衝突回数が2回になったら
+                life--; // ライフを1減らす
+                enemyCollisionCount = 0; // 衝突回数リセット
+                if (life <= 0) { // ライフが0になったらゲームオーバー
+                    SceneManager::ChangeScene("GameOver");
+                    return; // 処理を終了
+                }
+            }
+        }
+    }
+    for (Walker* walker : walkers) {
+        if (CircleHit(position, walker->position, 56)) { // 衝突した場合
+            enemyCollisionCount++; // 衝突回数を増加
+            if (enemyCollisionCount >= 2) { // 衝突回数が2回になったら
+                life--; // ライフを1減らす
+                enemyCollisionCount = 0; // 衝突回数リセット
+                if (life <= 0) { // ライフが0になったらゲームオーバー
+                    SceneManager::ChangeScene("GameOver");
+                    return; // 処理を終了
+                }
+            }
+        }
     }
 }
 
