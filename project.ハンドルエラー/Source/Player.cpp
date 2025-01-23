@@ -43,11 +43,11 @@ Player::Player()
 void Player::Update()
 
 {
-<<<<<<< HEAD
 
-=======
+
+
 //<<<<<<< HEAD
->>>>>>> d2eb35d7477e272531dc84b7e3f0b22498cdcede
+
     std::list<GoalText*> gls = FindGameObjects<GoalText>(); // ƒS[ƒ‹ˆ—æ“¾
     for (auto g : gls) {
         //ƒS[ƒ‹‚µ‚Ä‚¢‚½‚ç‘S‚Ä‚Ìˆ—‚ğ’â~
@@ -57,13 +57,13 @@ void Player::Update()
         }
     }
 
-<<<<<<< HEAD
 
 
-=======
+
+
 //=======
 //>>>>>> 22785fc63763e0367779acd117806a6a2e23f18e
->>>>>>> d2eb35d7477e272531dc84b7e3f0b22498cdcede
+
     GetJoypadInputState(DX_INPUT_KEY_PAD1);
     int PadInput;
 
