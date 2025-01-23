@@ -153,8 +153,8 @@ void Walker::Draw()
         int frameX = (currentFrame % maxFrames) * frameWidth;
         int frameY = 0;   // 横方向のフレーム位置
         // スプライトシートの指定した部分を描画
-        DrawGraph(
-            position.x - s->scroll,position.y, currentImage,TRUE);
+        DrawRectGraph(
+            position.x - s->scroll,position.y,frameX,frameY, frameWidth,frameHeight,currentImage,TRUE);
     }
 }
 VECTOR2 Walker::GetPosition() const

@@ -30,7 +30,7 @@ Player::Player()
     velocity = 0; //初期速度
     prevJumpKey = false;   //初期ジャンプキー状態
     onGround = false;  //地上判定初期化
-    IsGoal = 0; //ゴールフラグ初期化
+    
     goaled = 0;  //ゴール達成フラグ初期化
     scroll = 0;  //スクロール位置初期化
 
