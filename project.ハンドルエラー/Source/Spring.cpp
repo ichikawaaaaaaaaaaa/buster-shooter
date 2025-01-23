@@ -19,8 +19,8 @@ Spring::Spring()
     patternY = 0;
     currentImage = hImage;
     // アニメーションの設定
-    frameWidth = 40;  // 1フレームの幅
-    frameHeight = 50; // 1フレームの高さ
+    frameWidth = 33;  // 1フレームの幅
+    frameHeight = 41; // 1フレームの高さ
     maxFrames = 2;    // 総フレーム数 (フレーム数が 2 に設定)
     currentFrame = 0; // 現在のフレーム
     frameTimer = 0;   // フレーム切り替えタイマー
@@ -37,6 +37,7 @@ Spring::~Spring()
 {
     DeleteGraph(hImage); // 使用した画像を削除
 }
+
 void Spring::Update()
 {
     if (dead) // 敵が死亡している場合の処理
@@ -55,31 +56,7 @@ void Spring::Update()
         frameTimer = 0;
         currentFrame = (currentFrame + 1) % maxFrames; // フレームをループ
     }
-   // if (attacking) // 攻撃モードの場合
-   // {
-   //     Player* player = FindGameObject<Player>();
-   //     if (player)
-   //     {
-   //         VECTOR2 to = VSub(player->position, position); // プレイヤーへのベクトル
-   //         to = VNorm(to); // 正規化
-   //         position = VAdd(position, VScale(to, 2.0f)); // 移動処理
-   //     }
-   // }
-   // else // 通常モードの場合
-   // {
-   //     timer -= 1;
-   //     if (timer == 0)
-   //     {
-   //         attacking = true; // 攻撃モード開始
-   //         timer = rand() % (5 * 60) + 60; // 次の攻撃開始タイマーをリセット
-   //     }
-   //     position.x -= 2.0f; // 左方向に移動
-   //     if (position.x < -64) // 画面外に出た場合
-   //     {
-   //         position.x = SCREEN_WIDTH;
-   //         position.y = rand() % 700;
-   //     }
-   // }
+
     // 弾との衝突判定
     std::list<Ball*> balls = FindGameObjects<Ball>();
     for (Ball* Ba : balls)
@@ -101,52 +78,71 @@ void Spring::Update()
         }
     }
 
-
-
-
     Stage* s = FindGameObject<Stage>();
+    //モーション
+    position.x += speed.x;
     {
-        int push = s->IsWallLeft(position + VECTOR2(0, 0));
-        position.x += push;
-        push = s->IsWallLeft(position + VECTOR2(0, 49));
-        position.x += push;
+        int push = s->IsWallRight(position + VECTOR2(31, 0));
+        if (push > 0)
+        {
+
+            position.x -= push;
+            speed.x = -4;
+        }
+         push = s->IsWallRight(position + VECTOR2(31, 20));
+        if (push > 0) 
+        {
+            position.x -= push;
+            speed.x = -4;
+
+        }
+         push = s->IsWallLeft(position + VECTOR2(0, 20));
+        if (push > 0) 
+        {
+            position.x += push;
+            speed.x = 4;
+        }
+
+         push = s->IsWallLeft(position + VECTOR2(0, 0));
+        if (push > 0) 
+        {
+            position.x += push;
+            speed.x = 4;
+        }
     }
-    {
-        int push = s->IsWallRight(position + VECTOR2(49, 0));
-        position.x -= push;
-        push = s->IsWallRight(position + VECTOR2(49, 49));
-        position.x -= push;
-    }
-    if (velocity >= 0) {
-        // キャラクターの位置に応じた地面衝突判定
-        int push = s->IsWallDown(position + VECTOR2(0, 49 + 1)); // 例(1111)はキャラクターの高さ
-        if (push > 0) { // 地面に触れた場合
-            velocity = 0.0f; // 速度を0にする
-            position.y -= push - 1; // 地面に押し戻す
-            onGround = true;        // 地上判定をON
-        }
-        else {
-            // 頭の衝突判定
-            push = s->IsWallUP(position + VECTOR2(0, 0));
-            if (push > 0) {
-                velocity = 0.0f;  // 頭に衝突した場合、速度を0にする
-                position.y += push; // 頭上に押し戻す
-            }
-            push = s->IsWallUP(position + VECTOR2(49, 0)); // 例(1111)はキャラクターの高さ
-            if (push > 0) {
-                velocity = 0.0f;
-                position.y += push;
-            }
-        }
-        // 右足地面判定
-        push = s->IsWallDown(position + VECTOR2(49, 49)); // 例(1111)はキャラクターの高さ
-        if (push > 0) {
-            velocity = 0.0f;
-            position.y -= push - 1;
-            onGround = true; // 地面に着地したとき、地上判定をONにする
-        }
+
+    // キャラクターの位置に応じた地面衝突判定
+    int push1 = s->IsWallDown(position + VECTOR2(0, 39 + 5)); // 例(1111)はキャラクターの高さ
+    int push2 = s->IsWallDown(position + VECTOR2(39, 39 + 5)); // 例(1111)はキャラクターの高さ
+    if (push1 == 0 || push2 == 0) {
+        speed.x = -speed.x;
     }
 }
+
+
+    //Stage* s = FindGameObject<Stage>();
+
+    // if (velocity >= 0) {
+    //     // キャラクターの位置に応じた地面衝突判定
+    //     int push = s->IsWallDown(position + VECTOR2(0, 49 + 1)); // 例(1111)はキャラクターの高さ
+    //     if (push > 0) { // 地面に触れた場合
+    //         velocity = 0.0f; // 速度を0にする
+    //         position.y -= push - 1; // 地面に押し戻す
+    //         onGround = true;        // 地上判定をON
+    //     }
+       //  else {
+             // 頭の衝突判定
+           //  int push = s->IsWallUP(position + VECTOR2(0, 0));
+           //  if (push > 0) {
+           //      velocity = 0.0f;  // 頭に衝突した場合、速度を0にする
+           //      position.y += push; // 頭上に押し戻す
+           //  }
+           //  push = s->IsWallUP(position + VECTOR2(49, 0)); // 例(1111)はキャラクターの高さ
+           //  if (push > 0) {
+           //      velocity = 0.0f;
+           //      position.y += push;
+
+
 
 void Spring::Draw()
 {
@@ -157,23 +153,16 @@ void Spring::Draw()
         int frameX = (currentFrame % maxFrames) * frameWidth;
         int frameY = 0;   // 横方向のフレーム位置
         // スプライトシートの指定した部分を描画
-        DrawRectGraph(
-            position.x - s->scroll,
-            position.y,
-            frameX,
-            frameY,
-            frameWidth,
-            frameHeight,
-            currentImage,
-            TRUE
-        );
+        DrawRectGraph( position.x - s->scroll, position.y, frameX, frameY, frameWidth, frameHeight, currentImage, TRUE);
     }
 }
-VECTOR2 Spring::GetPosition() const
-{
-    return position;
-}
-void Spring::OnCollide()
-{
-    DestroyMe(); // 衝突時に削除
-}
+
+    VECTOR2 Spring::GetPosition() const
+    {
+        return position;
+    }
+
+    void Spring::OnCollide()
+    {
+        DestroyMe(); // 衝突時に削除
+    }

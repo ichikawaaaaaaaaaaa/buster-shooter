@@ -20,8 +20,8 @@ Walker::Walker()
     patternY = 0;
     currentImage = hImage;
     // アニメーションの設定
-    frameWidth = 64;  // 1フレームの幅
-    frameHeight = 46; // 1フレームの高さ
+    frameWidth = 55;  // 1フレームの幅
+    frameHeight = 40; // 1フレームの高さ
     maxFrames = 2;    // 総フレーム数 (フレーム数が 2 に設定)
     currentFrame = 0; // 現在のフレーム
     frameTimer = 0;   // フレーム切り替えタイマー
@@ -109,15 +109,22 @@ void Walker::Update()
     {
         //モーション
         position.x += speed.x;
-        int push = s->IsWallRight(position + VECTOR2(39, 0));
+        int push = s->IsWallRight(position + VECTOR2(55, 0));
         if (push > 0) {
+            
             position.x -= push;
             speed.x = -4;
        }
-        push = s->IsWallRight(position + VECTOR2(39, 39));
+        push = s->IsWallRight(position + VECTOR2(55, 20));
         if (push > 0) {
             position.x -= push;
             speed.x = -4;
+
+        }
+        push = s->IsWallLeft(position + VECTOR2(0, 20));
+        if (push > 0) {
+            position.x += push;
+            speed.x = 4;
         }
     }
     {
@@ -126,74 +133,29 @@ void Walker::Update()
             position.x += push;
             speed.x = 4;
         }
-        push = s->IsWallLeft(position + VECTOR2(0, 39));
+        push = s->IsWallLeft(position + VECTOR2(0, 20));
         if (push > 0) {
             position.x += push;
             speed.x = 4;
         }
     }
-    if (velocity >= 0) {
+//    if (velocity >= 0) {
         // キャラクターの位置に応じた地面衝突判定
-        int push = s->IsWallDown(position + VECTOR2(0, 39 + 1)); // 例(1111)はキャラクターの高さ
-        if (push > 0) { // 地面に触れた場合
-            velocity = 0.0f; // 速度を0にする
-            position.y -= push - 1; // 地面に押し戻す
-            onGround = true;        // 地上判定をON
+        int push1 = s->IsWallDown(position + VECTOR2(0, 39 + 5)); // 例(1111)はキャラクターの高さ
+        int push2 = s->IsWallDown(position + VECTOR2(39, 39 + 5)); // 例(1111)はキャラクターの高さ
+        if (push1 == 0 || push2 == 0) {
+            speed.x = -speed.x;
         }
-        else {
-            // 頭の衝突判定
-            push = s->IsWallUP(position + VECTOR2(0, 0));
-            if (push > 0) {
-                velocity = 0.0f;  // 頭に衝突した場合、速度を0にする
-                position.y += push; // 頭上に押し戻す
-            }
-            push = s->IsWallUP(position + VECTOR2(49, 0)); // 例(1111)はキャラクターの高さ
-            if (push > 0) {
-                velocity = 0.0f;
-                position.y += push;
-            }
-        }
-        // 右足地面判定
-        push = s->IsWallDown(position + VECTOR2(49, 49)); // 例(1111)はキャラクターの高さ
-        if (push > 0) {
-            velocity = 0.0f;
-            position.y -= push - 1;
-            onGround = true; // 地面に着地したとき、地上判定をONにする
-        }
-        if (velocity >= 0) {
-            int push = s->IsWallDown(position + VECTOR2(1, 38));
-            // ジャンプの足元チェックは、１ドット下を見て、
-            // 押し返す量は、-1する
-            if (push > 0) { // 地面に触れたので
-                velocity = 0.0f; // 地面に触ったら速度を0にする
-                position.y -= push - 1; // 地面の上に押し返す
-                onGround = true;
-            }
-
-            push = s->IsWallDown(position + VECTOR2(39, 40));
-            if (push > 0) {
-                velocity = 0.0f;
-                position.y -= push - 1;
-                onGround = true;
-            }
-        }
-        else {
-            int push = s->IsWallUP(position + VECTOR2(0, 0));
-            if (push > 0) {
-                velocity = 0.0f;
-                position.y += push;
-            }
-            push = s->IsWallUP(position + VECTOR2(39, 0));
-            if (push > 0) {
-                velocity = 0.0f;
-                position.y += push;
-            }
-        }
-
-
-      
-    }
+        //   // 右足地面判定
+     //   push = s->IsWallDown(position + VECTOR2(49, 49)); // 例(1111)はキャラクターの高さ
+     //   if (push > 0) {
+     //       velocity = 0.0f;
+     //       position.y -= push - 1;
+     //       onGround = true; // 地面に着地したとき、地上判定をONにする
+     //   }
+//    }
 }
+
 void Walker::Draw()
 {
     Stage* s = FindGameObject<Stage>();

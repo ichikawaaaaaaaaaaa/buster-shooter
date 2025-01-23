@@ -43,4 +43,5 @@ public:
     int animationSpeed;      // アニメーションの速度
 	
     int Springlife;
+
 };
