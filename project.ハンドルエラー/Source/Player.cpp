@@ -129,6 +129,13 @@ void Player::Update()
         }
     }
 
+    // 画面外に出たらゲームオーバー
+    int x = position.x;
+    int y = position.y;
+    if (x < 0 || x >= SCREEN_WIDTH || y < 0 || y >= SCREEN_HEIGHT) {
+        SceneManager::ChangeScene("GameOver");
+        return; // ゲームオーバー後の処理を終了
+    }
 
     {
         Stage* s = FindGameObject<Stage>();
