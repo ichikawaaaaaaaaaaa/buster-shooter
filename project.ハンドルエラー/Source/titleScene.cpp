@@ -5,6 +5,7 @@
 #include "../StageUtility.h"
 #include "../Library/time.h"
 
+
 TitleScene::TitleScene()
 {
 	hBGImage = LoadGraph("data/image/Title.png");
@@ -20,7 +21,10 @@ TitleScene::TitleScene()
 	StageFlame = LoadGraph("data/image/StageFlame.png");
 
 	Stageflame = 0;
+	prevInputPad = false;   
+	
 
+	int PlaySoundFile(char* FileName, int PlayType);
 
 
 	//	[PUSH SPACE KEY]表示設定の初期化
@@ -36,6 +40,13 @@ TitleScene::~TitleScene()
 
 void TitleScene::Update()
 {
+
+	GetJoypadInputState(DX_INPUT_KEY_PAD1);
+	int PadInput;
+
+	GetJoypadAnalogInput(&XInput, &YInput, DX_INPUT_KEY_PAD1);
+	PadInput = GetJoypadInputState(DX_INPUT_KEY_PAD1);
+
 //	if (CheckHitKey(KEY_INPUT_1)) {
 //		StageUtility::SetStageNo(1);
 //		SceneManager::ChangeScene("PlayScene");
@@ -60,25 +71,74 @@ void TitleScene::Update()
 
 	if (CheckHitKey(KEY_INPUT_1)) {
 		Stageflame = 1;
+		PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_NORMAL);
 			}
 			if (CheckHitKey(KEY_INPUT_2)) {
 				Stageflame = 2;
+				PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_NORMAL);
 			}
 			if (CheckHitKey(KEY_INPUT_3)) {
 				Stageflame = 3;
+				PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_NORMAL);
 			}
 			if (CheckHitKey(KEY_INPUT_4)) {
 				Stageflame = 4;
+				PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_NORMAL);
 			}
 			if (CheckHitKey(KEY_INPUT_5)) {
 				Stageflame = 5;
+				PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_NORMAL);
 			}
 
 			if (CheckHitKey(KEY_INPUT_SPACE))
 			{
+				PlaySoundFile("data/sound/StageJoin.mp3", DX_PLAYTYPE_NORMAL);
 				StageUtility::SetStageNo(Stageflame);
 				SceneManager::ChangeScene("PlayScene");
 			}
+
+
+			timer += 0.1f;
+			if (timer >= 1.0f) {
+				prevInputPad = false;
+			}
+
+				if (prevInputPad == false) {
+					if (XInput > 100) {
+						PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_NORMAL);
+					//if (CheckHitKey(KEY_INPUT_RIGHT)) {
+						Stageflame = ((Stageflame + 1) % 5) ;
+					}
+					if (Stageflame == 0)
+					{
+						Stageflame = 5;
+					}
+				if (XInput < -100) {
+					PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_NORMAL);
+				//if (CheckHitKey(KEY_INPUT_LEFT)) {
+						Stageflame -= 1;
+						if (Stageflame == 0)
+						{
+							Stageflame = 5;
+						}
+					
+					}
+
+				prevInputPad = true;
+				timer = 0.0f;
+
+				}
+				
+				if (PadInput & (PAD_INPUT_1))
+				{
+					StageUtility::SetStageNo(Stageflame);
+					SceneManager::ChangeScene("PlayScene");
+				}
+			
+			
+		
+
+
 
 	//	前フレームからの経過時間を取得
 	DrawKeyTimer += Time::DeltaTime();
@@ -109,9 +169,9 @@ void TitleScene::Draw()
 
 	if (Stageflame ==1) {
 		if (isDrawKey)
-		{
+	{
 		DrawGraph(100, 500, StageFlame, TRUE);
-		}
+	}
 	}
 
 	if (Stageflame == 2) {
@@ -126,7 +186,7 @@ void TitleScene::Draw()
 		if (isDrawKey)	   
 		{				   
 			DrawGraph(500, 500, StageFlame, TRUE);
-		}				   
+	}				   
 	}					   
 						   
 	if (Stageflame == 4) { 

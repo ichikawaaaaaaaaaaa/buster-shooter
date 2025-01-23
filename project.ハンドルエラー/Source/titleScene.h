@@ -1,5 +1,6 @@
 #pragma once
 #include "../Library/sceneBase.h"
+#include "Vector2.h"
 
 /// <summary>
 /// タイトルシーン
@@ -36,4 +37,12 @@ private:
 	float DrawKeyTimer;		//	タイマー
 
 	int KeyimputCount;
+
+	int XInput;             // ジョイパッドX軸入力
+	int YInput;             // ジョイパッドY軸入力
+
+	bool prevInputPad;
+	float timer;
+
+	VECTOR2 position;       // プレイヤーの座標（Vector2）
 };

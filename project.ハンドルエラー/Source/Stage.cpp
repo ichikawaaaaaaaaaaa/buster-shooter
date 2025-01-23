@@ -10,11 +10,15 @@ const int CHIP_SIZE = 40;
 #include "CsvReader.h"
 #include "../StageUtility.h"
 
+
+
 using namespace std;
 //#include "stage1.h"
 Stage::Stage()
 
 {
+	StageBackScreen = LoadGraph("data/image/BackScreen.png");
+
 	map.clear();
 	std::string filename = "data/stage.";
 	filename += std::to_string(StageUtility::GetStageNo());
@@ -31,7 +35,7 @@ Stage::Stage()
 	WIDTH = csv->GetColumns(0);
 	delete csv;
 
-	hImage = LoadGraph("data/image/parts.png");
+	hImage = LoadGraph("data/image/maptile_renga.png");
 	for (int j = 0; j < HEIGHT; j++) {
 		for (int i = 0; i < WIDTH; i++) {
 			if (map[j][i] == 9) {
@@ -49,12 +53,12 @@ Stage::Stage()
 				e->position.x = i * 40;
 				e->position.y = j * 40;
 			}*/
-			if (map[j][i] == 4) {
+			if (map[j][i] == 5) {
 				GoalText* g = Instantiate<GoalText>();
 				g->position.x = i * 40;
 				g->position.y = j * 40;
 			}
-			if (map[j][i] == 5) {
+			if (map[j][i] == 4) {
 				Jet* jet = Instantiate<Jet>();
 				jet->position.x = i * 40;
 				jet->position.y = j * 40;
@@ -80,6 +84,9 @@ Stage::~Stage()
 
 void Stage::Draw()//ècâ°Ç≈âÒÇ∑
 {
+	//DrawRectGraph(x - scroll, y, 0, 0, 1280, 720, StageBackScreen, TRUE);
+	
+
 	//scroll += 1;
 	for (int j = 0; j < HEIGHT; j++)
 	{
@@ -90,7 +97,7 @@ void Stage::Draw()//ècâ°Ç≈âÒÇ∑
 			if (map[j][i] == 1)
 			{
 				
-				DrawRectGraph(x - scroll, y, 0, 40, 40, 40, hImage, TRUE);
+				DrawRectGraph(x - scroll, y, 0, 0, 40, 40, hImage, TRUE);
 			}
 
 		}

@@ -41,4 +41,6 @@ public:
     int currentFrame;        // 現在のフレーム番号
     int frameTimer;          // フレーム切り替え用タイマー
     int animationSpeed;      // アニメーションの速度
+	
+    int Springlife;
 };

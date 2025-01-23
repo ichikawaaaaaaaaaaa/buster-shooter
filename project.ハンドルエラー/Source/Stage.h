@@ -27,4 +27,5 @@ public:
 	int WIDTH;
 
 	int scroll;
+	int StageBackScreen;
 };

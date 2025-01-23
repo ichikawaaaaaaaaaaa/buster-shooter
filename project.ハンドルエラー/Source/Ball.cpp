@@ -6,6 +6,7 @@
 #include "Enemy.h"
 #include "../Library/time.h"
 
+
 // コンストラクタで初期化
 
 Ball::Ball() {
@@ -39,7 +40,11 @@ void Ball::Update() {
     
     {
         timer += Time::DeltaTime();
+<<<<<<< HEAD
         if (timer >= 1.1f)
+=======
+        if (timer >= 1.0f)
+>>>>>>> 55a783797ac8b7ff05f08afb14431916d62ecdf2
         {
             DestroyMe();
         }

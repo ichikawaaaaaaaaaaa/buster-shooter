@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Stage.h"
 #include "config.h"
+
 // ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 Spring::Spring()
 {
@@ -28,7 +29,10 @@ Spring::Spring()
     attacking = false;
     dead = false;
     deadCounter = 0;
+
+    Springlife = 4; //“Gƒ‰ƒCƒt
 }
+
 Spring::~Spring()
 {
     DeleteGraph(hImage); // Žg—p‚µ‚½‰æ‘œ‚ðíœ
@@ -84,12 +88,22 @@ void Spring::Update()
         VECTOR2 bCenter = { position.x + frameWidth / 2, position.y + frameHeight / 2 }; // “G‚Ì’†SÀ•W
         if (CircleHit(sCenter, bCenter, 20 + 8)) // Õ“Ë”¼Œa: ’e(8) + “G(20)
         {
-            dead = true; // “G‚ðŽ€–Só‘Ô‚É‚·‚é
-            deadCounter = 0;
-            currentFrame = maxFrames - 1; // ÅŒã‚ÌƒtƒŒ[ƒ€‚ðŽ€–Só‘Ô‚ÉÝ’è
-            Ba->DestroyMe(); // ’e‚ðíœ
+            Springlife--;
+            Ba->DestroyMe();
+            if (Springlife <= 0)
+            {
+                dead = true; // “G‚ðŽ€–Só‘Ô‚É‚·‚é
+                deadCounter = 0;
+                currentFrame = maxFrames - 1; // ÅŒã‚ÌƒtƒŒ[ƒ€‚ðŽ€–Só‘Ô‚ÉÝ’è
+                DestroyMe(); //’e‚Ìíœ
+                return;
+            }
         }
     }
+
+
+
+
     Stage* s = FindGameObject<Stage>();
     {
         int push = s->IsWallLeft(position + VECTOR2(0, 0));
@@ -133,6 +147,7 @@ void Spring::Update()
         }
     }
 }
+
 void Spring::Draw()
 {
     Stage* s = FindGameObject<Stage>();
