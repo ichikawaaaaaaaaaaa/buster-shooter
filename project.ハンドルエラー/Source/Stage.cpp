@@ -84,8 +84,9 @@ Stage::~Stage()
 
 void Stage::Draw()//ècâ°Ç≈âÒÇ∑
 {
-	//DrawRectGraph(x - scroll, y, 0, 0, 1280, 720, StageBackScreen, TRUE);
-	
+	DrawGraph(0 - scroll *3 / 4, 0, StageBackScreen, TRUE);
+	DrawGraph(1280 - scroll *3 / 4, 0, StageBackScreen, TRUE);
+
 
 	//scroll += 1;
 	for (int j = 0; j < HEIGHT; j++)

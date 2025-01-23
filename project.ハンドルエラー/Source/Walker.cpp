@@ -8,13 +8,13 @@
 Walker::Walker()
 {
 
-    float Gravity = 2.0f;     //重力加速度
+ 
     hImage = LoadGraph("data/image/Walker.png");
     // スプライトシートの幅と高さを取得
     GetGraphSize(hImage, &imageWidth, &imageHeight);
     position.x = rand() % 1000; // 初期位置 (x座標)
     position.y = rand() % 700; // 初期位置 (y座標)
-    speed.x = 0.0f;
+    speed.x = 4.0f;
     speed.y = 0.0f;
     patternX = 0;
     patternY = 0;
@@ -39,9 +39,8 @@ Walker::~Walker()
 }
 void Walker::Update()
 {
-    position.y += velocity; // 座標には速度を足す
-    velocity += Gravity; // 速度には重力を足す
 
+   
 
     if (dead) // 敵が死亡している場合の処理
     {
@@ -109,33 +108,33 @@ void Walker::Update()
     Stage* s = FindGameObject<Stage>();
     {
         //モーション
-        //position.x += 4;
-        int push = s->IsWallRight(position + VECTOR2(0, 0));
+        position.x += speed.x;
+        int push = s->IsWallRight(position + VECTOR2(39, 0));
         if (push > 0) {
             position.x -= push;
-            position.x -= 4;
-        }
-        push = s->IsWallLeft(position + VECTOR2(0, 49));
+            speed.x = -4;
+       }
+        push = s->IsWallRight(position + VECTOR2(39, 39));
         if (push > 0) {
             position.x -= push;
-            position.x -= 4;
+            speed.x = -4;
         }
     }
     {
-        int push = s->IsWallLeft(position + VECTOR2(49, 0));
-        if (push < 0) {
+        int push = s->IsWallLeft(position + VECTOR2(0, 0));
+        if (push > 0) {
             position.x += push;
-            position.x += 4;
+            speed.x = 4;
         }
-        push = s->IsWallRight(position + VECTOR2(49, 49));
-        if (push < 0) {
+        push = s->IsWallLeft(position + VECTOR2(0, 39));
+        if (push > 0) {
             position.x += push;
-            position.x += 4;
+            speed.x = 4;
         }
     }
     if (velocity >= 0) {
         // キャラクターの位置に応じた地面衝突判定
-        int push = s->IsWallDown(position + VECTOR2(0, 49 + 1)); // 例(1111)はキャラクターの高さ
+        int push = s->IsWallDown(position + VECTOR2(0, 39 + 1)); // 例(1111)はキャラクターの高さ
         if (push > 0) { // 地面に触れた場合
             velocity = 0.0f; // 速度を0にする
             position.y -= push - 1; // 地面に押し戻す

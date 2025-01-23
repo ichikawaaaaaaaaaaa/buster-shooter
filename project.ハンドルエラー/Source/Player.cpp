@@ -36,6 +36,7 @@ Player::Player()
 
     //プレイヤーのライフ
     life = LoadGraph("data/image/heart.png");
+    timer = 0.0f;
 }
 
 // 更新処理
@@ -140,6 +141,8 @@ void Player::Update()
     {
         Stage* s = FindGameObject<Stage>();
         if (goaled == false) {
+
+            timer;
 
             //右移動
             if (CheckHitKey(KEY_INPUT_A)) {
