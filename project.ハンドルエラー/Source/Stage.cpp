@@ -86,6 +86,8 @@ void Stage::Draw()//ècâ°Ç≈âÒÇ∑
 {
 	DrawGraph(0 - scroll *3 / 4, 0, StageBackScreen, TRUE);
 	DrawGraph(1280 - scroll *3 / 4, 0, StageBackScreen, TRUE);
+	DrawGraph(2560 - scroll * 3 / 4, 0, StageBackScreen, TRUE);
+	DrawGraph(3840 - scroll * 3 / 4, 0, StageBackScreen, TRUE);
 
 
 	//scroll += 1;

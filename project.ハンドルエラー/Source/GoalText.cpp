@@ -88,7 +88,7 @@ void GoalText::Draw()
 		
 		}
 		if (timer >= 2.0f) {
-			DrawGraph(0, 0, PushSpaceKey, TRUE);
+			DrawGraph(400, 500, PushSpaceKey, TRUE);
 		}
 	
 	}

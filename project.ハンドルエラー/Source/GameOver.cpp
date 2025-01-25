@@ -3,12 +3,14 @@
 #include <cassert>
 
 #include "Player.h"
+#include "Fader.h"
 GameOver::GameOver()
 {
 
-	bgHandle = LoadGraph("image/GameOver.png");
+	bgHandle = LoadGraph("data/image/GameOver.png");
 	assert(bgHandle > 0);
 
+	PushSpaceKey = LoadGraph("data/image/PushSpace.png");
 }
 
 GameOver::~GameOver()
@@ -19,20 +21,27 @@ GameOver::~GameOver()
 
 void GameOver::Update()
 {
+	GetJoypadInputState(DX_INPUT_KEY_PAD1);
+	int PadInput;
 
-	if ((CheckHitKey(KEY_INPUT_T)) || CheckHitKey(KEY_INPUT_RSHIFT))
+	GetJoypadAnalogInput(&XInput, &YInput, DX_INPUT_KEY_PAD1);
+	PadInput = GetJoypadInputState(DX_INPUT_KEY_PAD1);
+
+	if (PadInput & PAD_INPUT_1 || CheckHitKey(KEY_INPUT_B)) 
 	{
 		SceneManager::ChangeScene("TitleScene");
 	}
 }
 
+	void GameOver::Draw()
+	{
+		DrawGraph(400, 200, hBGImageII, TRUE);
+		//	タイトル画面
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);		//	通常描画
+		DrawGraph(200, 200, bgHandle, TRUE);
+		//	[GameOver]
 
-void GameOver::Draw()
-{
-	DrawGraph(0, 0, hBGImageII, TRUE);
-	//	タイトル画面
-	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);		//	通常描画
-	DrawGraph(0, 0, bgHandle, TRUE);
-	//	[GameOver]
-
-}
+		DrawGraph(400, 500, PushSpaceKey, TRUE);
+		if (timer >= 1.0f) {
+		}
+	}
