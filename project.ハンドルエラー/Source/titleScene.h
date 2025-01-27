@@ -45,4 +45,7 @@ private:
 	float timer;
 
 	VECTOR2 position;       // プレイヤーの座標（Vector2）
+
+	bool KeyPush;	//キー入力検知
+	bool StickInput; //コントローラー検知
 };

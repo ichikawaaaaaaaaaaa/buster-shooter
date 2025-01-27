@@ -22,6 +22,9 @@ TitleScene::TitleScene()
 
 	Stageflame = 0;
 	prevInputPad = false;   
+
+	int KeyPush = false;	//キー入力検知
+	int StickInput = false; //コントローラー検知
 	
 
 	int PlaySoundFile(char* FileName, int PlayType);
@@ -71,10 +74,14 @@ void TitleScene::Update()
 
 	if (CheckHitKey(KEY_INPUT_1)) {
 		Stageflame = 1;
+		StickInput = false;
+		KeyPush = true;
 		PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_NORMAL);
 			}
 			if (CheckHitKey(KEY_INPUT_2)) {
 				Stageflame = 2;
+				StickInput = false;
+				KeyPush = true;
 				PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_NORMAL);
 			}
 			if (CheckHitKey(KEY_INPUT_3)) {
@@ -105,6 +112,8 @@ void TitleScene::Update()
 
 				if (prevInputPad == false) {
 					if (XInput > 100) {
+						KeyPush = false;
+						StickInput = true;
 						PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_NORMAL);
 					//if (CheckHitKey(KEY_INPUT_RIGHT)) {
 						Stageflame = ((Stageflame + 1) % 5) ;
@@ -114,6 +123,8 @@ void TitleScene::Update()
 						Stageflame = 5;
 					}
 				if (XInput < -100) {
+					KeyPush = false;
+					StickInput = true;
 					PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_NORMAL);
 				//if (CheckHitKey(KEY_INPUT_LEFT)) {
 						Stageflame -= 1;
@@ -155,13 +166,21 @@ void TitleScene::Draw()
 	//	タイトル画面
 	DrawGraph(0, 0, BackScreen, TRUE);
 	DrawGraph(160, 200, hBGImage, TRUE);
-	DrawGraph(340, 600, hKeyImage, TRUE);
-	
+
+
+	if (KeyPush == true) {
+		DrawGraph(340, 600, hKeyImage, TRUE);
+	}
+	if (StickInput == true) {
+		DrawGraph(340, 600, hBGImage, TRUE);
+	}
 
 	
 
 
 	//	[PUSH SPACE KEY]
+	
+
 	if (isDrawKey)
 	{
 		DrawGraph(300, 2000, hKeyImage, TRUE);
