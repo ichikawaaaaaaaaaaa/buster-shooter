@@ -30,7 +30,7 @@ void GameOver::Update()
 	GetJoypadAnalogInput(&XInput, &YInput, DX_INPUT_KEY_PAD1);
 	PadInput = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 
-	if (PadInput & PAD_INPUT_1 || CheckHitKey(KEY_INPUT_B)) 
+	if (PadInput & PAD_INPUT_3 || CheckHitKey(KEY_INPUT_B)) 
 	{
 		PlaySoundFile("data/sound/GameOver_TitleBack.mp3", DX_PLAYTYPE_NORMAL);
 		SceneManager::ChangeScene("TitleScene");

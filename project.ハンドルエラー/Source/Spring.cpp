@@ -47,13 +47,15 @@ void Spring::Update()
 
     if (dead) // 敵が死亡している場合の処理
     {
-        PlaySoundFile("data/sound/EnemyDeth.mp3", DX_PLAYTYPE_NORMAL);
+       
         deadCounter++;
         if (deadCounter >= 20)
         {
             DestroyMe(); // 一定時間経過後、敵を削除
         }
+      
         return;
+        PlaySoundFile("data/sound/EnemyDeth.mp3", DX_PLAYTYPE_BACK);
     }
     // アニメーションの更新
     frameTimer++;

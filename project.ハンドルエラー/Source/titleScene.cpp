@@ -77,21 +77,21 @@ void TitleScene::Update()
 		Stageflame = 1;
 		StickInput = false;
 		KeyPush = true;
-		PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_NORMAL);
+		PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_BACK);
 			}
 			if (CheckHitKey(KEY_INPUT_2)) {
 				Stageflame = 2;
 				StickInput = false;
 				KeyPush = true;
-				PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_NORMAL);
+				PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_BACK);
 			}
 			if (CheckHitKey(KEY_INPUT_3)) {
 				Stageflame = 3;
-				PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_NORMAL);
+				PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_BACK);
 			}
 			if (CheckHitKey(KEY_INPUT_4)) {
 				Stageflame = 4;
-				PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_NORMAL);
+				PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_BACK);
 			}
 			if (CheckHitKey(KEY_INPUT_5)) {
 				Stageflame = 5;
@@ -100,7 +100,7 @@ void TitleScene::Update()
 
 			if (CheckHitKey(KEY_INPUT_SPACE))
 			{
-				PlaySoundFile("data/sound/StageJoin.mp3", DX_PLAYTYPE_NORMAL);
+				PlaySoundFile("data/sound/StageJoin.mp3", DX_PLAYTYPE_BACK);
 				StageUtility::SetStageNo(Stageflame);
 				SceneManager::ChangeScene("PlayScene");
 			}
@@ -115,7 +115,7 @@ void TitleScene::Update()
 					if (XInput > 100) {
 						KeyPush = false;
 						StickInput = true;
-						PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_NORMAL);
+						PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_BACK);
 					//if (CheckHitKey(KEY_INPUT_RIGHT)) {
 						Stageflame = ((Stageflame + 1) % 5) ;
 					}
@@ -126,22 +126,20 @@ void TitleScene::Update()
 				if (XInput < -100) {
 					KeyPush = false;
 					StickInput = true;
-					PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_NORMAL);
+					PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_BACK);
 				//if (CheckHitKey(KEY_INPUT_LEFT)) {
 						Stageflame -= 1;
 						if (Stageflame == 0)
 						{
 							Stageflame = 5;
 						}
-					
 					}
-
 				prevInputPad = true;
 				timer = 0.0f;
 
 				}
 				
-				if (PadInput & (PAD_INPUT_1))
+				if (PadInput & (PAD_INPUT_3))
 				{
 					PlaySoundFile("data/sound/StageJoin.mp3", DX_PLAYTYPE_NORMAL);
 					StageUtility::SetStageNo(Stageflame);
@@ -174,7 +172,7 @@ void TitleScene::Draw()
 		DrawGraph(340, 600, hKeyImage, TRUE);
 	}
 	if (StickInput == true) {
-		DrawGraph(340, 600, PushBbutton, TRUE);
+		DrawGraph(300, 600, PushBbutton, TRUE);
 	}
 
 	
