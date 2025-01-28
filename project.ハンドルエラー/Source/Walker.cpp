@@ -32,7 +32,10 @@ Walker::Walker()
     deadCounter = 0;
 
 	Walkerlife = 4; //“Gƒ‰ƒCƒt
+
+    int PlaySoundFile(char* FileName, int PlayType);
 }
+
 Walker::~Walker()
 {
     DeleteGraph(hImage); // Žg—p‚µ‚½‰æ‘œ‚ðíœ
@@ -44,6 +47,7 @@ void Walker::Update()
 
     if (dead) // “G‚ªŽ€–S‚µ‚Ä‚¢‚éê‡‚Ìˆ—
     {
+        PlaySoundFile("data/sound/EnemyDeth.mp3", DX_PLAYTYPE_NORMAL);
         deadCounter++;
         if (deadCounter >= 20)
         {

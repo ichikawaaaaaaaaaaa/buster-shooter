@@ -10,7 +10,10 @@ GameOver::GameOver()
 	bgHandle = LoadGraph("data/image/GameOver.png");
 	assert(bgHandle > 0);
 
-	PushSpaceKey = LoadGraph("data/image/PushSpace.png");
+	PushBKey = LoadGraph("data/image/PushBkey.png");
+	PushAbutton = LoadGraph("data/image/PushAbutton.png");
+
+	int PlaySoundFile(char* FileName, int PlayType);
 }
 
 GameOver::~GameOver()
@@ -29,6 +32,7 @@ void GameOver::Update()
 
 	if (PadInput & PAD_INPUT_1 || CheckHitKey(KEY_INPUT_B)) 
 	{
+		PlaySoundFile("data/sound/GameOver_TitleBack.mp3", DX_PLAYTYPE_NORMAL);
 		SceneManager::ChangeScene("TitleScene");
 	}
 }
@@ -41,7 +45,6 @@ void GameOver::Update()
 		DrawGraph(200, 200, bgHandle, TRUE);
 		//	[GameOver]
 
-		DrawGraph(400, 500, PushSpaceKey, TRUE);
-		if (timer >= 1.0f) {
-		}
+		DrawGraph(400, 500, PushBKey, TRUE);
+		DrawGraph(400, 650, PushAbutton, TRUE);
 	}

@@ -7,7 +7,8 @@ private://	ゲームオーバー
 
 	const char* KEY_GRAPH_PATH = "data/image/GameOver.png";
 
-	int PushSpaceKey;
+	int PushBKey;
+	int PushAbutton;
 
 	const int OVER_GRAPH_X = 370;			//	[GAMEOVER]表示位置(X)
 	const int OVER_GRAPH_Y = 450;		//	[GAMEOVER]表示位置(Y)
@@ -28,4 +29,5 @@ public:
 	int YInput;             // ジョイパッドY軸入力
 	bool fadeStarted;          // フェード開始フラグ
 	int alpha;                 // 文字の透明度（フェード用）
+
 };

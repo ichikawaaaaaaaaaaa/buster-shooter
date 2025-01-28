@@ -32,7 +32,10 @@ Spring::Spring()
     deadCounter = 0;
 
     Springlife = 4; //“Gƒ‰ƒCƒt
+
+    int PlaySoundFile(char* FileName, int PlayType);
 }
+
 Spring::~Spring()
 {
     DeleteGraph(hImage); // Žg—p‚µ‚½‰æ‘œ‚ðíœ
@@ -44,6 +47,7 @@ void Spring::Update()
 
     if (dead) // “G‚ªŽ€–S‚µ‚Ä‚¢‚éê‡‚Ìˆ—
     {
+        PlaySoundFile("data/sound/EnemyDeth.mp3", DX_PLAYTYPE_NORMAL);
         deadCounter++;
         if (deadCounter >= 20)
         {

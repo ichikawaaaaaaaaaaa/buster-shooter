@@ -33,6 +33,8 @@ Jet::Jet()
     deadCounter = 0;
 
     Jetlife = 4; //“Gƒ‰ƒCƒt
+
+    int PlaySoundFile(char* FileName, int PlayType);
 }
 Jet::~Jet()
 {
@@ -52,6 +54,7 @@ void Jet::Update()
 
     if (dead) // “G‚ªŽ€–S‚µ‚Ä‚¢‚éê‡‚Ìˆ—
     {
+        PlaySoundFile("data/sound/EnemyDeth.mp3", DX_PLAYTYPE_NORMAL);
         deadCounter++;
         if (deadCounter >= 20)
         {

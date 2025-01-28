@@ -11,6 +11,7 @@ TitleScene::TitleScene()
 	hBGImage = LoadGraph("data/image/Title.png");
 	hKeyImage = LoadGraph("data/image/PushSpace.png");
 	BackScreen = LoadGraph("data/image/Titiebackscreen.png");
+	PushBbutton = LoadGraph("data/image/PushBbutton.png");
 
 	Stage1Image = LoadGraph("data/image/Stage1.png");
 	Stage2Image = LoadGraph("data/image/Stage2.png");
@@ -94,7 +95,7 @@ void TitleScene::Update()
 			}
 			if (CheckHitKey(KEY_INPUT_5)) {
 				Stageflame = 5;
-				PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_NORMAL);
+				PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_BACK);
 			}
 
 			if (CheckHitKey(KEY_INPUT_SPACE))
@@ -142,6 +143,7 @@ void TitleScene::Update()
 				
 				if (PadInput & (PAD_INPUT_1))
 				{
+					PlaySoundFile("data/sound/StageJoin.mp3", DX_PLAYTYPE_NORMAL);
 					StageUtility::SetStageNo(Stageflame);
 					SceneManager::ChangeScene("PlayScene");
 				}
@@ -172,7 +174,7 @@ void TitleScene::Draw()
 		DrawGraph(340, 600, hKeyImage, TRUE);
 	}
 	if (StickInput == true) {
-		DrawGraph(340, 600, hBGImage, TRUE);
+		DrawGraph(340, 600, PushBbutton, TRUE);
 	}
 
 	

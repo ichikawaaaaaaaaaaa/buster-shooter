@@ -45,6 +45,8 @@ Player::Player()
     hImagelife = LoadGraph("data/image/heart.png");
     blinkCounter = 0;
     life = 3;
+
+    int PlaySoundFile(char* FileName, int PlayType);
 }
 
 // 更新処理
@@ -271,10 +273,11 @@ void Player::Update()
         if (PadInput & PAD_INPUT_1 || CheckHitKey(KEY_INPUT_SPACE)) {
             if (prevJumpKey == false) {
                 if (onGround) {
+                    PlaySoundFile("data/sound/ Jump.mp3", DX_PLAYTYPE_NORMAL);
                     // ジャンプ開始
                     velocity = V0; // 初速を決める
                 }
-            }
+            }   
             prevJumpKey = true;
         }
         else {
@@ -330,6 +333,7 @@ void Player::Update()
     if (PadInput & PAD_INPUT_2 || GetMouseInput() & MOUSE_INPUT_RIGHT) {
 
         if (!prevRightMouse) {
+            PlaySoundFile("data/sound/Attack.mp3", DX_PLAYTYPE_NORMAL);
             Ball* ba = Instantiate<Ball>();   // ボールを生成
             ba->position = position;          // プレイヤーの位置に生成
             ba->position.y += 2;              // 少し下にずらす
@@ -346,6 +350,7 @@ void Player::Update()
     if (PadInput & PAD_INPUT_3 || GetMouseInput() & MOUSE_INPUT_LEFT) {
 
         if (!prevLeftMouse) {
+            PlaySoundFile("data/sound/Attack.mp3", DX_PLAYTYPE_NORMAL);
             Ball* ba = Instantiate<Ball>();  // ボールを生成
             ba->position = position;
             ba->position.y += 2;

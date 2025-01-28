@@ -11,6 +11,8 @@ GoalText::GoalText()
 	GameclearText = LoadGraph("data/image/GameClear.png");
 	PushSpaceKey = LoadGraph("data/image/PushSpace.png");
 
+	int PlaySoundFile(char* FileName, int PlayType);
+
 	IsGoal = false;
 	timer = 0.0f;
 
@@ -61,6 +63,7 @@ void GoalText::Update()
 
 			if (PadInput & PAD_INPUT_1 || CheckHitKey(KEY_INPUT_B)) {
 				{
+					PlaySoundFile("data/sound/GameClear_TitileBack.mp3", DX_PLAYTYPE_NORMAL);
 					Fader* f = FindGameObject <Fader>();
 					f->FadeOut(GetColor(0, 0, 0), 0.5f);
 					fadeStarted = true;

@@ -18,6 +18,7 @@ private:
 	int hKeyImage;		//	‰æ‘œƒnƒ“ƒhƒ‹(PUSH SPACE KEY)
 
 	int BackScreen;
+	int PushBbutton;
 
 	int Stage1Image;
 	int Stage2Image;
