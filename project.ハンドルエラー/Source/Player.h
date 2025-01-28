@@ -12,6 +12,8 @@ public:
     void Draw() override;   // プレイヤーの描画処理
     void Animation();       // プレイヤーのアニメーション処理
     int hImage;             // プレイヤーの画像ハンドル
+    int hImageKEY_D_Click;
+    int hImageKEY_A_Click;
     int hImageRightClick;
     int hImageLeftClick;
     int hImagelife;
@@ -37,6 +39,14 @@ public:
     int enemyCollisionCount; // 敵に触れた回数
     // ゲームオーバー処理
     void GameOver();        // ゲームオーバー処理（後で実装）
+
+    //Dクリックを検出して画像を変更する処理
+    bool prevKEY_D_Click = false;
+    bool isKEY_D_Click = false;
+
+    //Aクリックを検出して画像を変更する処理
+    bool prevKEY_A_Click = false;
+    bool isKEY_A_Click = false;
 
     // 右クリックを検出して画像を変更する処理
     bool prevRightClick = false;  // 右クリックの前回状態

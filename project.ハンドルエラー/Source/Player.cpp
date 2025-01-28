@@ -12,10 +12,6 @@
 #include "../Library/time.h"
 #include <iostream>
 
-
-
-
-
 float Gravity = 2.0f;     //重力加速度
 float jumpHeight = 40* 2.0;  //ジャンプの高さ
 float V0 = -sqrtf(3.0f * Gravity * jumpHeight);//初速計算
@@ -30,6 +26,8 @@ Player::Player()
 
 {
     hImage = LoadGraph("data/image/Player.png");//キャラ画像の読み込み
+   // hImageKEY_D_Click = LoadGraph();
+   // hImageKEY_A_Click = LoadGraph();
     hImageRightClick = LoadGraph("data/image/kenright.png");
     hImageLeftClick = LoadGraph("data/image/kenleft.png");
     position.x = 10;  //初期X座標
@@ -54,13 +52,7 @@ Player::Player()
 void Player::Update()
 
 {
-
-
-
-
     //<<<<<<< HEAD
-
-
     std::list<GoalText*> gls = FindGameObjects<GoalText>(); // ゴール処理取得
     for (auto g : gls) {
         //ゴールしていたら全ての処理を停止
@@ -70,16 +62,8 @@ void Player::Update()
         }
     }
 
-
-
-
-
-
     //=======
     //>>>>>> 22785fc63763e0367779acd117806a6a2e23f18e
-
-
-
     GetJoypadInputState(DX_INPUT_KEY_PAD1);
     int PadInput;
 
@@ -266,8 +250,6 @@ void Player::Update()
                 push = s->IsWallLeft(position + VECTOR2(0, 39));
                 position.x += push;
             }
-
-
         }
 
         //ジャンプ
@@ -356,7 +338,6 @@ void Player::Update()
             ba->position = position;
             ba->position.y += 2;
             ba->velocity = VECTOR2(-10.0f, 0.0f); // 左方向の速度
-
         }
         prevLeftMouse = true;
     }
@@ -392,9 +373,8 @@ void Player::Draw()
         return;
     }
 
-
-
     Stage* s = FindGameObject<Stage>();
+    if ()
     if (isRightClicked) {
         // 右クリックされている場合、右クリック用の画像を描画
         DrawRectGraph(position.x - s->scroll, position.y, 0, 0, 32, 40, hImageRightClick, TRUE);
@@ -410,12 +390,9 @@ void Player::Draw()
         else {
             // 通常時の画像を描画
             DrawRectGraph(position.x - s->scroll, position.y, 0, 0, 32, 40, hImage, TRUE);
-            // ライフを表示（例えば、画面の上部にライフのアイコンを表示する）
-            
-            }
-           
+            // ライフを表示（例えば、画面の上部にライフのアイコンを表示する）            
+            }           
         }
-
     }
 
 
