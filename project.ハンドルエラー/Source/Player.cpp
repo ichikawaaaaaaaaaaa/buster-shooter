@@ -217,6 +217,7 @@ void Player::Update()
     int x = position.x;
     int y = position.y;
     if (y < 0 || y >= SCREEN_HEIGHT) {
+        PlaySoundFile("data/sound/GameOver.mp3", DX_PLAYTYPE_NORMAL);
         SceneManager::ChangeScene("GameOver");
         return; // ゲームオーバー後の処理を終了
     }

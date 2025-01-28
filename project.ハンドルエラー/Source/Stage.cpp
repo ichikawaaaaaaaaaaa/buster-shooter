@@ -19,6 +19,8 @@ Stage::Stage()
 {
 	StageBackScreen = LoadGraph("data/image/BackScreen.png");
 
+	int PlaySoundFile(char* FileName, int PlayType);
+
 	map.clear();
 	std::string filename = "data/stage.";
 	filename += std::to_string(StageUtility::GetStageNo());

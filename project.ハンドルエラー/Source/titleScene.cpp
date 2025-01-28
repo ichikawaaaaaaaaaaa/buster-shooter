@@ -21,7 +21,7 @@ TitleScene::TitleScene()
 
 	StageFlame = LoadGraph("data/image/StageFlame.png");
 
-	Stageflame = 0;
+	Stageflame = 1;
 	prevInputPad = false;   
 
 	int KeyPush = false;	//ƒL[“ü—ÍŒŸ’m

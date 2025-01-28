@@ -9,7 +9,7 @@ GoalText::GoalText()
 {
 	hImage = LoadGraph("data/image/Goal.png");
 	GameclearText = LoadGraph("data/image/GameClear.png");
-	PushSpaceKey = LoadGraph("data/image/PushSpace.png");
+	PushAbutton = LoadGraph("data/image/PushAbutton.png");
 
 	int PlaySoundFile(char* FileName, int PlayType);
 
@@ -39,11 +39,12 @@ void GoalText::Update()
 
 	if (CircleHit(playerPos, position, 20)) {//‰~‚Ì“–‚½‚è”»’è
 		//DestroyMe();
-
+		
 		IsGoal = true;
 	}
 	if (IsGoal)
 	{
+		PlaySoundFile("data/sound/GameClear.mp3", DX_PLAYTYPE_NORMAL);
 		timer += 1.0f / 60;
 		if (fadeStarted) {
 			Fader* f = FindGameObject <Fader>();
@@ -72,6 +73,7 @@ void GoalText::Update()
 			}
 		}
 	}
+	
 }
 
 
@@ -84,14 +86,14 @@ void GoalText::Draw()
 	if(IsGoal)
 	{
 		
-		DrawGraph(200, 200, GameclearText, TRUE);
+		DrawGraph(160, 200, GameclearText, TRUE);
 		if (timer >= 1.0f) {
 
 
 		
 		}
 		if (timer >= 2.0f) {
-			DrawGraph(400, 500, PushSpaceKey, TRUE);
+			DrawGraph(320, 600, PushAbutton, TRUE);
 		}
 	
 	}

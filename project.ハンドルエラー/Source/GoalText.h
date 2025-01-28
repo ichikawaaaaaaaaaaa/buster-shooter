@@ -11,7 +11,7 @@ public:
 	VECTOR2 position;
 	int hImage;
 
-	int PushSpaceKey;
+	int PushAbutton;
 	int GameclearText;
 
 	bool IsGoal;

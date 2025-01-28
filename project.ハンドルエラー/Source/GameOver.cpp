@@ -42,9 +42,9 @@ void GameOver::Update()
 		DrawGraph(400, 200, hBGImageII, TRUE);
 		//	É^ÉCÉgÉãâÊñ 
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);		//	í èÌï`âÊ
-		DrawGraph(200, 200, bgHandle, TRUE);
+		DrawGraph(171, 200, bgHandle, TRUE);
 		//	[GameOver]
 
-		DrawGraph(400, 500, PushBKey, TRUE);
-		DrawGraph(400, 650, PushAbutton, TRUE);
+		DrawGraph(397, 500, PushBKey, TRUE);
+		DrawGraph(324, 600, PushAbutton, TRUE);
 	}

@@ -54,7 +54,7 @@ void Jet::Update()
 
     if (dead) // “G‚ªŽ€–S‚µ‚Ä‚¢‚éê‡‚Ìˆ—
     {
-        PlaySoundFile("data/sound/EnemyDeth.mp3", DX_PLAYTYPE_BACK);
+        
         deadCounter++;
         if (deadCounter >= 20)
         {
@@ -107,6 +107,7 @@ void Jet::Update()
             Ba->DestroyMe();
             if (Jetlife <= 0)
             {
+                PlaySoundFile("data/sound/EnemyDeth.mp3", DX_PLAYTYPE_BACK);
                 dead = true; // “G‚ðŽ€–Só‘Ô‚É‚·‚é
                 deadCounter = 0;
                 currentFrame = maxFrames - 1; // ÅŒã‚ÌƒtƒŒ[ƒ€‚ðŽ€–Só‘Ô‚ÉÝ’è

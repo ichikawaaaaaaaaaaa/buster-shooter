@@ -55,7 +55,7 @@ void Spring::Update()
         }
       
         return;
-        PlaySoundFile("data/sound/EnemyDeth.mp3", DX_PLAYTYPE_BACK);
+       
     }
     // アニメーションの更新
     frameTimer++;
@@ -78,6 +78,7 @@ void Spring::Update()
             Ba->DestroyMe();
             if (Springlife <= 0)
             {
+                PlaySoundFile("data/sound/EnemyDeth.mp3", DX_PLAYTYPE_BACK);
                 dead = true; // 敵を死亡状態にする
                 deadCounter = 0;
                 currentFrame = maxFrames - 1; // 最後のフレームを死亡状態に設定
