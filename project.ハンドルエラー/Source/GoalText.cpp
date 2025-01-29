@@ -10,6 +10,7 @@ GoalText::GoalText()
 	hImage = LoadGraph("data/image/Goal.png");
 	GameclearText = LoadGraph("data/image/GameClear.png");
 	PushAbutton = LoadGraph("data/image/PushAbutton.png");
+	PushBKey = LoadGraph("data/image/PushBkey.png");
 
 	int PlaySoundFile(char* FileName, int PlayType);
 
@@ -93,6 +94,7 @@ void GoalText::Draw()
 		
 		}
 		if (timer >= 2.0f) {
+			DrawGraph(397, 500, PushBKey, TRUE);
 			DrawGraph(320, 600, PushAbutton, TRUE);
 		}
 	

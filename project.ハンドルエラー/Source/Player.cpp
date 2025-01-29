@@ -374,7 +374,7 @@ void Player::Draw()
     }
 
     Stage* s = FindGameObject<Stage>();
-    if ()
+   
     if (isRightClicked) {
         // 右クリックされている場合、右クリック用の画像を描画
         DrawRectGraph(position.x - s->scroll, position.y, 0, 0, 32, 40, hImageRightClick, TRUE);

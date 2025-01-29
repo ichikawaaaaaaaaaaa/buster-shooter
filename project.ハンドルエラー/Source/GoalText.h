@@ -11,6 +11,7 @@ public:
 	VECTOR2 position;
 	int hImage;
 
+	int PushBKey;
 	int PushAbutton;
 	int GameclearText;
 

@@ -17,8 +17,10 @@ private:
 	int hBGImage;		//	画像ハンドル(タイトル画面)
 	int hKeyImage;		//	画像ハンドル(PUSH SPACE KEY)
 
+
 	int BackScreen;
 	int PushBbutton;
+	int PushBKey;
 
 	int Stage1Image;
 	int Stage2Image;
