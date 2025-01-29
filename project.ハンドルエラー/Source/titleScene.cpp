@@ -165,7 +165,7 @@ void TitleScene::Draw()
 {
 	//	タイトル画面
 	DrawGraph(0, 0, BackScreen, TRUE);
-	DrawGraph(160, 200, hBGImage, TRUE);
+	DrawGraph(140, 200, hBGImage, TRUE);
 
 
 	if (KeyPush == true) {
@@ -189,14 +189,14 @@ void TitleScene::Draw()
 	if (Stageflame ==1) {
 		if (isDrawKey)
 	{
-		DrawGraph(100, 500, StageFlame, TRUE);
+		DrawGraph(33, 462, StageFlame, TRUE);
 	}
 	}
 
 	if (Stageflame == 2) {
 		if (isDrawKey)
 		{
-			DrawGraph(300, 500, StageFlame, TRUE);
+			DrawGraph(283, 462, StageFlame, TRUE);
 		}				   
 	}					   
 						  
@@ -204,32 +204,32 @@ void TitleScene::Draw()
 	if (Stageflame == 3) { 
 		if (isDrawKey)	   
 		{				   
-			DrawGraph(500, 500, StageFlame, TRUE);
+			DrawGraph(533, 462, StageFlame, TRUE);
 	}				   
 	}					   
 						   
 	if (Stageflame == 4) { 
 		if (isDrawKey)	   
 		{				   
-			DrawGraph(700, 500, StageFlame, TRUE);
+			DrawGraph(783, 462, StageFlame, TRUE);
 		}				   
 	}					   
 						   
 	if (Stageflame == 5) { 
 		if (isDrawKey)	   
 		{				   
-			DrawGraph(900, 500, StageFlame, TRUE);
+			DrawGraph(1033, 462, StageFlame, TRUE);
 		}
 	}
 
 
-	DrawGraph(100, 500, Stage1Image, TRUE);
-	DrawGraph(300, 500, Stage2Image, TRUE);
-	DrawGraph(500, 500, Stage3Image, TRUE);
-	DrawGraph(700, 500, Stage4Image, TRUE);
-	DrawGraph(900, 500, Stage5Image, TRUE);
+	DrawGraph(40, 470, Stage1Image, TRUE);
+	DrawGraph(290, 470, Stage2Image, TRUE);
+	DrawGraph(540, 470, Stage3Image, TRUE);
+	DrawGraph(790, 470, Stage4Image, TRUE);
+	DrawGraph(1040, 470, Stage5Image, TRUE);
 
 
 		SceneBase::Draw();
-		DrawString(100, 100, "プレイしたいステージを１～5を押して選択してください。Spaceで確定します", GetColor(255, 255, 255));
+	//	DrawString(100, 100, "プレイしたいステージを１～5を押して選択してください。Spaceで確定します", GetColor(255, 255, 255));
 }
