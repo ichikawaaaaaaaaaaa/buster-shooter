@@ -9,6 +9,7 @@ public:
     Player(); // コンストラクタ
     void Update() override; // プレイヤーの更新処理
     void Draw() override;   // プレイヤーの描画処理
+    void DrawLife();
     void Animation();       // プレイヤーのアニメーション処理
     void UpdateAnimation(); // 新規追加：アニメーション更新処理
 
