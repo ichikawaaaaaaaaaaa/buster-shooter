@@ -26,8 +26,8 @@ Player::Player()
 
 {
     hImage = LoadGraph("data/image/Player.png");//キャラ画像の読み込み
-   // hImageKEY_D_Click = LoadGraph();
-   // hImageKEY_A_Click = LoadGraph();
+    hImageMoveRight = LoadGraph("data/image/run.png");
+    hImageMoveLeft = LoadGraph("data/image/run.png");
     hImageRightClick = LoadGraph("data/image/kenright.png");
     hImageLeftClick = LoadGraph("data/image/kenleft.png");
     position.x = 10;  //初期X座標
@@ -209,48 +209,56 @@ void Player::Update()
     {
         Stage* s = FindGameObject<Stage>();
         if (goaled == false) {
-
-            //右移動
-            if (CheckHitKey(KEY_INPUT_A)) {
-                position.x -= 7;
-                int push = s->IsWallLeft(position + VECTOR2(0, 0));
-                position.x += push;
-                push = s->IsWallLeft(position + VECTOR2(0, 29));
-                position.x += push;
+            isMoving = false; // 毎フレーム初期化
+            // 右移動（キーボード）
+            if (CheckHitKey(KEY_INPUT_D)) {
+                position.x += 7;
+                int push = s->IsWallRight(position + VECTOR2(39, 0));
+                position.x -= push;
+                push = s->IsWallRight(position + VECTOR2(39, 39));
+                position.x -= push;
+                isMoving = true;
             }
-
-            // 右の移動処理(PAD)
-
+            // 右移動（パッド）
             if (XInput > 100) {
                 position.x += 7;
                 int push = s->IsWallRight(position + VECTOR2(39, 0));
                 position.x -= push;
                 push = s->IsWallRight(position + VECTOR2(39, 39));
                 position.x -= push;
+                isMoving = true;
             }
-
-            //左移動
-            if (CheckHitKey(KEY_INPUT_D)) {
-                position.x += 7;
-                // 右に壁があるか調べる
-                int push = s->IsWallRight(position + VECTOR2(39, 0));
-                position.x -= push;
-                push = s->IsWallRight(position + VECTOR2(39, 39));
-                position.x -= push;
+            // 左移動（キーボード）
+            if (CheckHitKey(KEY_INPUT_A)) {
+                position.x -= 7;
+                int push = s->IsWallLeft(position + VECTOR2(0, 0));
+                position.x += push;
+                push = s->IsWallLeft(position + VECTOR2(0, 29));
+                position.x += push;
+                isMoving = true;
             }
-
-            // 左の移動処理(PAD)
-
+            // 左移動（パッド）
             if (XInput < -100) {
                 position.x -= 7;
-                //キャラクターの左上隅で衝突チェック
-
                 int push = s->IsWallLeft(position + VECTOR2(0, 0));
                 position.x += push;
                 push = s->IsWallLeft(position + VECTOR2(0, 39));
                 position.x += push;
+                isMoving = true;
             }
         }
+        // アニメーションの更新
+        animationCounter++;
+        if (animationCounter >= animationSpeed) {
+            animationCounter = 0;
+            if (isMoving) {
+                animationFrame = (animationFrame + 1) % 2;  // 移動時の2フレームアニメーション
+            }
+            else {
+                animationFrame = (animationFrame + 1) % 2;  // 停止時も2フレームアニメーション
+            }
+        }
+
 
         //ジャンプ
         if (PadInput & PAD_INPUT_2 || CheckHitKey(KEY_INPUT_SPACE)) {
@@ -260,7 +268,7 @@ void Player::Update()
                     // ジャンプ開始
                     velocity = V0; // 初速を決める
                 }
-            }   
+            }
             prevJumpKey = true;
         }
         else {
@@ -374,26 +382,28 @@ void Player::Draw()
     }
 
     Stage* s = FindGameObject<Stage>();
-   
+    int spriteWidth = 32;  // 画像の幅
+    int spriteHeight = 40; // 画像の高さ
+    int spriteX = animationFrame * spriteWidth; // アニメーションのX座標
+    int imageToDraw = hImage;  // デフォルトの立ち状態画像
+    // 横移動している場合、移動用アニメーションを適用
+    if (XInput > 100 || CheckHitKey(KEY_INPUT_D)) {
+        imageToDraw = hImageMoveRight; // 右移動の画像
+    }
+    else if (XInput < -100 || CheckHitKey(KEY_INPUT_A)) {
+        imageToDraw = hImageMoveLeft; // 左移動の画像
+    }
+    // クリック状態を優先
     if (isRightClicked) {
-        // 右クリックされている場合、右クリック用の画像を描画
-        DrawRectGraph(position.x - s->scroll, position.y, 0, 0, 32, 40, hImageRightClick, TRUE);
+        imageToDraw = hImageRightClick;
     }
-    else {
-        // 通常時の画像を描画
-        DrawRectGraph(position.x - s->scroll, position.y, 0, 0, 32, 40, hImage, TRUE);
-        // ライフを表示（例えば、画面の上部にライフのアイコンを表示する）
-
-        if (isLeftClicked) {
-            DrawRectGraph(position.x - s->scroll, position.y, 0, 0, 32, 40, hImageLeftClick, TRUE);
-        }
-        else {
-            // 通常時の画像を描画
-            DrawRectGraph(position.x - s->scroll, position.y, 0, 0, 32, 40, hImage, TRUE);
-            // ライフを表示（例えば、画面の上部にライフのアイコンを表示する）            
-            }           
-        }
+    else if (isLeftClicked) {
+        imageToDraw = hImageLeftClick;
     }
+    // 画像を描画（アニメーションフレーム考慮）
+    DrawRectGraph(position.x - s->scroll, position.y, spriteX, 0, spriteWidth, spriteHeight, imageToDraw, TRUE);
+}
+   
 
 
     //alpha += (int)(ofset * Time::DeltaTime());
