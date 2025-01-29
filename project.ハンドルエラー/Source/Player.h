@@ -7,11 +7,13 @@ class Player : public GameObject {
 
 public:
     Player(); // コンストラクタ
-    void Update() override; // プレイヤーの更新処理
+    void Update() override;
+  
+    // プレイヤーの更新処理
     void Draw() override;   // プレイヤーの描画処理
-    void DrawLife();
-    void Animation();       // プレイヤーのアニメーション処理
-    void UpdateAnimation(); // 新規追加：アニメーション更新処理
+    //void DrawLife();
+    //void Animation();       // プレイヤーのアニメーション処理
+    //void UpdateAnimation(); // 新規追加：アニメーション更新処理
 
     // プレイヤーの画像ハンドル
     int hImage;             // プレイヤーのデフォルトの画像
@@ -62,9 +64,12 @@ public:
     int animationCounter;
     int animationFrame;
     int animationSpeed = 10;
-    int blinkCounter;
+    
     int isMoving;
 
     int prevRightClick;
     int prevLeftClick;
+
+    int blinkCounter = 0;
+    bool isBlinking = false;
 };

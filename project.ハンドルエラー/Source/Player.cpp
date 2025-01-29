@@ -17,8 +17,8 @@ float jumpHeight = 40 * 2.0;  //ジャンプの高さ
 float V0 = -sqrtf(3.0f * Gravity * jumpHeight);//初速計算
 
 // プレイヤーのライフと敵に触れた回数
-int life = 3;  // 初期ライフは3
-int enemyCollisionCount = 1; // 敵に触れた回数
+//int life = 3;  // 初期ライフは3
+//int enemyCollisionCount = 1; // 敵に触れた回数
 
 // コンストラクタ
 
@@ -41,8 +41,10 @@ Player::Player()
 
     //プレイヤーのライフ
     hImagelife = LoadGraph("data/image/heart.png");
-    blinkCounter = 0;
+    //blinkCounter = 0;
     life = 3;
+
+	blinkCounter = 0;  // プレイヤーの点滅処理用カウンター
 }
 
 // 更新処理
@@ -88,11 +90,11 @@ void Player::Update()
     Stage* s = FindGameObject<Stage>(); // ステージオブジェクト取得
     if (goaled) return; // ゴール済みの場合、処理を終了
 
-    // 衝突後の処理遅延時間
+   // 衝突後の処理遅延時間
     if (blinkCounter > 0) {
-        blinkCounter--;
-        return; // 衝突判定を行わない
-    }
+     blinkCounter--;
+     return; // 衝突判定を行わない
+   }
 
     // 敵と衝突したかどうかを判定するフラグ
     bool collided = false;
@@ -110,7 +112,8 @@ void Player::Update()
                         SceneManager::ChangeScene("GameOver");
                         return; // ゲームオーバー後の処理を終了
                     }
-                    blinkCounter = 180;
+                    blinkCounter = 80;
+					isBlinking = true;
                 }
             }
         }
@@ -126,7 +129,8 @@ void Player::Update()
                     SceneManager::ChangeScene("GameOver");
                     return; // ゲームオーバー後の処理を終了
                 }
-                blinkCounter = 180;
+                blinkCounter = 80;
+				isBlinking = true;
             }
         }
     }
@@ -141,10 +145,19 @@ void Player::Update()
                     SceneManager::ChangeScene("GameOver");
                     return; // ゲームオーバー後の処理を終了
                 }
-                blinkCounter = 180;
+                blinkCounter = 80;
+				isBlinking = true;
             }
         }
     }
+    // 点滅処理（Update関数内で）
+    if (isBlinking) {
+        blinkCounter--;  // カウンターをデクリメント
+        if (blinkCounter <= 0) {
+            isBlinking = false;  // 点滅が終了
+        }
+    }
+
     std::list<GoalText*> gls = FindGameObjects<GoalText>(); // ゴール処理取得
     for (auto g : gls) {
         //ゴールしていたら全ての処理を停止
@@ -328,25 +341,6 @@ void Player::Update()
 void Player::Draw()
 
 {
-    // ライフアイコンを描画（右から左に減らす）
-    for (int i = 0; i < 3; i++) {
-        // 最大3つのハート
-        if (i < life) {
-            // 左上に配置するため、(i * 40)で横位置を決定
-            // 右から消えるようにするため、(2 - i)を使って右から配置
-            DrawGraph(40 * i, 34, hImagelife, TRUE);  // 左上に配置
-        }
-    }
-    // 点滅カウントが0より大きい場合（無敵時間）
-    if (blinkCounter > 0) {
-        blinkCounter--;  // カウントダウン
-    }
-    // 点滅が有効な場合、描画をスキップする
-    if (blinkCounter % 2 != 0) {
-        return;
-    }
-
-
     Stage* s = FindGameObject<Stage>();
 
     int spriteWidth = 32;  // 画像の幅
@@ -369,19 +363,15 @@ void Player::Draw()
     }
     // 画像を描画（アニメーションフレーム考慮）
     DrawRectGraph(position.x - s->scroll, position.y, spriteX, 0, spriteWidth, spriteHeight, imageToDraw, TRUE);
-}
 
-void Player::DrawLife()
-{
     // ライフアイコンを描画（右から左に減らす）
-    for (int i = 0; i < 3; i++) {  // 最大3つのハート
-        // もしライフがこの数値より大きい場合、ハートを表示
+    for (int i = 0; i < 3; i++) {
+        // 最大3つのハート
         if (i < life) {
-            DrawGraph(40 * (2 - i), 34, hImagelife, TRUE);  // 右から左に配置
+            // 左上に配置するため、(i * 40)で横位置を決定
+            // 右から消えるようにするため、(2 - i)を使って右から配置
+            DrawGraph(40 * i, 34, hImagelife, TRUE);  // 左上に配置
         }
-        // ライフが減った場合は表示しない（既に表示されるハートは減少しない）
     }
 }
-
-
 
