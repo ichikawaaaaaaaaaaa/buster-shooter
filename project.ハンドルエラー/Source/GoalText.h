@@ -25,4 +25,5 @@ private:
 	bool fadeStarted;          // フェード開始フラグ
 	int alpha;                 // 文字の透明度（フェード用）
 
+	int PlaySoundCounter;
 };
