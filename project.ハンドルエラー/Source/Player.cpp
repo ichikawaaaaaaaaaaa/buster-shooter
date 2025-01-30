@@ -12,8 +12,8 @@
 #include "../Library/time.h"
 #include <iostream>
 
-float Gravity = 2.0f;     //重力加速度
-float jumpHeight = 40 * 2.0;  //ジャンプの高さ
+float Gravity = 0.5f;     //重力加速度
+float jumpHeight = 40 * 1.5;  //ジャンプの高さ
 float V0 = -sqrtf(3.0f * Gravity * jumpHeight);//初速計算
 
 // プレイヤーのライフと敵に触れた回数
@@ -112,7 +112,7 @@ void Player::Update()
                         SceneManager::ChangeScene("GameOver");
                         return; // ゲームオーバー後の処理を終了
                     }
-                    blinkCounter = 80;
+                    blinkCounter = 20;
 					isBlinking = true;
                 }
             }
@@ -129,7 +129,7 @@ void Player::Update()
                     SceneManager::ChangeScene("GameOver");
                     return; // ゲームオーバー後の処理を終了
                 }
-                blinkCounter = 80;
+                blinkCounter = 20;
 				isBlinking = true;
             }
         }
@@ -145,7 +145,7 @@ void Player::Update()
                     SceneManager::ChangeScene("GameOver");
                     return; // ゲームオーバー後の処理を終了
                 }
-                blinkCounter = 80;
+                blinkCounter = 20;
 				isBlinking = true;
             }
         }
