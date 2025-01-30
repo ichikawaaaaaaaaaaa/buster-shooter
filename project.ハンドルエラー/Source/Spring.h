@@ -19,7 +19,7 @@ public:
     int hImage;              // 敵の画像ハンドル
     int patternX;            // 表示パターンの横番号
     int patternY;            // 表示パターンの縦番号
-    int velocity;
+    float velocity;
     VECTOR2 GetPosition() const;  // 敵の位置を取得する
     void OnCollide();             // 衝突時の処理
 

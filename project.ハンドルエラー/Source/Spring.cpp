@@ -4,6 +4,12 @@
 #include "Player.h"
 #include "Stage.h"
 #include "config.h"
+
+float SpringGravity = 0.5f;     //重力加速度
+float SpringjumpHeight = 1 * 60.0;  //ジャンプの高さ
+float SpringV0 = -sqrtf(3.0f * SpringGravity * SpringjumpHeight);//初速計算
+
+
 // コンストラクタ
 Spring::Spring()
 {
@@ -19,6 +25,7 @@ Spring::Spring()
     patternX = 0;
     patternY = 0;
     currentImage = hImage;
+    velocity = 0; //初期速度
     // アニメーションの設定
     frameWidth = 33;  // 1フレームの幅
     frameHeight = 40; // 1フレームの高さ
@@ -47,15 +54,15 @@ void Spring::Update()
 
     if (dead) // 敵が死亡している場合の処理
     {
-       
+
         deadCounter++;
         if (deadCounter >= 20)
         {
             DestroyMe(); // 一定時間経過後、敵を削除
         }
-      
+
         return;
-       
+
     }
     // アニメーションの更新
     frameTimer++;
@@ -66,7 +73,7 @@ void Spring::Update()
     }
 
 
-      // 弾との衝突判定
+    // 弾との衝突判定
     std::list<Ball*> balls = FindGameObjects<Ball>();
     for (Ball* Ba : balls)
     {
@@ -124,14 +131,60 @@ void Spring::Update()
     if (push1 == 0 || push2 == 0) {
         speed.x = -speed.x;
     }
-    //   // 右足地面判定
- //   push = s->IsWallDown(position + VECTOR2(49, 49)); // 例(1111)はキャラクターの高さ
- //   if (push > 0) {
- //       velocity = 0.0f;
- //       position.y -= push - 1;
- //       onGround = true; // 地面に着地したとき、地上判定をONにする
- //   }
-//    }
+
+
+
+    //ジャンプ
+    {
+        if (onGround) {
+            velocity = SpringV0; // 初速を決める
+            onGround = false;
+
+        }
+
+        position.y += velocity; // 座標には速度を足す
+        velocity += SpringGravity; // 速度には重力を足す
+        if (velocity >= 0) {
+            int push = s->IsWallDown(position + VECTOR2(1, 38));
+            // ジャンプの足元チェックは、１ドット下を見て、
+            // 押し返す量は、-1する
+            if (push > 0) { // 地面に触れたので
+                velocity = 0.0f; // 地面に触ったら速度を0にする
+                position.y -= push - 1; // 地面の上に押し返す
+                onGround = true;
+            }
+
+            push = s->IsWallDown(position + VECTOR2(39, 40));
+            if (push > 0) {
+                velocity = 0.0f;
+                position.y -= push - 1;
+                onGround = true;
+            }
+        }
+        else {
+            int push = s->IsWallUP(position + VECTOR2(0, 0));
+            if (push > 0) {
+                velocity = 0.0f;
+                position.y += push;
+            }
+            push = s->IsWallUP(position + VECTOR2(39, 0));
+            if (push > 0) {
+                velocity = 0.0f;
+                position.y += push;
+            }
+        }
+
+
+
+        //   // 右足地面判定
+     //   push = s->IsWallDown(position + VECTOR2(49, 49)); // 例(1111)はキャラクターの高さ
+     //   if (push > 0) {
+     //       velocity = 0.0f;
+     //       position.y -= push - 1;
+     //       onGround = true; // 地面に着地したとき、地上判定をONにする
+     //   }
+    //    }
+    }
 }
 
 void Spring::Draw()
