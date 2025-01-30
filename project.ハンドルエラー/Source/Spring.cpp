@@ -50,7 +50,7 @@ Spring::~Spring()
 void Spring::Update()
 {
 
-
+    position.x -= 1;
 
     if (dead) // “G‚ª€–S‚µ‚Ä‚¢‚éê‡‚Ìˆ—
     {
