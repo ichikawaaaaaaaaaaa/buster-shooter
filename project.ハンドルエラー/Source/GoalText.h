@@ -12,7 +12,7 @@ public:
 	int hImage;
 
 	int PushBKey;
-	int PushAbutton;
+	int PushBbutton;
 	int GameclearText;
 
 	bool IsGoal;

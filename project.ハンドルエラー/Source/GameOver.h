@@ -8,7 +8,7 @@ private://	ゲームオーバー
 	const char* KEY_GRAPH_PATH = "data/image/GameOver.png";
 
 	int PushBKey;
-	int PushAbutton;
+	int PushBbutton;
 
 	const int OVER_GRAPH_X = 370;			//	[GAMEOVER]表示位置(X)
 	const int OVER_GRAPH_Y = 450;		//	[GAMEOVER]表示位置(Y)

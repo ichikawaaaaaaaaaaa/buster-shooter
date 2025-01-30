@@ -226,7 +226,7 @@ void Player::Update()
 
 
         //ジャンプ
-        if (PadInput & PAD_INPUT_2 || CheckHitKey(KEY_INPUT_SPACE)) {
+        if (PadInput & PAD_INPUT_1 || CheckHitKey(KEY_INPUT_SPACE)) {
             if (prevJumpKey == false) {
                 if (onGround) {
                     PlaySoundFile("data/sound/Jump.mp3", DX_PLAYTYPE_BACK);
@@ -286,7 +286,7 @@ void Player::Update()
     }
     // 右にBallを投げる(PAD)
     // Xボタン PAD_INPUT_3
-    if (PadInput & PAD_INPUT_3 || GetMouseInput() & MOUSE_INPUT_RIGHT) {
+    if (PadInput & PAD_INPUT_2 || GetMouseInput() & MOUSE_INPUT_RIGHT) {
 
         if (!prevRightMouse) {
             PlaySoundFile("data/sound/Attack.mp3", DX_PLAYTYPE_BACK);
@@ -303,7 +303,7 @@ void Player::Update()
     }
     // 左にBallを投げる(PAD)
       // Aボタン PAD_INPUT_1
-    if (PadInput & PAD_INPUT_1 || GetMouseInput() & MOUSE_INPUT_LEFT) {
+    if (PadInput & PAD_INPUT_3 || GetMouseInput() & MOUSE_INPUT_LEFT) {
 
         if (!prevLeftMouse) {
             PlaySoundFile("data/sound/Attack.mp3", DX_PLAYTYPE_BACK);

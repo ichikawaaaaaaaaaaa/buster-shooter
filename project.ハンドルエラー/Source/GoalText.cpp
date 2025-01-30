@@ -9,7 +9,7 @@ GoalText::GoalText()
 {
 	hImage = LoadGraph("data/image/Goal.png");
 	GameclearText = LoadGraph("data/image/GameClear.png");
-	PushAbutton = LoadGraph("data/image/PushAbutton.png");
+	PushBbutton = LoadGraph("data/image/PushBbutton.png");
 	PushBKey = LoadGraph("data/image/PushBkey.png");
 
 	int PlaySoundFile(char* FileName, int PlayType);
@@ -67,7 +67,7 @@ void GoalText::Update()
 			}
 
 
-			if (PadInput & PAD_INPUT_1 || CheckHitKey(KEY_INPUT_B)) {
+			if (PadInput & PAD_INPUT_2 || CheckHitKey(KEY_INPUT_B)) {
 				{
 					PlaySoundFile("data/sound/GameClear_TitileBack.mp3", DX_PLAYTYPE_NORMAL);
 					Fader* f = FindGameObject <Fader>();
@@ -99,7 +99,7 @@ void GoalText::Draw()
 		}
 		if (timer >= 6.0f) {
 			DrawGraph(397, 500, PushBKey, TRUE);
-			DrawGraph(320, 600, PushAbutton, TRUE);
+			DrawGraph(320, 600, PushBbutton, TRUE);
 		}
 	
 	}
