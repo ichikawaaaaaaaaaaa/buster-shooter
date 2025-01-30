@@ -38,7 +38,7 @@ Spring::Spring()
     dead = false;
     deadCounter = 0;
 
-    Springlife = 4; //敵ライフ
+    Springlife = 3; //敵ライフ
 
     int PlaySoundFile(char* FileName, int PlayType);
 }
