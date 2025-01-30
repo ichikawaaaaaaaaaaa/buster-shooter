@@ -56,6 +56,7 @@
     <ClCompile Include="StageUtility.cpp">
       <Filter>TitleScene</Filter>
     </ClCompile>
+    <ClCompile Include="D:\最新\project.休み期間\Source\Enemy2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\sceneFactory.h" />
@@ -125,6 +126,7 @@
     <ClInclude Include="StageUtility.h">
       <Filter>TitleScene</Filter>
     </ClInclude>
+    <ClInclude Include="D:\最新\project.休み期間\Source\Enemy2.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">

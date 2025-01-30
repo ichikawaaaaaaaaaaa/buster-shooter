@@ -1,0 +1,9 @@
+diff a/project.ハンドルエラー/Source/Player.cpp b/project.ハンドルエラー/Source/Player.cpp	(rejected hunks)
+@@ -44,7 +44,6 @@
+ 
+ {
+ 
+-<<<<<<< HEAD
+     std::list<GoalText*> gls = FindGameObjects<GoalText>(); // �S�[�������擾
+     for (auto g : gls) {
+         //�S�[�����Ă�����S�Ă̏������~

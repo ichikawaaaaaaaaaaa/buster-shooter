@@ -14,7 +14,10 @@ Stage::Stage()
 
 {
 	map.clear();
-	CsvReader* csv = new CsvReader("data/stage.1.csv");
+	std::string filename = "data/stage.";
+	filename += std::to_string(StageUtility::GetStageNo());
+	filename += ".csv";
+	CsvReader* csv = new CsvReader(filename);
 	for (int y = 0; y < csv->GetLines(); y++) {
 		vector<int> m;
 		for (int x = 0; x < csv->GetColumns(y); x++) {
@@ -53,7 +56,6 @@ Stage::Stage()
 				Enemy1* e1 = Instantiate<Enemy1>();
 				e1->position.x = i * 40;
 				e1->position.y = j * 40;
-
 			}
 		}
 	}
@@ -77,6 +79,7 @@ void Stage::Draw()//ècâ°Ç≈âÒÇ∑
 				
 				DrawRectGraph(x - scroll, y, 0, 40, 40, 40, hImage, TRUE);
 			}
+
 		}
 	}
 }

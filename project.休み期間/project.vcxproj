@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="D:\最新\project.休み期間\Source\Enemy2.h" />
     <ClInclude Include="Library\app.h" />
     <ClInclude Include="Library\gameObject.h" />
     <ClInclude Include="Library\myDxLib.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="StageUtility.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="D:\最新\project.休み期間\Source\Enemy2.cpp" />
     <ClCompile Include="Library\app.cpp" />
     <ClCompile Include="Library\main.cpp" />
     <ClCompile Include="Library\resourceLoader.cpp" />
