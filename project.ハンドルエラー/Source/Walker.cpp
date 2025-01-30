@@ -31,7 +31,7 @@ Walker::Walker()
     dead = false;
     deadCounter = 0;
 
-	Walkerlife = 4; //“Gƒ‰ƒCƒt
+	Walkerlife = 3; //“Gƒ‰ƒCƒt
 
     int PlaySoundFile(char* FileName, int PlayType);
 }
@@ -120,25 +120,25 @@ void Walker::Update()
         if (push > 0) {
             
             position.x -= push;
-            speed.x = -4;
+            speed.x = -3;
        }
         push = s->IsWallRight(position + VECTOR2(55, 20));
         if (push > 0) {
             position.x -= push;
-            speed.x = -4;
+            speed.x = -3;
 
         }
         push = s->IsWallLeft(position + VECTOR2(0, 20));
         if (push > 0) {
             position.x += push;
-            speed.x = 4;
+            speed.x = 3;
         }
     }
     {
         int push = s->IsWallLeft(position + VECTOR2(0, 0));
         if (push > 0) {
             position.x += push;
-            speed.x = 4;
+            speed.x = 3;
         }
     }
 //    if (velocity >= 0) {

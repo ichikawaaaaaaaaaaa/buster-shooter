@@ -90,68 +90,6 @@ void Player::Update()
     Stage* s = FindGameObject<Stage>(); // ステージオブジェクト取得
     if (goaled) return; // ゴール済みの場合、処理を終了
 
-   // 衝突後の処理遅延時間
-    if (blinkCounter > 0) {
-     blinkCounter--;
-     return; // 衝突判定を行わない
-   }
-
-    // 敵と衝突したかどうかを判定するフラグ
-    bool collided = false;
-    // プレイヤーと敵の衝突判定
-    if (blinkCounter == 0) {
-        std::list<Jet*> Jets = FindGameObjects<Jet>();
-        for (Jet* j : Jets) {
-            if (CircleHit(position, j->position, 51)) {
-                // 1回だけライフを減らす
-                if (!collided) {
-                    collided = true;
-                    life--; // ライフを1減らす
-                    // ライフが0になったらゲームオーバー
-                    if (life <= 0) {
-                        SceneManager::ChangeScene("GameOver");
-                        return; // ゲームオーバー後の処理を終了
-                    }
-                    blinkCounter = 20;
-					isBlinking = true;
-                }
-            }
-        }
-    }
-    // 他の敵（SpringやWalker）に対する衝突判定も同様に行う
-    std::list<Spring*> Springs = FindGameObjects<Spring>();
-    for (Spring* s : Springs) {
-        if (CircleHit(position, s->position, 37)) {
-            if (!collided) {
-                collided = true;
-                life--; // ライフを1減らす
-                if (life <= 0) {
-                    SceneManager::ChangeScene("GameOver");
-                    return; // ゲームオーバー後の処理を終了
-                }
-                blinkCounter = 20;
-				isBlinking = true;
-            }
-        }
-    }
-    // 他の敵（Walker）に対する衝突判定
-    std::list<Walker*> Walkers = FindGameObjects<Walker>();
-    for (Walker* w : Walkers) {
-        if (CircleHit(position, w->position, 37)) {
-            if (!collided) {
-                collided = true;
-                life--; // ライフを1減らす
-                if (life <= 0) {
-                    SceneManager::ChangeScene("GameOver");
-                    return; // ゲームオーバー後の処理を終了
-                }
-                blinkCounter = 20;
-				isBlinking = true;
-            }
-        }
-    }
-    
-
     std::list<GoalText*> gls = FindGameObjects<GoalText>(); // ゴール処理取得
     for (auto g : gls) {
         //ゴールしていたら全ての処理を停止
@@ -328,6 +266,69 @@ void Player::Update()
     if (position.x - s->scroll < 200) {
         s->scroll = position.x - 200;
     }
+    //衝突後の処理遅延時間
+    if (blinkCounter > 0) {
+        blinkCounter--;
+        return; // 衝突判定を行わない
+    }
+
+    // 敵と衝突したかどうかを判定するフラグ
+    bool collided = false;
+    // プレイヤーと敵の衝突判定
+    if (blinkCounter == 0) {
+        std::list<Jet*> Jets = FindGameObjects<Jet>();
+        for (Jet* j : Jets) {
+            if (CircleHit(position, j->position, 45)) {
+                // 1回だけライフを減らす
+                if (!collided) {
+                    collided = true;
+                    life--; // ライフを1減らす
+                    // ライフが0になったらゲームオーバー
+                    if (life <= 0) {
+                        SceneManager::ChangeScene("GameOver");
+                        return; // ゲームオーバー後の処理を終了
+                    }
+                    blinkCounter = 50;
+                    isBlinking = true;
+                }
+            }
+        }
+    }
+    // 他の敵（SpringやWalker）に対する衝突判定も同様に行う
+    std::list<Spring*> Springs = FindGameObjects<Spring>();
+    for (Spring* s : Springs) {
+        if (CircleHit(position, s->position, 37)) {
+            if (!collided) {
+                collided = true;
+                life--; // ライフを1減らす
+                if (life <= 0) {
+                    SceneManager::ChangeScene("GameOver");
+                    return; // ゲームオーバー後の処理を終了
+                }
+                blinkCounter = 50;
+                isBlinking = true;
+            }
+        }
+    }
+    // 他の敵（Walker）に対する衝突判定
+    std::list<Walker*> Walkers = FindGameObjects<Walker>();
+    for (Walker* w : Walkers) {
+        if (CircleHit(position, w->position, 37)) {
+            if (!collided) {
+                collided = true;
+                life--; // ライフを1減らす
+                if (life <= 0) {
+                    SceneManager::ChangeScene("GameOver");
+                    return; // ゲームオーバー後の処理を終了
+                }
+                blinkCounter = 50;
+                isBlinking = true;
+            }
+        }
+    }
+
+
+
 }
 
 
@@ -345,9 +346,6 @@ void Player::Draw()
             DrawGraph(40 * i, 34, hImagelife, TRUE);  // 左上に配置
         }
 
-        if (blinkCounter > 0) {
-            blinkCounter--;
-        }
         if (blinkCounter % 2 != 0) {
             return;
         }
