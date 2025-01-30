@@ -150,13 +150,7 @@ void Player::Update()
             }
         }
     }
-    // 点滅処理（Update関数内で）
-    if (isBlinking) {
-        blinkCounter--;  // カウンターをデクリメント
-        if (blinkCounter <= 0) {
-            isBlinking = false;  // 点滅が終了
-        }
-    }
+    
 
     std::list<GoalText*> gls = FindGameObjects<GoalText>(); // ゴール処理取得
     for (auto g : gls) {
@@ -219,16 +213,16 @@ void Player::Update()
             }
         }
         // アニメーションの更新
-        animationCounter++;
+        //animationCounter++;
         if (animationCounter >= animationSpeed) {
             animationCounter = 0;
             if (isMoving) {
                 animationFrame = (animationFrame + 1) % 2;  // 移動時の2フレームアニメーション
             }
-            else {
+           else {
                 animationFrame = (animationFrame + 1) % 2;  // 停止時も2フレームアニメーション
-            }
-        }
+           }
+       }
 
 
         //ジャンプ
@@ -343,33 +337,40 @@ void Player::Draw()
 
 {
 // ライフアイコンを描画（右から左に減らす）
-for (int i = 0; i < 3; i++) {
-    // 最大3つのハート
-    if (i < life) {
-        // 左上に配置するため、(i * 40)で横位置を決定
-        // 右から消えるようにするため、(2 - i)を使って右から配置
-        DrawGraph(40 * i, 34, hImagelife, TRUE);  // 左上に配置
-    }
+    for (int i = 0; i < 3; i++) {
+        // 最大3つのハート
+        if (i < life) {
+            // 左上に配置するため、(i * 40)で横位置を決定
+            // 右から消えるようにするため、(i)を使って右から配置
+            DrawGraph(40 * i, 34, hImagelife, TRUE);  // 左上に配置
+        }
+
+        if (blinkCounter > 0) {
+            blinkCounter--;
+        }
+        if (blinkCounter % 2 != 0) {
+            return;
+        }
+
+
+        Stage* s = FindGameObject<Stage>();
+
+        int spriteWidth = 32;  // 画像の幅
+        int spriteHeight = 40; // 画像の高さ
+        int spriteX = animationFrame * spriteWidth; // アニメーションのX座標
+        int imageToDraw = hImage;  // デフォルトの立ち状態画像
 
 
 
-
-    Stage* s = FindGameObject<Stage>();
-
-    int spriteWidth = 32;  // 画像の幅
-    int spriteHeight = 40; // 画像の高さ
-    int spriteX = animationFrame * spriteWidth; // アニメーションのX座標
-    int imageToDraw = hImage;  // デフォルトの立ち状態画像
-
-
-
-    // 横移動している場合、移動用アニメーションを適用
-    if (XInput > 100 || CheckHitKey(KEY_INPUT_D)) {
-        imageToDraw = hImageMoveRight; // 右移動の画像
-    }
-    else if (XInput < -100 || CheckHitKey(KEY_INPUT_A)) {
-        imageToDraw = hImageMoveLeft; // 左移動の画像
-    }
+        // 横移動している場合、移動用アニメーションを適用
+        if (XInput > 100 || CheckHitKey(KEY_INPUT_D)) {
+            imageToDraw = hImageMoveRight; // 右移動の画像
+        }
+        else if (XInput < -100 || CheckHitKey(KEY_INPUT_A)) {
+            imageToDraw = hImageMoveLeft; // 左移動の画像
+        }
+        DrawRectGraph(position.x - s->scroll, position.y, spriteX, 0, spriteWidth, spriteHeight, imageToDraw, TRUE);
+    
     // クリック状態を優先
     if (isRightClicked) {
         imageToDraw = hImageRightClick;
