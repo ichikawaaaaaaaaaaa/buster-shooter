@@ -32,7 +32,7 @@ Jet::Jet()
     dead = false;
     deadCounter = 0;
 
-    Jetlife = 4; //敵ライフ
+    Jetlife = 2; //敵ライフ
 
     int PlaySoundFile(char* FileName, int PlayType);
 }
@@ -88,7 +88,7 @@ void Jet::Update()
             attacking = true; // 攻撃モード開始
             timer = rand() % (5 * 60) + 60; // 次の攻撃開始タイマーをリセット
         }
-        position.x -= 2.0f; // 左方向に移動
+        position.x -= 1.5f; // 左方向に移動
         if (position.x < -64) // 画面外に出た場合
         {
             position.x = SCREEN_WIDTH;
