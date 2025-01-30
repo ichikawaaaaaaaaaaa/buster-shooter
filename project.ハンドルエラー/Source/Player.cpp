@@ -313,7 +313,7 @@ void Player::Update()
     // 他の敵（Walker）に対する衝突判定
     std::list<Walker*> Walkers = FindGameObjects<Walker>();
     for (Walker* w : Walkers) {
-        if (CircleHit(position, w->position, 37)) {
+        if (CircleHit(position, w->position, 34)) {
             if (!collided) {
                 collided = true;
                 life--; // ライフを1減らす
@@ -346,7 +346,7 @@ void Player::Draw()
             DrawGraph(40 * i, 34, hImagelife, TRUE);  // 左上に配置
         }
 
-        if (blinkCounter % 2 != 0) {
+        if (blinkCounter % 5 != 0) {
             return;
         }
 
