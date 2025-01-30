@@ -87,14 +87,20 @@ void TitleScene::Update()
 			}
 			if (CheckHitKey(KEY_INPUT_3)) {
 				Stageflame = 3;
+				StickInput = false;
+				KeyPush = true;
 				PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_BACK);
 			}
 			if (CheckHitKey(KEY_INPUT_4)) {
 				Stageflame = 4;
+				StickInput = false;
+				KeyPush = true;
 				PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_BACK);
 			}
 			if (CheckHitKey(KEY_INPUT_5)) {
 				Stageflame = 5;
+				StickInput = false;
+				KeyPush = true;
 				PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_BACK);
 			}
 
@@ -109,6 +115,36 @@ void TitleScene::Update()
 			timer += 0.1f;
 			if (timer >= 1.0f) {
 				prevInputPad = false;
+			}
+
+
+
+			if (prevInputPad == false) {
+				if (CheckHitKey(KEY_INPUT_D)) {
+					StickInput = false;
+					KeyPush = true;
+					PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_BACK);
+					//if (CheckHitKey(KEY_INPUT_RIGHT)) {
+					Stageflame = ((Stageflame + 1) % 5);
+				}
+				if (Stageflame == 0)
+				{
+					Stageflame = 5;
+				}
+				if ( CheckHitKey(KEY_INPUT_A)) {
+					StickInput = false;
+					KeyPush = true;
+					PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_BACK);
+					//if (CheckHitKey(KEY_INPUT_LEFT)) {
+					Stageflame -= 1;
+					if (Stageflame == 0)
+					{
+						Stageflame = 5;
+					}
+				}
+				prevInputPad = true;
+				timer = 0.0f;
+
 			}
 
 				if (prevInputPad == false) {
