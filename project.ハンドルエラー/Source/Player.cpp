@@ -102,7 +102,7 @@ void Player::Update()
     if (blinkCounter == 0) {
         std::list<Jet*> Jets = FindGameObjects<Jet>();
         for (Jet* j : Jets) {
-            if (CircleHit(position, j->position, 56)) {
+            if (CircleHit(position, j->position, 51)) {
                 // 1回だけライフを減らす
                 if (!collided) {
                     collided = true;
@@ -121,7 +121,7 @@ void Player::Update()
     // 他の敵（SpringやWalker）に対する衝突判定も同様に行う
     std::list<Spring*> Springs = FindGameObjects<Spring>();
     for (Spring* s : Springs) {
-        if (CircleHit(position, s->position, 56)) {
+        if (CircleHit(position, s->position, 37)) {
             if (!collided) {
                 collided = true;
                 life--; // ライフを1減らす
@@ -137,7 +137,7 @@ void Player::Update()
     // 他の敵（Walker）に対する衝突判定
     std::list<Walker*> Walkers = FindGameObjects<Walker>();
     for (Walker* w : Walkers) {
-        if (CircleHit(position, w->position, 56)) {
+        if (CircleHit(position, w->position, 37)) {
             if (!collided) {
                 collided = true;
                 life--; // ライフを1減らす
@@ -183,7 +183,7 @@ void Player::Update()
             isMoving = false; // 毎フレーム初期化
             // 右移動（キーボード）
             if (CheckHitKey(KEY_INPUT_D)) {
-                position.x += 7;
+                position.x += 5;
                 int push = s->IsWallRight(position + VECTOR2(39, 0));
                 position.x -= push;
                 push = s->IsWallRight(position + VECTOR2(39, 39));
@@ -192,7 +192,7 @@ void Player::Update()
             }
             // 右移動（パッド）
             if (XInput > 100) {
-                position.x += 7;
+                position.x += 5;
                 int push = s->IsWallRight(position + VECTOR2(39, 0));
                 position.x -= push;
                 push = s->IsWallRight(position + VECTOR2(39, 39));
@@ -201,7 +201,7 @@ void Player::Update()
             }
             // 左移動（キーボード）
             if (CheckHitKey(KEY_INPUT_A)) {
-                position.x -= 7;
+                position.x -= 5;
                 int push = s->IsWallLeft(position + VECTOR2(0, 0));
                 position.x += push;
                 push = s->IsWallLeft(position + VECTOR2(0, 29));
@@ -210,7 +210,7 @@ void Player::Update()
             }
             // 左移動（パッド）
             if (XInput < -100) {
-                position.x -= 7;
+                position.x -= 5;
                 int push = s->IsWallLeft(position + VECTOR2(0, 0));
                 position.x += push;
                 push = s->IsWallLeft(position + VECTOR2(0, 39));
