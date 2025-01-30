@@ -97,7 +97,7 @@ void GoalText::Draw()
 
 		
 		}
-		if (timer >= 6a.0f) {
+		if (timer >= 6.0f) {
 			DrawGraph(397, 500, PushBKey, TRUE);
 			DrawGraph(320, 600, PushAbutton, TRUE);
 		}
