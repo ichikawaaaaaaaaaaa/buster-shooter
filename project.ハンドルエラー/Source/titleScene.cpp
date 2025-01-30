@@ -112,7 +112,7 @@ void TitleScene::Update()
 			}
 
 				if (prevInputPad == false) {
-					if (XInput > 100) {
+					if (XInput > 100 || CheckHitKey(KEY_INPUT_D)) {
 						KeyPush = false;
 						StickInput = true;
 						PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_BACK);
@@ -123,7 +123,7 @@ void TitleScene::Update()
 					{
 						Stageflame = 5;
 					}
-				if (XInput < -100) {
+				if (XInput < -100 || CheckHitKey(KEY_INPUT_A)) {
 					KeyPush = false;
 					StickInput = true;
 					PlaySoundFile("data/sound/StageSelect.mp3", DX_PLAYTYPE_BACK);
