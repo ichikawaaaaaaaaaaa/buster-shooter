@@ -40,12 +40,16 @@ void GoalText::Update()
 
 	if (CircleHit(playerPos, position, 20)) {//‰~‚Ì“–‚½‚è”»’è
 		//DestroyMe();
+		PlaySoundCounter++;
 		
 		IsGoal = true;
 	}
 	if (IsGoal)
 	{
-		PlaySoundFile("data/sound/GameClear.mp3", DX_PLAYTYPE_NORMAL);
+		if (PlaySoundCounter == 1) {
+			PlaySoundFile("data/sound/GameClear.mp3", DX_PLAYTYPE_BACK);
+		}
+
 		timer += 1.0f / 60;
 		if (fadeStarted) {
 			Fader* f = FindGameObject <Fader>();
@@ -93,7 +97,7 @@ void GoalText::Draw()
 
 		
 		}
-		if (timer >= 2.0f) {
+		if (timer >= 6.0f) {
 			DrawGraph(397, 500, PushBKey, TRUE);
 			DrawGraph(320, 600, PushAbutton, TRUE);
 		}
