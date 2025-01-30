@@ -340,13 +340,29 @@ void Player::Update()
 
 void Player::Draw()
 
+
 {
+// ライフアイコンを描画（右から左に減らす）
+for (int i = 0; i < 3; i++) {
+    // 最大3つのハート
+    if (i < life) {
+        // 左上に配置するため、(i * 40)で横位置を決定
+        // 右から消えるようにするため、(2 - i)を使って右から配置
+        DrawGraph(40 * i, 34, hImagelife, TRUE);  // 左上に配置
+    }
+
+
+
+
     Stage* s = FindGameObject<Stage>();
 
     int spriteWidth = 32;  // 画像の幅
     int spriteHeight = 40; // 画像の高さ
     int spriteX = animationFrame * spriteWidth; // アニメーションのX座標
     int imageToDraw = hImage;  // デフォルトの立ち状態画像
+
+
+
     // 横移動している場合、移動用アニメーションを適用
     if (XInput > 100 || CheckHitKey(KEY_INPUT_D)) {
         imageToDraw = hImageMoveRight; // 右移動の画像
@@ -364,14 +380,7 @@ void Player::Draw()
     // 画像を描画（アニメーションフレーム考慮）
     DrawRectGraph(position.x - s->scroll, position.y, spriteX, 0, spriteWidth, spriteHeight, imageToDraw, TRUE);
 
-    // ライフアイコンを描画（右から左に減らす）
-    for (int i = 0; i < 3; i++) {
-        // 最大3つのハート
-        if (i < life) {
-            // 左上に配置するため、(i * 40)で横位置を決定
-            // 右から消えるようにするため、(2 - i)を使って右から配置
-            DrawGraph(40 * i, 34, hImagelife, TRUE);  // 左上に配置
-        }
+   
     }
 }
 
